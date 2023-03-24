@@ -6,6 +6,15 @@
     
 
 {% block content %}
-    <h1>home</h1>
+    
+    {% if user.is_authenticated %}
+
+    {% else %}
+        
+        
+    {% endif %}
+        
+
+
 {% endblock content %}
     
