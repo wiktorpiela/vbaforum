@@ -9,6 +9,7 @@ from .models import UserProfile
 from .func import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     roles = UserProfile.roles[:-1]
@@ -68,3 +69,33 @@ def register(request):
             error = "Passwords don't match! Please try again."
             return render(request, "register.html", {"roles":roles,
                                                      "error":error})
+        
+def login_user(request):
+    if request.method == "GET":
+        return render(request, "login_user.html")
+    else:
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        userExists = User.objects.filter(username=username).exists()
+        userIsActive = User.objects.filter(username=username,
+                                           is_active=True).exists()
+        if userExists and userIsActive:
+            user = authenticate(username=username,
+                                password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("forumapp:home")
+            else:
+                messages.error(request, "Wrong credentials! Try again.")
+                return render(request, "login_user.html")
+        elif not userExists:
+            messages.error(request, "This user doesn't exist. Please create account and try again.")
+            return render(request, "login_user.html")
+        elif not userIsActive:
+            messages.error(request, "This user is inactive currently. Activate your account through email and try again.")
+            return render(request, "login_user.html")
+
+@login_required       
+def logout_user(request):
+    logout(request)
+    return redirect("forumapp:home")
