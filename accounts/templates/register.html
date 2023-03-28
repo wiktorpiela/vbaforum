@@ -9,6 +9,21 @@
     {% if message %}
         <h3>{{message}}</h3> 
     {% endif %}
+
+    {% if error %}
+        <h3>{{error}}</h3> 
+    {% endif %}
+
+    {% if passError %}
+        <h3>Password doesn't satisfy below requirement{{length|pluralize}}:</h3>
+        <ul>
+            {% for err in passError %}
+                <li>{{err}}</li>
+            {% endfor %}
+        </ul>    
+    {% endif %}
+
+    {% include 'messages.html' %}
         
     <form action="{% url 'accounts:register' %}" method="post">
         {% csrf_token %}

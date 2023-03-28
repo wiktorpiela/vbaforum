@@ -8,6 +8,7 @@ from .forms import UserRegistrationForm, UserProfileRegistrationForm
 from .models import UserProfile
 from .func import validate_email
 from django.core.exceptions import ValidationError
+from django.contrib import messages
 
 def register(request):
     roles = UserProfile.roles[:-1]
@@ -32,18 +33,39 @@ def register(request):
                                                         "roles":roles})
             else:
                 if not emailTaken and not usernameTaken and emailValid:
-                    form = UserRegistrationForm(request.POST)
-                    inactiveUser = send_verification_email(request, form)
-                    if inactiveUser:
-                        profileForm = UserProfileRegistrationForm(request.POST)
-                        profileForm.user = inactiveUser.id
-                        profileForm.save()
+                    userForm = UserRegistrationForm(request.POST)
+                    profileForm = UserProfileRegistrationForm(request.POST)
+                    if userForm.is_valid() and profileForm.is_valid():
+                        send_verification_email(request, userForm)
+                        newUser = userForm.save()
+                        newProfile = profileForm.save(commit=False)
+                        newProfile.user = newUser
+                        newProfile.save()
+                        message = """
+                            Your account has been successfully created.
+                            Please check your mailbox to activate this account.
+                        """
+                        messages.success(request, "Your account has been successfully created. Please check your mailbox to activate this account.")
                         return redirect("accounts:register")
+                    else:
+                        error = "Something went wrog. Please try again."
+                        return render(request, "register.html", {"roles":roles,
+                                                                 "error":error})
                     
-                elif emailTaken and not usernameTaken and emailValid:
-                    return render(request, "register.html", {"roles":roles})
+                elif emailTaken:
+                    error = "This email is already taken! Please try again."
+                    return render(request, "register.html", {"roles":roles,
+                                                             "error":error})
+                elif usernameTaken:
+                    error = "This username is already taken! Please try again."
+                    return render(request, "register.html", {"roles":roles,
+                                                             "error":error})
+                elif not emailValid:
+                    error = "Wrong email format!  Please try again."
+                    return render(request, "register.html", {"roles":roles,
+                                                             "error":error})
 
         else:
-            message = "Passwords don't match! Please try again."
+            error = "Passwords don't match! Please try again."
             return render(request, "register.html", {"roles":roles,
-                                                     "message":message})
+                                                     "error":error})
