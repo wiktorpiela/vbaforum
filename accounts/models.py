@@ -14,13 +14,13 @@ class UserProfile(models.Model):
     
     roles = [
         ("DEV", "developer"),
-        ("STU", "dtudent"),
+        ("STU", "student"),
         ("INT", "internship"),
         ("MAN", "project manager"),
         ("EMP", "employer"),
-        ("ADM", "admin"),
         ("TEC", "teacher"),
         ("OTH", "other"),
+        ("ADM", "admin"),
     ]
 
     role = models.CharField(
@@ -34,12 +34,12 @@ class UserProfile(models.Model):
     stop_notifications = models.BooleanField(default=False,
                                              help_text= "if user wants to turn off email notification when question has been answered")
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            UserProfile.objects.create(user=instance)
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         UserProfile.objects.create(user=instance)
 
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.userprofile.save()
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.userprofile.save()
 
