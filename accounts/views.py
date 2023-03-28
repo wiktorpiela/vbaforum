@@ -41,11 +41,10 @@ def register(request):
                         newProfile = profileForm.save(commit=False)
                         newProfile.user = newUser
                         newProfile.save()
-                        message = """
+                        messages.success(request, """
                             Your account has been successfully created.
                             Please check your mailbox to activate this account.
-                        """
-                        messages.success(request, "Your account has been successfully created. Please check your mailbox to activate this account.")
+                            """)
                         return redirect("accounts:register")
                     else:
                         error = "Something went wrog. Please try again."
