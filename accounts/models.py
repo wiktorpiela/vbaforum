@@ -29,7 +29,7 @@ class UserProfile(models.Model):
         default="ADM"
     )
 
-    avatar = models.ImageField(upload_to="images/", default="default_user_img.jpg")
+    avatar = models.ImageField(upload_to="images/", default="images/default_user_img.jpg")
 
     stop_notifications = models.BooleanField(default=False,
                                              help_text= "if user wants to turn off email notification when question has been answered")

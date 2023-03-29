@@ -37,10 +37,9 @@ def register(request):
                     userForm = UserRegistrationForm(request.POST)
                     profileForm = UserProfileRegistrationForm(request.POST)
                     if userForm.is_valid() and profileForm.is_valid():
-                        send_verification_email(request, userForm)
-                        newUser = userForm.save()
+                        inactiveUser = send_verification_email(request, userForm)
                         newProfile = profileForm.save(commit=False)
-                        newProfile.user = newUser
+                        newProfile.user = inactiveUser
                         newProfile.save()
                         messages.success(request, """
                             Your account has been successfully created.
