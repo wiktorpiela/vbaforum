@@ -32,10 +32,13 @@
             <a href="#">Questions</a>
             <a href="#">Answers</a>
 
-            <a href="#">
-                <img src="{{user.userprofile.avatar.url}}" alt="pics" height="50" width="50">
-            </a>
             
+            {% if user.userprofile %}
+                <a href="#">
+                    <img src="{{user.userprofile.avatar.url}}" alt="pics" height="50" width="50">
+                </a>  
+            {% endif %}
+                
             <a href="{% url 'accounts:logout_user' %}">Log out</a>
         {% else %}
             <a href="{% url 'accounts:register' %}">Register</a>

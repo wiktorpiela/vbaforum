@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("accounts.urls")),
     path('verification/', include('verify_email.urls')),
+    path("auth/", include("django.contrib.auth.urls")),
     path("", include("forumapp.urls")),
 ]
 
