@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "accounts",
     "forumapp",
     "verify_email.apps.VerifyEmailConfig",
-    
+    "taggit",
 ]
 
 MIDDLEWARE = [
@@ -139,4 +139,7 @@ EMAIL_HOST_PASSWORD = os.environ['PASSWORD']
 DEFAULT_FROM_EMAIL = 'VBA forum <rprogrammer97@gmail.com>'
 
 LOGIN_URL = "accounts:login_user"
+
+##taggit setup
+TAGGIT_CASE_SENSITIVE = False
 
