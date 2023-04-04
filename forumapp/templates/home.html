@@ -4,8 +4,27 @@
     Welcome to VBA forum
 {% endblock title %}
     
-
 {% block content %}
+
+{% for question in questions %}
+    <div class="question-wall">
+
+        <h4>{{question.text}}</h4>
+        <p>{{question.create_date|date:'j E Y'}} by {{question.user.username}}</p>
+        <p>{{question.text|truncatechars:100}}</p>
+
+        <div class="counting">
+            <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
+            <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
+        </div>
+        
+        {% for tag in question.tags.all %}
+            <small>#{{tag}}</small>
+        {% endfor %}
+
+    </div>
+{% endfor %}
+    
     
 
 

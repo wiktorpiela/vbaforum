@@ -1,11 +1,17 @@
 from django.contrib import admin
 from .models import Question, Answer
 
-class CreateDate(admin.ModelAdmin):
-    readonly_fields = ("create_date","likes","user",)
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    readonly_fields = ("create_date","likes",)
+    list_display = ("title", "user", "create_date","get_tags",)
 
-class ReadOnlyAnswer(admin.ModelAdmin):
+    def get_tags(self, obj):
+        return ", ".join(tag for tag in obj.tags.names())
+    
+@admin.register(Answer)
+class QuestionAdmin(admin.ModelAdmin):
     readonly_fields = ("question","user","likes","create_date",)
+    list_display = ("question","user","create_date",)
 
-admin.site.register(Question, CreateDate)
-admin.site.register(Answer, ReadOnlyAnswer)
+
