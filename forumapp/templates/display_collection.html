@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Collection - {{type}}
+{% endblock title %}
+
+{% block content %}
+    
+    {% if type == questions %}
+        <h1>Collection review - {{type|capfirst}}</h1>
+        <a href="#">
+            <ion-icon name="list"></ion-icon>
+            <p>My questions</p>
+        </a>
+        <a href="#">
+            <ion-icon name="star"></ion-icon>
+            <p>Favorite questions</p>
+        </a>
+
+    {% else %}
+        <h1>Collection review - {{type|capfirst}}</h1>
+        <a href="#">
+            <ion-icon name="list"></ion-icon>
+            <p>My answers</p>
+        </a>
+        <a href="#">
+            <ion-icon name="star"></ion-icon>
+            <p>Favorite answers</p>
+        </a>
+
+    {% endif %}
+    
+
+{% endblock content %}
+    
+    

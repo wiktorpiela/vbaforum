@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question
 from .forms import QuestionForm
 from taggit.models import Tag
@@ -24,6 +24,16 @@ def new_question(request):
         else:
             messages.error(request, "Something went wrong, data hasn't been saved. Try again!")
             return render(request, "new_question.html")
+        
+def question_details(request, questID):
+    quest = get_object_or_404(Question, pk=questID)
+    return render(request, "question_details.html", {"question":quest})
+
+def display_collection(request, type):
+    typeToReturn="questions" if type=="quest" else "answers"
+    return render(request, "display_collection.html", {"type":typeToReturn,
+                                                       "questions":"questions",
+                                                       "answers":"answers"})
 
 
 

@@ -25,8 +25,8 @@
         {% if user.is_authenticated %}
 
             <a href="{% url 'forumapp:new_question' %}">New question</a>
-            <a href="#">Questions</a>
-            <a href="#">Answers</a>
+            <a href="{% url 'forumapp:display_collection' 'quest' %}">Questions</a>
+            <a href="{% url 'forumapp:display_collection' 'ans' %}">Answers</a>
             <a href="#">Stats</a>
           
             {% if user.userprofile %}
