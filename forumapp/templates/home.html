@@ -9,6 +9,7 @@
     <h1 class="main-header">VBA forum - for professionals, students and enthusiasts</h1>
 
     {% for question in questions %}
+    
         <a href="{% url 'forumapp:question_details' question.id %}">
             <div class="question-wall">
 

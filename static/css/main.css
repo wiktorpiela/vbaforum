@@ -9,16 +9,18 @@ html, body {
     font-weight: 400;
 }
 
-.row {
+.my-row {
     max-width: 1140px;
     margin: 0 auto;
-    text-align: center;
 }
 
 .counting{
     display: flex;
-    justify-content: space-between;
-    max-width: 6%;
+    margin: 0 auto;
+}
+
+.counting p{
+    margin-right: 1rem;
 }
 
 /* --------------------------- */
@@ -54,6 +56,11 @@ nav form button{
     border-radius: 1.5rem;
     padding: 0.5rem 1rem;
     background-color: white;
+    margin-right: 1rem;
+}
+
+nav form input[type='text']{
+    width: 40rem;
 }
 
 nav form button:hover{
@@ -65,7 +72,6 @@ nav form a{
     color: black;
     border-radius: 1.5rem;
     padding: 0.5rem 1rem;
-    height: 100%;
     border-color: black;
     text-decoration: none;
     border: 0.2rem solid black;
@@ -77,6 +83,9 @@ nav form a:hover{
     background-color: rgb(170, 161, 161);
 }
 
+nav form{
+    display: flex;
+}
 
 /* REUSABLE */
 .main-header{
@@ -89,7 +98,9 @@ nav form a:hover{
     display: flex;
     justify-content: space-between;
     text-align: center;
+    margin: 0 auto;
     margin-top: 3rem;
+    width: 50rem;
 }
 
 .collection-icon-desc a{
@@ -99,6 +110,7 @@ nav form a:hover{
     border: 0.3rem solid #32889f;
     padding: 1rem 1rem;
     font-size: 2rem;
+    flex: 0 0 calc(50% - 1rem);
 }
 
 .collection-icon-desc a:hover{
@@ -115,4 +127,16 @@ nav form a:hover{
 .main-form{
     margin-top: 4rem;
     font-size: 2rem;
+}
+
+.main-form label{
+    width: 21rem;
+}
+
+.question-wall{
+    max-width: 30rem;
+    margin: 0 auto;
+    background-color: cadetblue;
+    margin-bottom: 3rem;
+    padding: 1rem;
 }
