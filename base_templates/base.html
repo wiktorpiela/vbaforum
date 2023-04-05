@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/tagsinput.css" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <title>
         {% block title %}
 
@@ -21,6 +21,13 @@
         <a href="{% url 'forumapp:home' %}">
             <img src="{% static 'css/img/logo.png' %}" alt="pic" height="50" width="150">
         </a>
+
+        <form action="#" method="post">
+            {% csrf_token %}
+            <input type="text" name="search" placeholder="Search by title and text..." required>
+            <button type="submit" class>Go!</button>
+            <a href="#">Reset</a>
+        </form>
 
         {% if user.is_authenticated %}
 
@@ -37,6 +44,9 @@
                 
             <a href="{% url 'accounts:logout_user' %}">Log out</a>
         {% else %}
+            <div></div>
+            <div></div>
+            <div></div>
             <a href="{% url 'accounts:register' %}">Register</a>
             <a href="{% url 'accounts:login_user' %}">Log in</a>
         {% endif %}

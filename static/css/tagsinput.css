@@ -5,41 +5,42 @@
 
  .bootstrap-tagsinput {
     border: solid 1px #e9ecee;
-  border-radius: 0;
-  color: #8e9091;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  height: 48px;
-  padding: 8px 20px;
-  font-size: 16px;
+    border-radius: 0;
+    color: #8e9091;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    height: 48px;
+    padding: 8px 20px;
+    font-size: 16px;
   }
+
   .bootstrap-tagsinput input {
-  border: none;
-  border-radius: 0;
-  color: #8e9091;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+    border: none;
+    border-radius: 0;
+    color: #8e9091;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
   
   }
   .badge-tag{
-    background-color: #17a2b8;
-    color: white;
+      background-color: #17a2b8;
+      color: white;
   }
   .bootstrap-tagsinput.form-control input::-moz-placeholder {
-    color: #777;
-    opacity: 1;
+      color: #777;
+      opacity: 1;
   }
   .bootstrap-tagsinput.form-control input:-ms-input-placeholder {
-    color: #777;
+      color: #777;
   }
   .bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
-    color: #777;
+      color: #777;
   }
   .bootstrap-tagsinput input:focus {
-    border: none;
-    box-shadow: none;
+      border: none;
+      box-shadow: none;
   }
   .bootstrap-tagsinput .badge {
     margin-left: 4px;

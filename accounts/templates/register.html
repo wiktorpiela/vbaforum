@@ -24,36 +24,52 @@
     {% endif %}
 
     {% include 'messages.html' %}
+
+    <div class="main-form">
+
+        <div>
+            <h1>Registration</h1>
+        </div>
+
+        <form action="{% url 'accounts:register' %}" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_username">Username</label>
+                <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
+            </div>
+
+            <div>
+                <label for="id_email">Email</label>
+                <input type="email" name="email" required="" id="id_email">
+            </div>
+
+            <div>
+                <label for="id_role">Role</label>
+                <select name="role" id="id_role" required>
+                    <option value="" selected disabled>Select your role</option>
         
-    <form action="{% url 'accounts:register' %}" method="post">
-        {% csrf_token %}
+                    {% for short, long in roles %}
+                        <option value="{{short}}">{{long}}</option>   
+                    {% endfor %}
+        
+                </select>
+            </div>
 
-        <label for="id_username">Username</label>
-        <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
+            <div>
+                <label for="id_password1">Password</label>
+                <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+            </div>
 
-        <label for="id_email">Email</label>
-        <input type="email" name="email" required="" id="id_email">
+            <div>
+                <label for="id_password2">Password confirmation</label>
+                <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+            </div>
+            
+            <button type="submit">Register</button>
+     
+        </form>
 
-        <label for="id_role">Role</label>
-
-        <select name="role" id="id_role" required>
-            <option value="" selected disabled>Select your role</option>
-
-            {% for short, long in roles %}
-                <option value="{{short}}">{{long}}</option>   
-            {% endfor %}
-
-          </select>
-
-          <label for="id_password1">Password</label>
-          <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
-
-          <label for="id_password2">Password confirmation</label>
-          <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
-
-          <button type="submit">Register</button>
- 
-    </form>
+    </div>
 
 {% endblock content %}
     

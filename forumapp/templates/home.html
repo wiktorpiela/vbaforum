@@ -6,31 +6,30 @@
     
 {% block content %}
 
-{% for question in questions %}
-    <a href="{% url 'forumapp:question_details' question.id %}">
-        <div class="question-wall">
+    <h1 class="main-header">VBA forum - for professionals, students and enthusiasts</h1>
 
-            <h4>{{question.text}}</h4>
-            <p>{{question.create_date|date:'j E Y'}} by {{question.user.username}}</p>
-            <p>{{question.text|truncatechars:100}}</p>
+    {% for question in questions %}
+        <a href="{% url 'forumapp:question_details' question.id %}">
+            <div class="question-wall">
 
-            <div class="counting">
-                <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
-                <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
+                <h4>{{question.text}}</h4>
+                <p>{{question.create_date|date:'j E Y'}} by {{question.user.username}}</p>
+                <p>{{question.text|truncatechars:100}}</p>
+
+                <div class="counting">
+                    <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
+                    <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
+                </div>
+                
+                {% for tag in question.tags.all %}
+                    <small>#{{tag}}</small>
+                {% endfor %}
+
             </div>
-            
-            {% for tag in question.tags.all %}
-                <small>#{{tag}}</small>
-            {% endfor %}
+        </a>
 
-        </div>
-    </a>
-
-{% endfor %}
+    {% endfor %}
     
     
-
-
-
 {% endblock content %}
     

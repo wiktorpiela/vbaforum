@@ -7,30 +7,37 @@
 {% block content %}
     
     {% if type == questions %}
-        <h1>Collection review - {{type|capfirst}}</h1>
-        <a href="#">
-            <ion-icon name="list"></ion-icon>
-            <p>My questions</p>
-        </a>
-        <a href="#">
-            <ion-icon name="star"></ion-icon>
-            <p>Favorite questions</p>
-        </a>
+
+    <div>
+        <h1 class="main-header">Collection review - {{type|capfirst}}</h1>
+        <div class="collection-icon-desc">
+            <a href="#">
+                <ion-icon name="list" class="icon"></ion-icon>
+                <p>My questions</p>
+            </a>
+            <a href="#">
+                <ion-icon name="star" class="icon"></ion-icon>
+                <p>Favorite questions</p>
+            </a>
+        </div>
+    </div>
 
     {% else %}
-        <h1>Collection review - {{type|capfirst}}</h1>
-        <a href="#">
-            <ion-icon name="list"></ion-icon>
-            <p>My answers</p>
-        </a>
-        <a href="#">
-            <ion-icon name="star"></ion-icon>
-            <p>Favorite answers</p>
-        </a>
-
+        <div>
+            <h1 class="main-header">Collection review - {{type|capfirst}}</h1>
+            <div class="collection-icon-desc">
+                <a href="#">
+                    <ion-icon name="list" class="icon"></ion-icon>
+                    <p>My answers</p>
+                </a>
+                <a href="#">
+                    <ion-icon name="star" class="icon"></ion-icon>
+                    <p>Favorite answers</p>
+                </a>
+            </div>
+        </div>
     {% endif %}
     
-
 {% endblock content %}
     
     

@@ -1,4 +1,4 @@
-/* * {
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -7,11 +7,112 @@
 html, body {
     font-size: 10px;
     font-weight: 400;
-} */
+}
 
+.row {
+    max-width: 1140px;
+    margin: 0 auto;
+    text-align: center;
+}
 
 .counting{
     display: flex;
     justify-content: space-between;
-    max-width: 4.5%;
+    max-width: 6%;
+}
+
+/* --------------------------- */
+/* NAVIGATION */
+/* --------------------------- */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 5rem;
+    align-items: center;
+    background-color: #32889f;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+nav img{
+    border-radius: 1rem;
+    box-shadow: 0.2rem 0.2rem 0.2rem black;
+}
+
+nav a{
+    color: white;
+}
+
+nav a:hover{
+    color: rgb(170, 161, 161);
+    text-decoration: none;
+}
+
+nav form input[type='text'],
+nav form button{
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+}
+
+nav form button:hover{
+    background-color: rgb(170, 161, 161);
+}
+
+nav form a{
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    border-color: black;
+    text-decoration: none;
+    border: 0.2rem solid black;
+    text-transform: none;
+}
+
+nav form a:hover{
+    color: black;
+    background-color: rgb(170, 161, 161);
+}
+
+
+/* REUSABLE */
+.main-header{
+    font-size: 3.5rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.collection-icon-desc{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.collection-icon-desc a{
+    text-decoration: none;
+    color: #32889f;
+    border-radius: 1.5rem;
+    border: 0.3rem solid #32889f;
+    padding: 1rem 1rem;
+    font-size: 2rem;
+}
+
+.collection-icon-desc a:hover{
+    color: rgb(170, 161, 161);
+    border: 0.3rem solid rgb(170, 161, 161);
+    border-radius: 1.5rem;
+}
+
+.icon{
+    font-size: 4.5rem;
+}
+
+/* LOGIN/REGISTER FORM */
+.main-form{
+    margin-top: 4rem;
+    font-size: 2rem;
 }
