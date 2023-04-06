@@ -14,15 +14,6 @@ html, body {
     margin: 0 auto;
 }
 
-.counting{
-    display: flex;
-    margin: 0 auto;
-}
-
-.counting p{
-    margin-right: 1rem;
-}
-
 /* --------------------------- */
 /* NAVIGATION */
 /* --------------------------- */
@@ -123,6 +114,83 @@ nav form{
     font-size: 4.5rem;
 }
 
+.question-wall{
+    max-width: 90rem;
+    margin: 0 auto;
+    background-color: rgb(177, 174, 167);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    font-size: 2rem;
+}
+
+.question-wall a{
+    color: black;
+}
+
+.question-wall a:hover{
+    color: #35393a;
+    text-decoration: none;
+}
+
+.question-wall-tags small{
+    background-color: #32889f;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.question-wall h4{
+    font-size: 3rem;
+}
+
+.question-wall h6{
+    font-size: 1.5rem;
+}
+
+.question-wall p{
+    font-size: 2.5rem;
+}
+
+.question-wall-inside{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.question-wall-inside-second{
+    width: 40%;
+}
+
+.question-wall-inside-second img{
+    border-radius: 1.5rem;
+}
+
+
+
+
+.counting{
+    display: flex;
+    margin: 0 auto;
+    color: #32889f;
+}
+
+.counting p{
+    margin-right: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* LOGIN/REGISTER FORM */
 .main-form{
     margin-top: 4rem;
@@ -133,10 +201,7 @@ nav form{
     width: 21rem;
 }
 
-.question-wall{
-    max-width: 30rem;
-    margin: 0 auto;
-    background-color: cadetblue;
-    margin-bottom: 3rem;
-    padding: 1rem;
+.main-form h1{
+    text-align: center;
 }
+

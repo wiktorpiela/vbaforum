@@ -9,28 +9,46 @@
     <h1 class="main-header">VBA forum - for professionals, students and enthusiasts</h1>
 
     {% for question in questions %}
-    
+
+    <div class="question-wall">
+
         <a href="{% url 'forumapp:question_details' question.id %}">
-            <div class="question-wall">
 
-                <h4>{{question.text}}</h4>
-                <p>{{question.create_date|date:'j E Y'}} by {{question.user.username}}</p>
-                <p>{{question.text|truncatechars:100}}</p>
-
-                <div class="counting">
-                    <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
-                    <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
+            <div class="question-wall-inside">
+                <div class="question-wall-inside-first">
+                    <h4>{{question.title|capfirst}}</h4>
+                    <h6>Posted {{question.create_date|date:'j E Y'}} by {{question.user.username}}</h6>
+                    
+                    {% if question.image %}
+                        <p>{{question.text|truncatechars:100}}</p> 
+                    {% else %}
+                        <p>{{question.text|truncatechars:200}}</p> 
+                    {% endif %}
+                        
+                    <div class="counting">
+                        <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
+                        <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
+                    </div>
+        
+                    <div class="question-wall-tags">
+                        {% for tag in question.tags.all %}
+                            <small>#{{tag}}</small>
+                        {% endfor %}
+                    </div>
+                    
                 </div>
-                
-                {% for tag in question.tags.all %}
-                    <small>#{{tag}}</small>
-                {% endfor %}
 
+                {% if question.image %}
+                    <div class="question-wall-inside-second">
+                        <img src="{{question.image.url}}" alt="pic" height="263" width="350"> 
+                    </div>
+                {% endif %}
+                
             </div>
         </a>
+    </div>
 
     {% endfor %}
-    
-    
+      
 {% endblock content %}
     
