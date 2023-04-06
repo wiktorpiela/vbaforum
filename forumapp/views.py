@@ -4,6 +4,7 @@ from .forms import QuestionForm
 from taggit.models import Tag
 from django.contrib import messages
 from django.template.defaultfilters import slugify
+from accounts.models import UserProfile
 
 def home(request):
     questions = Question.objects.order_by("-create_date")
@@ -27,7 +28,12 @@ def new_question(request):
         
 def question_details(request, questID):
     quest = get_object_or_404(Question, pk=questID)
-    return render(request, "question_details.html", {"question":quest})
+    roles = UserProfile.roles
+    for short, long in roles:
+        if short == request.user.userprofile.role:
+            break   
+    return render(request, "question_details.html", {"question":quest,
+                                                     "user_role":long})
 
 def display_collection(request, type):
     typeToReturn="questions" if type=="quest" else "answers"

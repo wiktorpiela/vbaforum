@@ -123,6 +123,8 @@ nav form{
     padding: 2rem;
     border-radius: 1.5rem;
     font-size: 2rem;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .question-wall a{
@@ -160,14 +162,21 @@ nav form{
 
 .question-wall-inside-second{
     width: 40%;
+    margin-left: 2rem;
 }
 
 .question-wall-inside-second img{
     border-radius: 1.5rem;
 }
 
+.user-info-post img{
+    border-radius: 50%;
+}
 
-
+.user-info-post{
+    margin-right: 2.5rem;
+    margin-left: 1.5rem;
+}
 
 .counting{
     display: flex;
@@ -179,7 +188,37 @@ nav form{
     margin-right: 1rem;
 }
 
+.detailed-quest p{
+    font-size: 1.75rem;
+}
 
+.quest-detailed-content-image{
+    display: block;
+}
+
+.detailed-question-wall-inside-second{
+    /* margin: 0 auto; */
+    margin-left: 0rem;
+    margin-bottom: 1rem;
+}
+
+.detailed-quest-inside{
+    padding-right: 3rem;
+    align-items: flex-start;
+}
+
+.user-info-post{
+    margin-bottom: 10rem;
+    text-align: center;
+}
+
+.user-info-post small{
+    font-size: 1.5rem;
+}
+
+.user-info-post img{
+    margin-bottom: 1rem;
+}
 
 
 
