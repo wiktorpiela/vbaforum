@@ -5,21 +5,40 @@
 {% endblock title %}
 
 {% block content %}
+
     {% include 'messages.html' %}
-    <form action="{% url 'accounts:login_user' %}" method="post">
-        {% csrf_token %}
 
-        <label for="id_username">Username</label>
-        <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+    <div class="main-form">
 
-        <label for="id_password">Password</label>
-        <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+        <div>
+            <h1>Sign in</h1>
+        </div>
 
-        <button type="submit">Log in</button>
+        <form action="{% url 'accounts:login_user' %}" method="post">
+            {% csrf_token %}
 
-        <a href="{% url 'password_reset' %}">Forgit password? Reset</a>
+            <div class="main-form-component">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+            </div>
 
-    </form>
+            <div class="main-form-component">
+                <label for="id_password">Password</label>
+                <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+            </div>
+
+            <div class="form-btn">
+                <button type="submit" class="btn">Log in</button>
+            </div>
+        
+        </form>
+
+        <a href="{% url 'password_reset' %}">Forgot password? Reset</a>
+        <a href="{% url 'accounts:register' %}">Don't have an account yet? Register</a>
+
+    </div>
+
+
 
 {% endblock content %}
     

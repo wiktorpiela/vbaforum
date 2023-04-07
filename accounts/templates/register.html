@@ -28,22 +28,22 @@
     <div class="main-form">
 
         <div>
-            <h1>Registration</h1>
+            <h1>Create account</h1>
         </div>
 
         <form action="{% url 'accounts:register' %}" method="post">
             {% csrf_token %}
-            <div>
+            <div class="main-form-component">
                 <label for="id_username">Username</label>
                 <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
             </div>
 
-            <div>
+            <div class="main-form-component">
                 <label for="id_email">Email</label>
                 <input type="email" name="email" required="" id="id_email">
             </div>
 
-            <div>
+            <div class="main-form-component">
                 <label for="id_role">Role</label>
                 <select name="role" id="id_role" required>
                     <option value="" selected disabled>Select your role</option>
@@ -55,21 +55,23 @@
                 </select>
             </div>
 
-            <div>
+            <div class="main-form-component">
                 <label for="id_password1">Password</label>
                 <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
             </div>
 
-            <div>
+            <div class="main-form-component">
                 <label for="id_password2">Password confirmation</label>
                 <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
             </div>
 
             <div class="form-btn">
-                <button type="submit">Register</button>
+                <button type="submit" class="btn">Register</button>
             </div>
             
         </form>
+
+        <a href="{% url 'accounts:login_user' %}">Do you have already and account? Log in</a>
 
     </div>
 
