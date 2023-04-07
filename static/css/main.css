@@ -220,6 +220,10 @@ nav form{
     margin-bottom: 1rem;
 }
 
+.code-example{
+    text-align: none;
+}
+
 
 
 
@@ -241,6 +245,15 @@ nav form{
 }
 
 .main-form h1{
+    text-align: center;
+}
+
+.main-form form{
+    width: 57rem;
+    margin: 0 auto;
+}
+
+.form-btn{
     text-align: center;
 }
 

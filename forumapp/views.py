@@ -28,12 +28,19 @@ def new_question(request):
         
 def question_details(request, questID):
     quest = get_object_or_404(Question, pk=questID)
+    author_name = quest.user
+    author_avatar = quest.user.userprofile.avatar
+    author_role = quest.user.userprofile.role
+    author_joined = quest.user.date_joined
     roles = UserProfile.roles
     for short, long in roles:
-        if short == request.user.userprofile.role:
+        if short == author_role:
             break   
     return render(request, "question_details.html", {"question":quest,
-                                                     "user_role":long})
+                                                     "author_name":author_name,
+                                                     "author_avatar":author_avatar,
+                                                     "author_joined":author_joined,
+                                                     "author_role":long})
 
 def display_collection(request, type):
     typeToReturn="questions" if type=="quest" else "answers"

@@ -11,10 +11,10 @@
         <div class="question-wall-inside detailed-quest-inside">
 
             <div class="user-info-post">
-                <img src="{{user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
-                <h6>{{user.username}}</h6>
-                <small>{{user_role}}</small>
-                <small>Joined {{user.date_joined|date:'j-M-o'}}</small>
+                <img src="{{author_avatar.url}}" alt="pics" height="70" width="70">
+                <h6>{{author_name}}</h6>
+                <small>{{author_role}}</small>
+                <small>Joined {{author_joined|date:'j-M-o'}}</small>
             </div>
 
             <div class="quest-detailed-content-image">
@@ -25,6 +25,12 @@
                     <h6>Posted {{question.display_time}}</h6>
                     <p>{{question.text}}</p> 
 
+                    {% if question.code_example %}
+                        <div class="detailed-question-wall-inside-second code-example">
+                            <code>{{question.code_example}}</code>
+                        </div>
+                    {% endif %}
+
                     {% if question.image %}
                         <div class="question-wall-inside-second detailed-question-wall-inside-second">
                             <a href="{{question.image.url}}">
@@ -32,7 +38,7 @@
                             </a>  
                         </div>
                     {% endif %}
-     
+                
                     <div class="counting">
                         <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
                         <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
