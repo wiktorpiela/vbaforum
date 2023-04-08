@@ -190,6 +190,11 @@ nav form{
 .user-info-post{
     margin-right: 2.5rem;
     margin-left: 1.5rem;
+    width: 10%;
+}
+
+.quest-detailed-content-image{
+    width: 90%;
 }
 
 .counting{
@@ -248,7 +253,7 @@ nav form{
 
 
 
-/* LOGIN/REGISTER FORM */
+/* FORMS */
 .main-form{
     margin-top: 4rem;
     font-size: 2rem;
