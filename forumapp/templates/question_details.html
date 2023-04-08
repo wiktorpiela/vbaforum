@@ -39,8 +39,18 @@
                         </div>
                     {% endif %}
                 
-                    <div class="counting">
-                        <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
+                    <div class="counting"> 
+                        {% if question.is_liked %}
+                            <a href="{% url 'forumapp:like_dislike_item' question.id 'question' %}">
+                                <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'forumapp:like_dislike_item' question.id 'question' %}">
+                                <p><ion-icon name="thumbs-up-outline"></ion-icon>{{question.total_likes}}</p>
+                            </a>
+                        {% endif %}
+                            
+                        
                         <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
                     </div>
         

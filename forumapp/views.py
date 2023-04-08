@@ -87,20 +87,11 @@ def like_dislike_item(request, itemID, itemType):
     else:
         item_to_like.likes.add(request.user)
 
-    print(item_to_like.question)
-
     if itemType == "question":
-        return redirect("forumapp:question_details", questID=item_to_like)
+        return redirect("forumapp:question_details", questID=item_to_like.id)
     else:
         return redirect("forumapp:question_details", questID=item_to_like.question.id)
 
-    
-        
-     
-
-
-
-    
 @login_required
 def display_collection(request, type):
     typeToReturn="questions" if type=="quest" else "answers"
