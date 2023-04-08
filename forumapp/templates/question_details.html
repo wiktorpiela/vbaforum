@@ -102,7 +102,15 @@
                                 {% endif %}
                             
                                 <div class="counting">
-                                    <p><ion-icon name="thumbs-up"></ion-icon>{{answer.total_likes}}</p>
+                                    {% if answer.is_liked %}
+                                        <a href="{% url 'forumapp:like_dislike_item' answer.id 'answer' %}">
+                                            <p><ion-icon name="thumbs-up"></ion-icon>{{answer.total_likes}}</p>
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'forumapp:like_dislike_item' answer.id 'answer' %}">
+                                            <p><ion-icon name="thumbs-up-outline"></ion-icon>{{answer.total_likes}}</p>
+                                        </a>  
+                                    {% endif %}  
                                 </div>
             
                                 <div class="question-actions">

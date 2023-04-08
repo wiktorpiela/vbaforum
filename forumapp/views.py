@@ -39,10 +39,13 @@ def question_details(request, questID):
     for answer in answers:
         if answer.likes.filter(id=request.user.id).exists():
             answer.is_liked = True
-        elif answer.user == request.user:
-            answer.is_your = True
         else:
             answer.is_liked = False
+
+    for answer in answers:
+        if answer.user == request.user:
+            answer.is_your = True
+        else:
             answer.is_your = False
 
     return render(request, "question_details.html", {"question":quest,
@@ -71,18 +74,33 @@ def add_answer(request, questID):
 
 @login_required
 def delete_my_item(request, itemID, itemType):
-    if itemType == "question":
-        item_to_remove = get_object_or_404(Question, pk=itemID, user=request.user)
-    else:
-       item_to_remove = get_object_or_404(Answer, pk=itemID, user=request.user)
+    item_to_remove = get_object_or_404(Question, pk=itemID, user=request.user) if itemType == "question" else get_object_or_404(Answer, pk=itemID, user=request.user)
     item_to_remove.delete()
     return redirect("forumapp:home")
 
+@login_required
+def like_dislike_item(request, itemID, itemType):
+    item_to_like = get_object_or_404(Question, pk=itemID) if itemType == "question" else get_object_or_404(Answer, pk=itemID)
+    isLiked =  item_to_like.likes.filter(id=request.user.id)
+    if isLiked:
+        item_to_like.likes.remove(request.user)
+    else:
+        item_to_like.likes.add(request.user)
+
+    print(item_to_like.question)
+
+    if itemType == "question":
+        return redirect("forumapp:question_details", questID=item_to_like)
+    else:
+        return redirect("forumapp:question_details", questID=item_to_like.question.id)
 
     
+        
+     
 
 
 
+    
 @login_required
 def display_collection(request, type):
     typeToReturn="questions" if type=="quest" else "answers"
