@@ -243,16 +243,7 @@ nav form{
     text-align: none;
 }
 
-
-
-
-
-
-
-
-
-
-
+ 
 /* FORMS */
 .main-form{
     margin-top: 4rem;
@@ -317,3 +308,25 @@ nav form{
     padding-top: 2rem;
 }
 
+.main-form-component-new-quest{
+    text-align: center;
+    padding: 1rem;
+}
+
+.main-form-component-new-quest input[type='text'],
+.main-form-component-new-quest input[type='file']{
+    border-radius: 0rem;
+    width: 38.889rem;
+}
+
+.new-quest-from{
+    margin-bottom: 3rem;
+}
+
+.new-quest-from textarea{
+    height: 9rem;
+}
+
+.new-quest-from label{
+    text-transform: uppercase;
+}
