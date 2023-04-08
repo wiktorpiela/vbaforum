@@ -45,4 +45,10 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user}"
+    
+    def display_fullname_user_role(self):
+        for short, long in self.roles:
+            if self.role == short:
+                return long
+
 

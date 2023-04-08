@@ -8,5 +8,7 @@ urlpatterns = [
     path("new-question/", views.new_question, name="new_question"),
     path("question-details/<int:questID>/", views.question_details, name="question_details"),
     path("display-collection/<str:type>/", views.display_collection, name="display_collection"),
+    path("add-answer/<int:questID>/", views.add_answer, name="add_answer"),
+    path("delete-my-item/<int:itemID>/<str:itemType>/", views.delete_my_item, name="delete_my_item"),
     
 ]

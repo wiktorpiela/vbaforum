@@ -316,7 +316,7 @@ nav form{
 .main-form-component-new-quest input[type='text'],
 .main-form-component-new-quest input[type='file']{
     border-radius: 0rem;
-    width: 38.889rem;
+    width: 40.889rem;
 }
 
 .new-quest-from{
@@ -325,8 +325,13 @@ nav form{
 
 .new-quest-from textarea{
     height: 9rem;
+    padding: 0.5rem 1rem;
 }
 
 .new-quest-from label{
     text-transform: uppercase;
+}
+
+.answer-composing{
+    display: flex;
 }

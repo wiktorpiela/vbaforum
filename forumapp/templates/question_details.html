@@ -11,10 +11,10 @@
         <div class="question-wall-inside detailed-quest-inside">
 
             <div class="user-info-post">
-                <img src="{{author_avatar.url}}" alt="pics" height="70" width="70">
-                <h6>{{author_name}}</h6>
-                <small>{{author_role}}</small>
-                <small>Joined {{author_joined|date:'j-M-o'}}</small>
+                <img src="{{question.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
+                <h6>{{question.user}}</h6>
+                <small>{{question.user.userprofile.display_fullname_user_role}}</small>
+                <small>Joined {{question.user.date_joined|date:'j-M-o'}}</small>
             </div>
 
             <div class="quest-detailed-content-image">
@@ -47,7 +47,15 @@
                     <div class="question-wall-tags">
                         {% for tag in question.tags.all %}
                             <small>#{{tag}}</small>
-                        {% endfor %}
+                        {% endfor %}   
+                    </div>
+
+                    <div class="question-actions">
+                        <a href="{% url 'forumapp:add_answer' question.id %}">Answer this question</a>
+                        {% if question.is_your %}
+                            <a href="#">Edit question</a> 
+                            <a href="{% url 'forumapp:delete_my_item' question.id 'question' %}">Delete question</a>
+                        {% endif %}  
                     </div>
                     
                 </div>
@@ -58,6 +66,61 @@
 
     </div>
 
+    {% if answers %}
+
+        <h1 class="main-header">Answers</h1> 
+
+            {% for answer in answers %}
+                <div class="question-wall detailed-quest">
+                    <div class="question-wall-inside detailed-quest-inside ">
+
+                        <div class="user-info-post">
+                            <img src="{{answer.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
+                            <h6>{{answer.user}}</h6>
+                            <small>{{answer.user.userprofile.display_fullname_user_role}}</small>
+                            <small>Joined {{answer.user.date_joined|date:'j-M-o'}}</small>
+                        </div>
+
+                        <div class="quest-detailed-content-image">
+
+                            <div class="question-wall-inside-first">
+                                <h6>Posted {{answer.display_time}}</h6>
+                                <p>{{answer.text}}</p> 
+            
+                                {% if answer.code_example %}
+                                    <div class="detailed-question-wall-inside-second code-example">
+                                        <code>{{answer.code_example}}</code>
+                                    </div>
+                                {% endif %}
+            
+                                {% if answer.image %}
+                                    <div class="question-wall-inside-second detailed-question-wall-inside-second">
+                                        <a href="{{answer.image.url}}">
+                                            <img src="{{answer.image.url}}" alt="pic" width="350">
+                                        </a>  
+                                    </div>
+                                {% endif %}
+                            
+                                <div class="counting">
+                                    <p><ion-icon name="thumbs-up"></ion-icon>{{answer.total_likes}}</p>
+                                </div>
+            
+                                <div class="question-actions">
+                                    {% if answer.is_your %}
+                                        <a href="#">Edit answer</a> 
+                                        <a href="{% url 'forumapp:delete_my_item' answer.id 'answer' %}">Delete answer</a> 
+                                    {% endif %}  
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            {% endfor %}
+        
+    {% else %}
+        <h1 class="main-header">This question has no answers yet...</h1>  
+    {% endif %}
+        
 {% endblock content %}
     
     
