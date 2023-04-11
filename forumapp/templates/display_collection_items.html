@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Collection 
+{% endblock title %}
+
+
+{% block content %}
+    
+    {% if itemType == "my" %}
+
+        {% if items %}
+
+            {% for item in items %}
+                <div class="question-wall">
+
+                    <a href="{% url 'forumapp:question_details' item.id %}">
+            
+                        <div class="question-wall-inside">
+                            <div class="question-wall-inside-first">
+                                <h4>{{item.title|capfirst}}</h4>
+                                <h6>Posted {{item.display_time}}</h6>
+                                <p>{{item.text|truncatewords:20}}</p>
+                                    
+                                <div class="counting">
+                                    <p><ion-icon name="thumbs-up"></ion-icon>{{item.total_likes}}</p>
+                                    <p><ion-icon name="chatbox"></ion-icon>{{item.total_answers}}</p>
+                                </div>
+                    
+                                <div class="question-wall-tags">
+                                    {% for tag in item.tags.all %}
+                                        <small>#{{tag}}</small>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-actions">
+                            <a href="#">Edit</a>
+                            <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>
+                        </div>
+                    </a>
+                </div>
+
+            
+            {% endfor %}
+
+        {% else %}
+            <h1 class="main-header">You haven't posted any questions yet</h1>
+        {% endif %}
+        
+    {% else %}
+        <h1>dupa</h1>
+        
+
+        
+    {% endif %}
+        
+
+  
+    
+{% endblock content %}
+    
+    

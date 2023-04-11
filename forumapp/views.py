@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 def home(request):
     questions = Question.objects.order_by("-create_date")
@@ -62,14 +63,17 @@ def add_answer(request, questID):
     else:
         form = AnswerForm(request.POST, request.FILES)
         stopNotification = quest.user.userprofile.stop_notifications
+        ansYourQuest = True if quest.user == request.user else False
+        print(quest.user)
+        print(request.user)
 
-        if form.is_valid() and not stopNotification:
+        if form.is_valid() and not stopNotification: #and not ansYourQuest
             new_answer = form.save(commit=False)
             new_answer.question = quest
             new_answer.user = request.user
             new_answer.save()
 
-            author_mail = request.user.username
+            author_mail = request.user.email
             email = EmailMessage(
                 f"Your question '{quest.title}' has been asnwered by {request.user.username}",
                 f"""Hi, <br>
@@ -120,9 +124,43 @@ def like_dislike_item(request, itemID, itemType):
 @login_required
 def display_collection(request, type):
     typeToReturn="questions" if type=="quest" else "answers"
-    return render(request, "display_collection.html", {"type":typeToReturn,
-                                                       "questions":"questions",
-                                                       "answers":"answers"})
+    return render(request, "display_collection.html", {"type":typeToReturn})
+
+@login_required
+def display_collection_items(request, type, itemType):
+    typeToReturn="questions" if type=="quest" else "answers"
+    itemTypeToReturn="my" if itemType=="my" else "fav"
+
+    if typeToReturn == "questions" and itemTypeToReturn == "my":
+        itemsQueryset = Question.objects.filter(user=request.user)
+
+    elif typeToReturn == "questions" and itemTypeToReturn == "fav":
+        itemsQueryset = User.objects.prefetch_related("likes")\
+            .get(pk=request.user.id).likes.all()
+        
+        for item in itemsQueryset:
+            if item.user == request.user:
+                item.is_your = True
+            else:
+                item.is_your = False
+   
+    elif typeToReturn == "answers" and itemTypeToReturn == "my":
+        itemsQueryset = Answer.objects.filter(user=request.user)
+
+    elif typeToReturn == "answers" and itemTypeToReturn == "fav":
+        itemsQueryset = User.objects.prefetch_related("answerLikes")\
+            .get(pk=request.user.id).likes.all()
+        
+        for item in itemsQueryset:
+            if item.user == request.user:
+                item.is_your = True
+            else:
+                item.is_your = False
+
+    return render(request, "display_collection_items.html",
+                  {"items":itemsQueryset,
+                   "itemType":itemTypeToReturn,
+                   "collType":typeToReturn})
 
 def search(request):
     keywords = request.POST.get("search").split(" ")
@@ -139,6 +177,8 @@ def search(request):
             questions = queryset
         questions = questions.order_by("-create_date")
         return render(request, "search.html", {"questions":questions})
+    
+
 
 
 

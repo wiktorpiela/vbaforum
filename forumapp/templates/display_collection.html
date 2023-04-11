@@ -6,12 +6,12 @@
 
 {% block content %}
     
-    {% if type == questions %}
+    {% if type == "questions" %}
 
     <div>
         <h1 class="main-header">Collection review - {{type|capfirst}}</h1>
         <div class="collection-icon-desc">
-            <a href="#">
+            <a href="{% url 'forumapp:display_collection_items' 'quest' 'my' %}">
                 <ion-icon name="list" class="icon"></ion-icon>
                 <p>My questions</p>
             </a>
