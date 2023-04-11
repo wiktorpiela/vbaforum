@@ -128,7 +128,10 @@ def search(request):
     keywords = request.POST.get("search").split(" ")
     for word in keywords:
         queryset = Question.objects.filter(
-            Q(title__icontains = word) | Q(text__icontains = word)
+            Q(title__icontains = word) | 
+            Q(text__icontains = word) | 
+            Q(user__username__icontains = word) | 
+            Q(tags__name__icontains = word)
         )
         try:
             questions = questions | queryset
