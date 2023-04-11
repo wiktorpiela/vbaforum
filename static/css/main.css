@@ -207,6 +207,10 @@ nav form{
     margin-right: 1rem;
 }
 
+.counting a{
+    color: #32889f;
+}
+
 .detailed-quest p{
     font-size: 1.75rem;
 }

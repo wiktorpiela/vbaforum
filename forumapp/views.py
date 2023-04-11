@@ -6,6 +6,9 @@ from django.contrib import messages
 from django.template.defaultfilters import slugify
 from accounts.models import UserProfile
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.db.models import Q
 
 def home(request):
     questions = Question.objects.order_by("-create_date")
@@ -58,15 +61,37 @@ def add_answer(request, questID):
         return render(request, "add_answer.html",{"question":quest})
     else:
         form = AnswerForm(request.POST, request.FILES)
-        if form.is_valid():
+        stopNotification = quest.user.userprofile.stop_notifications
+
+        if form.is_valid() and not stopNotification:
             new_answer = form.save(commit=False)
             new_answer.question = quest
             new_answer.user = request.user
             new_answer.save()
 
-            #dodac wysyłanie emaila warunkowe
+            author_mail = request.user.username
+            email = EmailMessage(
+                f"Your question '{quest.title}' has been asnwered by {request.user.username}",
+                f"""Hi, <br>
+                {request.user.username} has just added the answer to your question!
+                Content of the response:
+                {new_answer.text} <br>
+                Best regards, VBA forum Team""",
+                settings.DEFAULT_FROM_EMAIL,
+                [author_mail])
+            email.content_subtype = "html"
+            email.send()
 
             return redirect("forumapp:question_details", questID=quest.id)
+        
+        elif form.is_valid() and stopNotification:
+            new_answer = form.save(commit=False)
+            new_answer.question = quest
+            new_answer.user = request.user
+            new_answer.save()
+
+            return redirect("forumapp:question_details", questID=quest.id)
+
         else:
             messages.error(request,
                            "Something went wrong, data hasn't been saved. Try again!")
@@ -98,6 +123,19 @@ def display_collection(request, type):
     return render(request, "display_collection.html", {"type":typeToReturn,
                                                        "questions":"questions",
                                                        "answers":"answers"})
+
+def search(request):
+    keywords = request.POST.get("search").split(" ")
+    for word in keywords:
+        queryset = Question.objects.filter(
+            Q(title__icontains = word) | Q(text__icontains = word)
+        )
+        try:
+            questions = questions | queryset
+        except UnboundLocalError:
+            questions = queryset
+        questions = questions.order_by("-create_date")
+        return render(request, "search.html", {"questions":questions})
 
 
 

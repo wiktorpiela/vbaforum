@@ -22,11 +22,11 @@
             <img src="{% static 'css/img/logo.png' %}" alt="pic" height="50" width="150">
         </a>
 
-        <form action="#" method="post">
+        <form action="{% url 'forumapp:search' %}" method="post">
             {% csrf_token %}
             <input type="text" name="search" placeholder="Search by title and text..." required>
             <button type="submit" class>Go!</button>
-            <a href="#">Reset</a>
+            <a href="{% url 'forumapp:home' %}">Reset</a>
         </form>
 
         {% if user.is_authenticated %}
