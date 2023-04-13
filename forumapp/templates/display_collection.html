@@ -1,43 +1,37 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Collection - {{type}}
+    Collection - {{returnType}}
 {% endblock title %}
 
 {% block content %}
-    
-    {% if type == "questions" %}
 
     <div>
-        <h1 class="main-header">Collection review - {{type|capfirst}}</h1>
+        <h1 class="main-header">Collection review - {{returnType|capfirst}}</h1>
         <div class="collection-icon-desc">
-            <a href="{% url 'forumapp:display_collection_items' 'quest' 'my' %}">
-                <ion-icon name="list" class="icon"></ion-icon>
-                <p>My questions</p>
-            </a>
-            <a href="#">
-                <ion-icon name="star" class="icon"></ion-icon>
-                <p>Favorite questions</p>
-            </a>
-        </div>
-    </div>
-
-    {% else %}
-        <div>
-            <h1 class="main-header">Collection review - {{type|capfirst}}</h1>
-            <div class="collection-icon-desc">
-                <a href="#">
+            
+            {% if type == "q" %}
+                <a href="{% url 'forumapp:display_collection_items' 'questions' 'my' %}">
+                    <ion-icon name="list" class="icon"></ion-icon>
+                    <p>My questions</p>
+                </a>
+                <a href="{% url 'forumapp:display_collection_items' 'questions' 'fav' %}">
+                    <ion-icon name="star" class="icon"></ion-icon>
+                    <p>Favorite questions</p>
+                </a>
+            {% else %}
+                <a href="{% url 'forumapp:display_collection_items' 'answers' 'my' %}">
                     <ion-icon name="list" class="icon"></ion-icon>
                     <p>My answers</p>
                 </a>
-                <a href="#">
+                <a href="{% url 'forumapp:display_collection_items' 'answers' 'fav' %}">
                     <ion-icon name="star" class="icon"></ion-icon>
                     <p>Favorite answers</p>
-                </a>
-            </div>
+                </a> 
+            {% endif %}
         </div>
-    {% endif %}
-    
+    </div>
+ 
 {% endblock content %}
     
     

@@ -49,8 +49,7 @@
                                 <p><ion-icon name="thumbs-up-outline"></ion-icon>{{question.total_likes}}</p>
                             </a>
                         {% endif %}
-                            
-                        
+
                         <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
                     </div>
         
@@ -61,10 +60,10 @@
                     </div>
 
                     <div class="question-actions">
-                        <a href="{% url 'forumapp:add_answer' question.id %}">Answer this question</a>
+                        <a href="{% url 'forumapp:add_answer' question.id %}">Answer</a>
                         {% if question.is_your %}
-                            <a href="#">Edit question</a> 
-                            <a href="{% url 'forumapp:delete_my_item' question.id 'question' %}">Delete question</a>
+                            <a href="#">Edit</a> 
+                            <a href="{% url 'forumapp:delete_my_item' question.id 'question' %}">Delete</a>
                         {% endif %}  
                     </div>
                     
@@ -125,8 +124,8 @@
             
                                 <div class="question-actions">
                                     {% if answer.is_your %}
-                                        <a href="#">Edit answer</a> 
-                                        <a href="{% url 'forumapp:delete_my_item' answer.id 'answer' %}">Delete answer</a> 
+                                        <a href="#">Edit</a> 
+                                        <a href="{% url 'forumapp:delete_my_item' answer.id 'answer' %}">Delete</a> 
                                     {% endif %}  
                                 </div> 
                             </div>

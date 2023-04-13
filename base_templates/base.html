@@ -30,18 +30,16 @@
         </form>
 
         {% if user.is_authenticated %}
-
             <a href="{% url 'forumapp:new_question' %}">New question</a>
-            <a href="{% url 'forumapp:display_collection' 'quest' %}">Questions</a>
-            <a href="{% url 'forumapp:display_collection' 'ans' %}">Answers</a>
-            <a href="#">Stats</a>
+            <a href="{% url 'forumapp:display_collection' 'q' %}">Questions</a>
+            <a href="{% url 'forumapp:display_collection' 'a' %}">Answers</a>
+            <a href="#">Chat room</a>
           
             {% if user.userprofile %}
                 <a href="#">
                     <img src="{{user.userprofile.avatar.url}}" alt="pics" height="50" width="50">
                 </a>  
-            {% endif %}
-                
+            {% endif %} 
             <a href="{% url 'accounts:logout_user' %}">Log out</a>
         {% else %}
             <div></div>

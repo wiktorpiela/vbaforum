@@ -64,8 +64,6 @@ def add_answer(request, questID):
         form = AnswerForm(request.POST, request.FILES)
         stopNotification = quest.user.userprofile.stop_notifications
         ansYourQuest = True if quest.user == request.user else False
-        print(quest.user)
-        print(request.user)
 
         if form.is_valid() and not stopNotification: #and not ansYourQuest
             new_answer = form.save(commit=False)
@@ -123,18 +121,17 @@ def like_dislike_item(request, itemID, itemType):
 
 @login_required
 def display_collection(request, type):
-    typeToReturn="questions" if type=="quest" else "answers"
-    return render(request, "display_collection.html", {"type":typeToReturn})
+    returnType = "questions" if type == "q" else "answers"
+    return render(request, "display_collection.html", {"type":type,
+                                                       "returnType":returnType})
 
 @login_required
 def display_collection_items(request, type, itemType):
-    typeToReturn="questions" if type=="quest" else "answers"
-    itemTypeToReturn="my" if itemType=="my" else "fav"
 
-    if typeToReturn == "questions" and itemTypeToReturn == "my":
+    if type == "questions" and itemType == "my":
         itemsQueryset = Question.objects.filter(user=request.user)
 
-    elif typeToReturn == "questions" and itemTypeToReturn == "fav":
+    elif type == "questions" and itemType == "fav":
         itemsQueryset = User.objects.prefetch_related("likes")\
             .get(pk=request.user.id).likes.all()
         
@@ -144,12 +141,12 @@ def display_collection_items(request, type, itemType):
             else:
                 item.is_your = False
    
-    elif typeToReturn == "answers" and itemTypeToReturn == "my":
+    elif type == "answers" and itemType == "my":
         itemsQueryset = Answer.objects.filter(user=request.user)
 
-    elif typeToReturn == "answers" and itemTypeToReturn == "fav":
+    elif type == "answers" and itemType == "fav":
         itemsQueryset = User.objects.prefetch_related("answerLikes")\
-            .get(pk=request.user.id).likes.all()
+            .get(pk=request.user.id).answerLikes.all()
         
         for item in itemsQueryset:
             if item.user == request.user:
@@ -159,8 +156,8 @@ def display_collection_items(request, type, itemType):
 
     return render(request, "display_collection_items.html",
                   {"items":itemsQueryset,
-                   "itemType":itemTypeToReturn,
-                   "collType":typeToReturn})
+                   "itemType":itemType,
+                   "type":type})
 
 def search(request):
     keywords = request.POST.get("search").split(" ")

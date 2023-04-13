@@ -2,63 +2,109 @@
 
 
 {% block title %}
-    Collection 
+    Collection
 {% endblock title %}
 
 
 {% block content %}
-    
-    {% if itemType == "my" %}
 
-        {% if items %}
+    {% if items %}
+
+        {% if type == "questions" %}
 
             {% for item in items %}
-                <div class="question-wall">
+                <div class="question-wall detailed-quest">
+                    <div class="question-wall-inside-first">
 
-                    <a href="{% url 'forumapp:question_details' item.id %}">
-            
-                        <div class="question-wall-inside">
-                            <div class="question-wall-inside-first">
-                                <h4>{{item.title|capfirst}}</h4>
-                                <h6>Posted {{item.display_time}}</h6>
-                                <p>{{item.text|truncatewords:20}}</p>
-                                    
-                                <div class="counting">
-                                    <p><ion-icon name="thumbs-up"></ion-icon>{{item.total_likes}}</p>
-                                    <p><ion-icon name="chatbox"></ion-icon>{{item.total_answers}}</p>
-                                </div>
-                    
-                                <div class="question-wall-tags">
-                                    {% for tag in item.tags.all %}
-                                        <small>#{{tag}}</small>
-                                    {% endfor %}
-                                </div>
+                        <a href="{% url 'forumapp:question_details' item.id %}">
+                            <h4>{{item.title|capfirst}}</h4>
+                            {% if item.is_your == False %}
+                                <h6>Posted {{item.display_time}} by {{item.user.username}}</h6>
+                            {% else %}
+                                <h6>Posted {{item.display_time}}</h6>  
+                            {% endif %}
+
+                            <div class="counting">   
+                                <p><ion-icon name="thumbs-up"></ion-icon>{{item.total_likes}}</p>
+                                <p><ion-icon name="chatbox"></ion-icon>{{item.total_answers}}</p>
                             </div>
-                        </div>
-                        <div class="question-actions">
-                            <a href="#">Edit</a>
-                            <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>
-                        </div>
-                    </a>
-                </div>
+                        </a>
 
-            
+                        {% if itemType == "my"%}
+                            <div class="question-actions">
+                                <a href="#">Edit</a> 
+                                <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>
+                            </div>
+                        {% else %}
+                            <div class="question-actions">
+                                <a href="{% url 'forumapp:like_dislike_item' item.id 'question' %}">Dislike</a>
+                                {% if item.is_your %}
+                                    <a href="#">Edit</a> 
+                                    <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>   
+                                {% endif %}     
+                            </div> 
+                        {% endif %}
+                    
+                    </div>
+                </div>
             {% endfor %}
 
         {% else %}
+
+            {% for item in items  %}
+                <div class="question-wall detailed-quest">
+                    <div class="question-wall-inside-first">
+
+                        <a href="{% url 'forumapp:question_details' item.question.id %}">
+                            <h4>Answer to {{item.question.title}}</h4>
+                            {% if item.is_your == False %}
+                                <h6>Posted {{item.display_time}} by {{item.user.username}}</h6>
+                            {% else %}
+                                <h6>Posted {{item.display_time}}</h6>  
+                            {% endif %}
+
+                            <div class="counting">   
+                                <p><ion-icon name="thumbs-up"></ion-icon>{{item.total_likes}}</p>
+                                <p><ion-icon name="chatbox"></ion-icon>{{item.question.total_answers}}</p>
+                            </div>
+                        </a>
+
+                        {% if itemType == "my"%}
+                            <div class="question-actions">
+                                <a href="#">Edit</a> 
+                                <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>
+                            </div>
+                        {% else %}
+                            <div class="question-actions">
+                                <a href="{% url 'forumapp:like_dislike_item' item.id 'answer' %}">Dislike</a>
+                                {% if item.is_your %}
+                                    <a href="#">Edit</a> 
+                                    <a href="{% url 'forumapp:delete_my_item' item.id 'answer' %}">Delete</a>   
+                                {% endif %}     
+                            </div> 
+                        {% endif %}
+                    
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% else %}
+
+        {% if type == "questions" and itemType == "my" %}
             <h1 class="main-header">You haven't posted any questions yet</h1>
+        {% elif type == "answers" and itemType == "my" %}
+            <h1 class="main-header">You haven't posted any answers yet</h1>
+        {% elif type == "questions" and itemType == "fav" %}
+            <h1 class="main-header">You haven't liked any questions yet</h1>
+        {% else %}
+            <h1 class="main-header">You haven't liked any answers yet</h1>
         {% endif %}
         
-    {% else %}
-        <h1>dupa</h1>
-        
-
-        
     {% endif %}
-        
-
-  
-    
+     
 {% endblock content %}
     
     
