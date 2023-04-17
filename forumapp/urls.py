@@ -13,6 +13,6 @@ urlpatterns = [
     path("like-dislike-item/<int:itemID>/<str:itemType>/", views.like_dislike_item, name="like_dislike_item"),
     path("search-item/", views.search, name="search"),
     path("display-collection/<str:type>/items/<str:itemType>/", views.display_collection_items, name="display_collection_items"),
+    path("edit-item/<int:itemID>/<str:itemType>/", views.edit_item, name="edit_item"),
 
-    
 ]

@@ -175,6 +175,39 @@ def search(request):
         questions = questions.order_by("-create_date")
         return render(request, "search.html", {"questions":questions})
     
+@login_required
+def edit_item(request, itemID, itemType):
+
+    if itemType == "question":
+        item_to_edit = get_object_or_404(Question, pk=itemID, user=request.user)
+        item_form = QuestionForm(instance=item_to_edit)
+    else:
+        item_to_edit = get_object_or_404(Answer, pk=itemID, user=request.user)
+        item_form = AnswerForm(instance=item_to_edit)
+
+    if request.method == "GET":
+        return render(request, "edit_item.html", {"item":item_to_edit,
+                                                  "itemType":itemType,
+                                                  "form":item_form})
+    else:
+        editedItem = QuestionForm(request.POST, request.FILES, instance=item_to_edit) \
+            if itemType == "question" else AnswerForm(request.POST, request.FILES, instance=item_to_edit)
+        
+        if editedItem.is_valid():
+            editedItem.save()
+            if itemType=="question":
+                return redirect("forumapp:question_details", questID=itemID)
+            else:
+                return redirect("forumapp:question_details", questID=item_to_edit.question.id)
+
+        else:
+            messages.error(request, "Something went wrong, data hasn't been saved. Try again!")
+            return render(request, "edit_item.html", {"item":item_to_edit,
+                                                      "itemType":itemType})
+
+
+
+    
 
 
 

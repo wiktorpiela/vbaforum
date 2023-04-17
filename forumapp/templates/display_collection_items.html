@@ -10,6 +10,16 @@
 
     {% if items %}
 
+    {% if type == "questions" and itemType == "my" %}
+        <h1 class="main-header">You have posted {{items.count}} question{{items.count|pluralize}}</h1>
+    {% elif type == "answers" and itemType == "my" %}
+        <h1 class="main-header">You have posted {{items.count}} answer{{items.count|pluralize}}</h1>
+    {% elif type == "questions" and itemType == "fav" %}
+        <h1 class="main-header">You have {{items.count}} favorite question{{items.count|pluralize}}</h1>
+    {% else %}
+        <h1 class="main-header">You have {{items.count}} favorite answer{{items.count|pluralize}}</h1>
+    {% endif %}
+
         {% if type == "questions" %}
 
             {% for item in items %}
@@ -32,14 +42,14 @@
 
                         {% if itemType == "my"%}
                             <div class="question-actions">
-                                <a href="#">Edit</a> 
+                                <a href="{% url 'forumapp:edit_item' item.id 'question' %}">Edit</a> 
                                 <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>
                             </div>
                         {% else %}
                             <div class="question-actions">
                                 <a href="{% url 'forumapp:like_dislike_item' item.id 'question' %}">Dislike</a>
                                 {% if item.is_your %}
-                                    <a href="#">Edit</a> 
+                                    <a href="{% url 'forumapp:edit_item' item.id 'question' %}">Edit</a> 
                                     <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>   
                                 {% endif %}     
                             </div> 

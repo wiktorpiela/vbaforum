@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Editing
+{% endblock title %}
+
+
+{% block content %}
+    
+    {% include 'messages.html' %}
+
+    <div class="main-form new-quest-from">
+
+        <div>     
+            {% if itemType == "question" %}
+                <h1 class="main-header">Question editing</h1>
+            {% else %}
+                <h1 class="main-header">Answer editing</h1>
+            {% endif %}  
+        </div>
+
+        
+        {% if itemType == "question" %}
+            <form action="{% url 'forumapp:edit_item' item.id 'question' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="main-form-component main-form-component-new-quest">
+                    <label for="id_title">Title</label>
+                    <input type="text" name="title" value="{{item.title}}" maxlength="300" required="" id="id_title">
+                </div>
+                <div class="main-form-component main-form-component-new-quest">
+                    <label for="id_text">Text</label>
+                    <textarea name="text" cols="40" rows="10" required="" id="id_text">{{item.text}}</textarea>
+                </div>
+                
+                {% if item.code_example %}
+                    <div class="main-form-component main-form-component-new-quest">
+                        <label for="id_code_example">Code example</label>
+                        <textarea name="code_example" cols="40" rows="10" id="id_code_example">{{item.code_example}}</textarea>
+                    </div>
+                {% else %}
+                    <div class="main-form-component main-form-component-new-quest">
+                        <label for="id_code_example">Code example</label>
+                        <textarea name="code_example" cols="40" rows="10" id="id_code_example"></textarea>
+                    </div> 
+                {% endif %}
+                    
+                {% if item.image %}
+                    <div class="main-form-component main-form-component-new-quest">
+                        <label for="id_image">Image</label>
+                        <a href="{{item.image.url}}">Current image</a>
+                        <label for="image-clear_id">Clear</label>
+                        <input type="checkbox" name="image-clear" id="image-clear_id">
+                        <input type="file" name="image" accept="image/*" id="id_image">
+                    </div>
+                {% else %}
+                    <div class="main-form-component main-form-component-new-quest">
+                        <label for="id_image">Image</label>
+                        <input type="file" name="image" accept="image/*" id="id_image">
+                    </div>    
+                {% endif %}
+                    
+                <div class="main-form-component main-form-component-new-quest">
+                    <label for="id_tags">Tags</label>
+                    <input type="text" name="tags" value="{% for tag in item.tags.all %} {{tag}} {% endfor %}" required="" id="id_tags">
+                </div>
+                
+                <div class="form-btn">
+                    <button type="submit" class="btn">Re-post</button>
+                </div>   
+            </form>
+
+        {% else %}
+
+        <div class="answer-composing">
+
+            <div class="question-wall detailed-quest">
+    
+                <div class="question-wall-inside detailed-quest-inside">
+        
+                    <div class="user-info-post">
+                        <img src="{{item.question.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
+                        <h6>{{item.question.user.username}}</h6>
+                        <small>{{item.question.user.userprofile.role}}</small>
+                        <small>Joined {{item.question.user.date_joined|date:'j-M-o'}}</small>
+                    </div>
+        
+                    <div class="quest-detailed-content-image">
+        
+                        <div class="question-wall-inside-first">
+                            <h4>{{item.question.title|capfirst}}</h4>
+                            <h6>Posted {{item.question.display_time}}</h6>
+                            <p>{{item.question.text}}</p> 
+        
+                            {% if item.question.code_example %}
+                                <div class="detailed-question-wall-inside-second code-example">
+                                    <code>{{item.question.code_example}}</code>
+                                </div>
+                            {% endif %}
+        
+                            {% if item.question.image %}
+                                <div class="question-wall-inside-second detailed-question-wall-inside-second">
+                                    <a href="{{item.question.image.url}}">
+                                        <img src="{{item.question.image.url}}" alt="pic" width="350">
+                                    </a>  
+                                </div>
+                            {% endif %}
+                        
+                            <div class="counting">
+                                <p><ion-icon name="thumbs-up"></ion-icon>{{item.question.total_likes}}</p>
+                                <p><ion-icon name="chatbox"></ion-icon>{{item.question.total_answers}}</p>
+                            </div>
+                
+                            <div class="question-wall-tags">
+                                {% for tag in item.question.tags.all %}
+                                    <small>#{{tag}}</small>
+                                {% endfor %}   
+                            </div>
+                            
+                        </div>
+        
+                    </div>
+                    
+                </div>
+        
+            </div>
+    
+            <div class="main-form new-quest-from">
+    
+                <h1 class="main-header">Editing answer...</h1>
+        
+                <form action="{% url 'forumapp:edit_item' item.id 'answer' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="main-form-component main-form-component-new-quest">
+                        <label for="id_text">Text</label>
+                        <textarea name="text" cols="40" rows="10" required="" id="id_text">{{item.text}}</textarea>
+                    </div>
+                    
+                    {% if item.code_example %}
+                        <div class="main-form-component main-form-component-new-quest">
+                            <label for="id_code_example">Code example</label>
+                            <textarea name="code_example" cols="40" rows="10" id="id_code_example">{{item.code_example}}</textarea>
+                        </div>  
+                    {% endif %}
+                    
+                    {% if item.image %}
+                        <div class="main-form-component main-form-component-new-quest">
+                            <label for="id_image">Image</label>
+                            <a href="{{item.image.url}}">Current image</a>
+                            <label for="image-clear_id">Clear</label>
+                            <input type="checkbox" name="image-clear" id="image-clear_id">
+                            <input type="file" name="image" accept="image/*" id="id_image">
+                        </div>
+                    {% else %}
+                        <div class="main-form-component main-form-component-new-quest">
+                            <label for="id_image">Image</label>
+                            <input type="file" name="image" accept="image/*" id="id_image">
+                        </div>   
+                    {% endif %}
+                     
+                    <div class="form-btn">
+                        <button type="submit" class="btn">Re-post</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        {% endif %}
+        
+    </div>
+
+{% endblock content %}
+    
+    
