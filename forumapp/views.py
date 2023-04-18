@@ -10,6 +10,8 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 def home(request):
     questions = Question.objects.order_by("-create_date")
@@ -100,11 +102,31 @@ def add_answer(request, questID):
             return render(request, "add_answer.html", {"question":quest})
 
 @login_required
-def delete_my_item(request, itemID, itemType):
-    item_to_remove = get_object_or_404(Question, pk=itemID, user=request.user) if itemType == "question" else get_object_or_404(Answer, pk=itemID, user=request.user)
+def delete_my_item(request, itemID, itemType, pageLocation):
+    item_to_remove = get_object_or_404(Question, pk=itemID, user=request.user)\
+          if itemType == "question" else get_object_or_404(Answer, pk=itemID, user=request.user)
+    depID = item_to_remove.question.id if itemType != "question" else None
     item_to_remove.delete()
-    return redirect("forumapp:home")
-
+    if itemType == "question":
+        if pageLocation=="quest-details":
+            return redirect("forumapp:home")
+        elif pageLocation=="quest-my":
+            # itemsQueryset = Question.objects.filter(user=request.user)
+            # return render(request, "display_collection_items.html",
+            #               {"items":itemsQueryset,
+            #                "itemType":"my",
+            #                "type":itemType})
+            pass
+        elif pageLocation=="quest-fav":
+            pass
+    else:
+        if pageLocation=="quest-details":
+            return redirect("forumapp:question_details", questID=depID)
+        elif pageLocation=="ans-my":
+            pass
+        elif pageLocation=="ans-fav":
+            pass
+                
 @login_required
 def like_dislike_item(request, itemID, itemType):
     item_to_like = get_object_or_404(Question, pk=itemID) if itemType == "question" else get_object_or_404(Answer, pk=itemID)
@@ -176,7 +198,7 @@ def search(request):
         return render(request, "search.html", {"questions":questions})
     
 @login_required
-def edit_item(request, itemID, itemType):
+def edit_item(request, itemID, itemType, pageLocation):
 
     if itemType == "question":
         item_to_edit = get_object_or_404(Question, pk=itemID, user=request.user)
@@ -188,7 +210,8 @@ def edit_item(request, itemID, itemType):
     if request.method == "GET":
         return render(request, "edit_item.html", {"item":item_to_edit,
                                                   "itemType":itemType,
-                                                  "form":item_form})
+                                                  "form":item_form,
+                                                  "location":pageLocation})
     else:
         editedItem = QuestionForm(request.POST, request.FILES, instance=item_to_edit) \
             if itemType == "question" else AnswerForm(request.POST, request.FILES, instance=item_to_edit)
@@ -196,10 +219,20 @@ def edit_item(request, itemID, itemType):
         if editedItem.is_valid():
             editedItem.save()
             if itemType=="question":
-                return redirect("forumapp:question_details", questID=itemID)
+                if pageLocation=="quest-details":
+                    return redirect("forumapp:question_details", questID=itemID)
+                elif pageLocation=="quest-my":
+                    return HttpResponseRedirect(reverse("forumapp:display_collection_items", kwargs={"type":"q","itemType":"my"}))
+                    # return redirect("forumapp:display_collection_items", type = "q", itemType = "my")
+                elif pageLocation=="quest-fav":
+                    return redirect("forumapp:display_collection_items", type = "q", itemType = "fav")
             else:
-                return redirect("forumapp:question_details", questID=item_to_edit.question.id)
-
+                if pageLocation=="ans-my":
+                    return redirect("forumapp:display_collection_items", type = "a", itemType = "my")
+                elif pageLocation=="ans-fav":
+                    return redirect("forumapp:display_collection_items", type = "a", itemType = "fav")
+                elif pageLocation=="quest-details":
+                    return redirect("forumapp:question_details", questID=item_to_edit.question.id)
         else:
             messages.error(request, "Something went wrong, data hasn't been saved. Try again!")
             return render(request, "edit_item.html", {"item":item_to_edit,

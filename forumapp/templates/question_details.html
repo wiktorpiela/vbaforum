@@ -62,8 +62,8 @@
                     <div class="question-actions">
                         <a href="{% url 'forumapp:add_answer' question.id %}">Answer</a>
                         {% if question.is_your %}
-                            <a href="{% url 'forumapp:edit_item' question.id 'question' %}">Edit</a> 
-                            <a href="{% url 'forumapp:delete_my_item' question.id 'question' %}">Delete</a>
+                            <a href="{% url 'forumapp:edit_item' question.id 'question' 'quest-details' %}">Edit</a> 
+                            <a href="{% url 'forumapp:delete_my_item' question.id 'question' 'quest-details' %}">Delete</a>
                         {% endif %}  
                     </div>
                     
@@ -124,8 +124,8 @@
             
                                 <div class="question-actions">
                                     {% if answer.is_your %}
-                                        <a href="{% url 'forumapp:edit_item' answer.id 'answer' %}">Edit</a> 
-                                        <a href="{% url 'forumapp:delete_my_item' answer.id 'answer' %}">Delete</a> 
+                                        <a href="{% url 'forumapp:edit_item' answer.id 'answer' 'quest-details' %}">Edit</a> 
+                                        <a href="{% url 'forumapp:delete_my_item' answer.id 'answer' 'quest-details' %}">Delete</a> 
                                     {% endif %}  
                                 </div> 
                             </div>

@@ -42,15 +42,15 @@
 
                         {% if itemType == "my"%}
                             <div class="question-actions">
-                                <a href="{% url 'forumapp:edit_item' item.id 'question' %}">Edit</a> 
-                                <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>
+                                <a href="{% url 'forumapp:edit_item' item.id 'question' 'quest-my' %}">Edit</a> 
+                                <a href="{% url 'forumapp:delete_my_item' item.id 'question' 'quest-my' %}">Delete</a>
                             </div>
                         {% else %}
                             <div class="question-actions">
                                 <a href="{% url 'forumapp:like_dislike_item' item.id 'question' %}">Dislike</a>
                                 {% if item.is_your %}
-                                    <a href="{% url 'forumapp:edit_item' item.id 'question' %}">Edit</a> 
-                                    <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>   
+                                    <a href="{% url 'forumapp:edit_item' item.id 'question' 'quest-fav' %}">Edit</a> 
+                                    <a href="{% url 'forumapp:delete_my_item' item.id 'question' 'quest-fav' %}">Delete</a>   
                                 {% endif %}     
                             </div> 
                         {% endif %}
@@ -81,15 +81,15 @@
 
                         {% if itemType == "my"%}
                             <div class="question-actions">
-                                <a href="#">Edit</a> 
-                                <a href="{% url 'forumapp:delete_my_item' item.id 'question' %}">Delete</a>
+                                <a href="{% url 'forumapp:edit_item' item.id 'answer' 'ans-my' %}">Edit</a> 
+                                <a href="{% url 'forumapp:delete_my_item' item.id 'answer' 'ans-my' %}">Delete</a>
                             </div>
                         {% else %}
                             <div class="question-actions">
                                 <a href="{% url 'forumapp:like_dislike_item' item.id 'answer' %}">Dislike</a>
                                 {% if item.is_your %}
-                                    <a href="#">Edit</a> 
-                                    <a href="{% url 'forumapp:delete_my_item' item.id 'answer' %}">Delete</a>   
+                                    <a href="{% url 'forumapp:edit_item' item.id 'answer' 'ans-fav' %}">Edit</a> 
+                                    <a href="{% url 'forumapp:delete_my_item' item.id 'answer' 'ans-fav' %}">Delete</a>   
                                 {% endif %}     
                             </div> 
                         {% endif %}
