@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Changing profile
+{% endblock title %}
+
+{% block content %}
+
+    {% include 'messages.html' %}
+
+    <div class="main-form">
+
+        <div>
+            <h1 class="main-header">Profile editing</h1>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+    
+            <div class="main-form-component">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" value="{{user.username}}" maxlength="150" required="" id="id_username">
+            </div>
+
+            <div class="main-form-component">
+                <label for="id_email">Email address</label>
+                <input type="email" name="email" value="{{user.email}}" maxlength="254" id="id_email">
+            </div>
+
+            <div class="main-form-component">
+                <label for="id_role">Role</label>
+                <select name="role" id="id_role" required>
+                    <option value="{{user_current_short_role}}" selected >{{user_current_fullname_role}}</option> 
+                    {% for short, long in roles %}
+                        <option value="{{short}}">{{long}}</option>  
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="main-form-component">
+                <label for="id_avatar">Avatar</label>
+                <a href="{{user.userprofile.avatar.url}}">
+                    <img src="{{user.userprofile.avatar.url}}" alt="pic" height="100" width="100">
+                </a>
+                <input type="file" name="avatar" accept="image/*" id="id_avatar">
+            </div>
+
+            <div class="main-form-component main-form-component-textarea">
+                <label for="id_bio">Bio</label>
+                <textarea name="bio" cols="40" rows="10" maxlength="500" id="id_bio">{{user.userprofile.bio}}</textarea>
+            </div>
+
+            <div class="main-form-component">
+                <label for="id_stop_notifications">Stop notifications</label>
+                {% if user.userprofile.stop_notifications %}
+                    <input type="checkbox" name="stop_notifications" id="id_stop_notifications" checked>
+                {% else %}
+                    <input type="checkbox" name="stop_notifications" id="id_stop_notifications"> 
+                {% endif %}
+            </div>
+
+            <div class="form-btn">
+                <button type="submit" class="btn">Update profile</button>
+            </div>
+        
+        </form>
+
+    </div>
+
+{% endblock content %}
+    
+    

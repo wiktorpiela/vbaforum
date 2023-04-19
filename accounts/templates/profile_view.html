@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{user.username}}'s profile
+{% endblock title %}
+    
+{% block content %}
+
+
+    {% if not user.userprofile.bio %}
+        <h1>Reminder:</h1>
+        <h2>Please provide your bio !</h2>
+        
+    {% endif %}
+
+    <div class="user-profile-all-content">
+        <div class="user-profile-avatar-desc">
+            <div class="user-profile-avatar">
+                <img src="{{user.userprofile.avatar.url}}" alt="pic" height="200" width="200">
+            </div>
+            <div class="user-profile-desc">
+                <p>{{user.username}}</p>
+                <p>{{user.email}}</p>
+                {% for short, long in roles %}
+                    {% if short == user.userprofile.role %}
+                        <p>Current role: {{long}}</p>
+                    {% endif %} 
+                {% endfor %}
+                <p>Joined: {{user.date_joined|date:'j E Y'}}</p>
+                
+                {% if user.userprofile.stop_notifications%}
+                    <p>Email notifilations: ON</p>
+                {% else %}
+                    <p>Email notifilations: OFF</p>   
+                {% endif %}
+                        
+            </div>  
+    
+        </div>
+    
+        {% if user.userprofile.bio %}
+            <div class="user-profile-bio">
+                <p>{{user.userprofile.bio}}</p>
+            </div>  
+        {% endif %}
+            
+        <div class="user-profile-options">
+            <a href="{% url 'accounts:profile_update' %}">Update profile</a>
+            <a href="{% url 'accounts:remove_account' %}">Delete account</a>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+    

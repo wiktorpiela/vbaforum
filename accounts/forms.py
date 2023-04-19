@@ -16,3 +16,18 @@ class UserProfileRegistrationForm(forms.ModelForm):
         model = UserProfile
         fields = ("role",)
 
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("username",
+                  "email",
+                  )
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ("bio",
+                  "role",
+                  "avatar",
+                  "stop_notifications")
+

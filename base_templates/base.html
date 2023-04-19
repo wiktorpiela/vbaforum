@@ -36,7 +36,7 @@
             <a href="#">Chat room</a>
           
             {% if user.userprofile %}
-                <a href="#">
+                <a href="{% url 'accounts:profile_view' %}">
                     <img src="{{user.userprofile.avatar.url}}" alt="pics" height="50" width="50">
                 </a>  
             {% endif %} 

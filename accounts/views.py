@@ -1,15 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from verify_email.email_handler import send_verification_email
-from .forms import UserRegistrationForm, UserProfileRegistrationForm
+from .forms import UserRegistrationForm, UserProfileRegistrationForm, UserForm, UserProfileForm
 from .models import UserProfile
 from .func import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect 
+from django.urls import reverse_lazy
 
 def register(request):
     roles = UserProfile.roles[:-1]
@@ -98,3 +102,50 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect("forumapp:home")
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = "profile_view.html"
+    extra_context = {"roles":UserProfile.roles[:-1]}
+
+class ProfileUpdateView(LoginRequiredMixin, TemplateView):
+    user_form = UserForm
+    profile_form = UserProfileForm
+    template_name = "profile_update.html"
+
+    def post(self, request):
+        post_data = request.POST or None
+        file_data = request.FILES or None
+
+        user_form = UserForm(post_data, instance=request.user)
+        profile_form = UserProfileForm(post_data, file_data, instance=request.user.userprofile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.error(request, 'Your profile is updated successfully!')
+            return HttpResponseRedirect(reverse_lazy('accounts:profile_view'))
+        
+        roles = UserProfile.roles[:-1]
+        for short, long in roles:
+            if short == request.user.userprofile.role:
+                break
+        
+        context = self.get_context_data(user_form=user_form,
+                                        profile_form=profile_form,
+                                        roles=roles,
+                                        user_current_fullname_role = long,
+                                        user_current_short_role = short)
+        
+        return self.render_to_response(context)
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs) 
+
+@login_required  
+def remove_account(request):
+    userKey = request.user.id
+    logout(request)
+    User.objects.filter(pk=userKey).delete()
+    return redirect("forumapp:home")
+
+        

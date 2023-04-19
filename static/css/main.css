@@ -289,6 +289,7 @@ nav form{
 .form-btn{
     text-align: center;
     margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .main-form form input,
@@ -343,3 +344,40 @@ nav form{
 .question-actions{
     margin-top: 1rem;
 }
+
+/* USERPROFILE DISPLAY */
+.user-profile-avatar-desc{
+    display: flex;
+    margin: 3rem 35rem;
+    align-items: center;
+}
+
+.user-profile-avatar img{
+    border-radius: 10%;
+}
+
+.user-profile-desc p{
+    font-size: 2rem;
+}
+
+.user-profile-desc{
+    margin-left: 2.5rem;
+}
+
+.user-profile-all-content{
+    margin: 0 auto;
+}
+
+.main-form-component input[type='file']{
+    margin-left: 12rem;
+    margin-top: 2rem;
+    width: 100rem;
+}
+
+/* .main-form-component-textarea{
+    margin-bottom: 1.5rem;
+    border-radius: 0rem;
+    width: 40.889rem;
+    padding: 3.5rem;
+
+} */
