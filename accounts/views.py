@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from verify_email.email_handler import send_verification_email
 from .forms import UserRegistrationForm, UserProfileRegistrationForm, UserForm, UserProfileForm
 from .models import UserProfile
@@ -14,6 +14,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect 
 from django.urls import reverse_lazy
+from django.contrib.auth.hashers import check_password
 
 def register(request):
     roles = UserProfile.roles[:-1]
@@ -123,7 +124,7 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
             user_form.save()
             profile_form.save()
             messages.error(request, 'Your profile is updated successfully!')
-            return HttpResponseRedirect(reverse_lazy('accounts:profile_view'))
+            return HttpResponseRedirect(reverse_lazy('accounts:profile_update'))
         
         roles = UserProfile.roles[:-1]
         for short, long in roles:
@@ -147,5 +148,51 @@ def remove_account(request):
     logout(request)
     User.objects.filter(pk=userKey).delete()
     return redirect("forumapp:home")
+
+class ChangeUserPasswordView(LoginRequiredMixin, TemplateView):
+    changePassForm = PasswordChangeForm
+    template_name = "change_user_password.html"
+
+    def get(self, request, *args, **kwargs):
+        form = self.changePassForm(request.user)
+        return render(request, self.template_name, {"form":form})
+    
+    def post(self, request, *args, **kwargs):
+        old_pass = request.POST.get("old_password")
+        new_pass_init = request.POST.get("new_password1")
+        new_pass_rep = request.POST.get("new_password2")
+
+        if check_password(old_pass, request.user.password):
+            if new_pass_init == new_pass_rep:
+                try:
+                    validate_password(new_pass_init)
+                except ValidationError as exceptions:
+                    return render(request, 
+                                  self.template_name,
+                                  {"passError":exceptions,
+                                   "length":len(list(exceptions))})
+
+                else:
+                    form = self.changePassForm(request.user, request.POST)
+                    if form.is_valid():
+                        user = form.save()
+                        update_session_auth_hash(request, user)
+                        messages.error(request, "Your password has been successfully changed!")
+                        return HttpResponseRedirect(reverse_lazy("accounts:change_user_password"))
+                    else:
+                        messages.error(request, "Something went wrong - no data saved. Please try again!")
+                        return HttpResponseRedirect(reverse_lazy("accounts:change_user_password"))
+            else:
+                messages.error(request, "Both passwords are not identical. Please try again!")
+                return HttpResponseRedirect(reverse_lazy("accounts:change_user_password"))
+        else:
+            messages.error(request, "Wrong old password provided. Please try again!")
+            return HttpResponseRedirect(reverse_lazy("accounts:change_user_password"))
+
+
+
+
+
+
 
         

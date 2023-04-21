@@ -29,9 +29,9 @@
                 <p>Joined: {{user.date_joined|date:'j E Y'}}</p>
                 
                 {% if user.userprofile.stop_notifications%}
-                    <p>Email notifilations: ON</p>
+                    <p>Email notifilations: OFF</p>
                 {% else %}
-                    <p>Email notifilations: OFF</p>   
+                    <p>Email notifilations: ON</p>   
                 {% endif %}
                         
             </div>  
@@ -45,6 +45,7 @@
         {% endif %}
             
         <div class="user-profile-options">
+            <a href="{% url 'accounts:change_user_password' %}">Change password</a>
             <a href="{% url 'accounts:profile_update' %}">Update profile</a>
             <a href="{% url 'accounts:remove_account' %}">Delete account</a>
         </div>
