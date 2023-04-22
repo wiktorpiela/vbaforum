@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from verify_email.email_handler import send_verification_email
@@ -15,6 +15,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect 
 from django.urls import reverse_lazy
 from django.contrib.auth.hashers import check_password
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
 
 def register(request):
     roles = UserProfile.roles[:-1]
@@ -171,7 +178,6 @@ class ChangeUserPasswordView(LoginRequiredMixin, TemplateView):
                                   self.template_name,
                                   {"passError":exceptions,
                                    "length":len(list(exceptions))})
-
                 else:
                     form = self.changePassForm(request.user, request.POST)
                     if form.is_valid():
@@ -188,6 +194,46 @@ class ChangeUserPasswordView(LoginRequiredMixin, TemplateView):
         else:
             messages.error(request, "Wrong old password provided. Please try again!")
             return HttpResponseRedirect(reverse_lazy("accounts:change_user_password"))
+        
+class ResetUserPasswordViewSendRequest(TemplateView):
+    resetPassForm = PasswordResetForm
+    template_name = "reset_user_password.html"
+
+    def get(self, request):
+        form = self.resetPassForm
+        return render(request, self.template_name, {"form":form})
+    
+    def post(self, request):
+        emailToSend = request.POST.get("email")
+        emailExists = User.objects.filter(email=emailToSend).exists()
+        if emailExists:
+            form = PasswordResetForm(request.POST)
+            if form.is_valid():
+                user = User.objects.filter(Q(email=emailToSend))[0]
+                subject = "Password Reset Requested"
+                email_template_name = "reset_user_password_email.txt"
+                c = {"email":emailToSend,
+					'domain':'127.0.0.1:8000',
+					'site_name': 'Website',
+					"uid": urlsafe_base64_encode(force_bytes(user.pk)),
+					"user": user,
+					'token': default_token_generator.make_token(user),
+					'protocol': 'http'}
+                email = render_to_string(email_template_name, c)
+                try:
+                    send_mail(subject, email, 
+                              settings.DEFAULT_FROM_EMAIL, 
+                              [user.email], 
+                              fail_silently=False)
+                except BadHeaderError:
+                    messages.error(request, "Someting went wrong - no request sent.")
+                    return HttpResponseRedirect(reverse_lazy("accounts:reset_user_password"))
+                messages.error(request, "Reset password request has been sent. Please check your mailbox for further instructions.")
+                return redirect ("accounts:reset_user_password")
+        else:
+            messages.error(request, "User with provided email doesn't exists!")
+            return render(request, self.template_name)
+
 
 
 
