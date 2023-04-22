@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question, Answer
-from .forms import QuestionForm, AnswerForm
+from .forms import QuestionForm, AnswerForm, SendEmailMessageForm
 from taggit.models import Tag
 from django.contrib import messages
 from django.template.defaultfilters import slugify
@@ -12,6 +12,8 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def home(request):
     questions = Question.objects.order_by("-create_date")
@@ -237,6 +239,52 @@ def edit_item(request, itemID, itemType, pageLocation):
             messages.error(request, "Something went wrong, data hasn't been saved. Try again!")
             return render(request, "edit_item.html", {"item":item_to_edit,
                                                       "itemType":itemType})
+        
+def profile_view(request, userID):
+    this_user = get_object_or_404(User, pk=userID)
+    this_user.is_your_profile = True if request.user == this_user else False
+    roles = UserProfile.roles[:-1]  
+    return render(request, "forumapp_profile_view.html", 
+                  {"userProf":this_user,
+                   "roles":roles})
+
+class SendEmailMessageView(LoginRequiredMixin ,TemplateView):
+    template_name = "send_email_message.html"
+    messageForm = SendEmailMessageForm
+
+    def get(self, request, userID):
+        user_receiver =  get_object_or_404(User, pk=userID)
+        return render(request, 
+                      self.template_name, 
+                      {"user_receiver":user_receiver})
+    
+    def post(self, request, userID):
+            message_subject = request.POST.get("subject")
+            message = request.POST.get("message")
+            attachment = request.FILES.get("attachment")
+            user_receiver =  get_object_or_404(User, pk=userID)
+            form = SendEmailMessageForm(request.POST, request.FILES)
+            if form.is_valid():
+                email = EmailMessage(
+                    subject=f"VBA Forum on behalf of user: {request.user}",
+                    body = f"""
+                    <h3>Title: {message_subject}</h3> <br> 
+                    {message} <br> 
+                    Regards, {request.user}""",
+                    from_email= settings.DEFAULT_FROM_EMAIL,
+                    to=[user_receiver.email])
+                email.content_subtype = "html"
+                if attachment:
+                    email.attach(attachment.name, attachment.read(), attachment.content_type)
+                email.send()
+                messages.error(request, "Your email has been sent!")
+                return redirect("forumapp:send_email_message", userID=userID)
+            else:
+                messages.error(request, "Something went worng. No email message sent.")
+                return redirect("forumapp:send_email_message",userID=userID)
+
+
+    
 
 
 

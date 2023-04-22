@@ -11,7 +11,7 @@
         <div class="question-wall-inside detailed-quest-inside">
 
             <div class="user-info-post">
-                <a href="{% url 'accounts:profile_view' %}">
+                <a href="{% url 'forumapp:profile_view' question.user.id %}">
                     <img src="{{question.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
                 </a>
                 <h6>{{question.user}}</h6>
@@ -86,7 +86,7 @@
                     <div class="question-wall-inside detailed-quest-inside ">
 
                         <div class="user-info-post">
-                            <a href="{% url 'profile_view' %}">
+                            <a href="{% url 'forumapp:profile_view' answer.user.id %}">
                                 <img src="{{answer.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
                             </a>
                             

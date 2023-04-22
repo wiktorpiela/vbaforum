@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Sending email message to {{user_receiver.username}}{% endblock title %}
+    
+{% block content %}
+
+    {% include 'messages.html' %}
+
+    <div class="main-form new-quest-from">
+        <div>
+            <h1 class="main-header">Composing message to {{user_receiver.username}}</h1>
+        </div>
+    
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="main-form-component main-form-component-new-quest">
+                <label for="id_subject">Title</label>
+                <input type="text" name="subject" maxlength="300" required="" id="id_title">
+            </div>
+    
+            <div class="main-form-component main-form-component-new-quest">
+                <label for="id_message">Text</label>
+                <textarea name="message" cols="40" rows="10" required="" id="id_text"></textarea>
+            </div>
+    
+            <div class="main-form-component main-form-component-new-quest">
+                <label for="id_attachment">Image</label>
+                <input type="file" name="attachment" accept="image/*" id="id_image">
+            </div>
+    
+            <div class="form-btn">
+                <button type="submit" class="btn">Send email</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}
+    

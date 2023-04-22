@@ -128,4 +128,9 @@ class Answer(models.Model):
                 return f"{years} year ago"
             else:
                 return f"{years} years ago"
+            
+class SendEmailMessage(models.Model):
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    attachment = models.ImageField(blank=True)
 
