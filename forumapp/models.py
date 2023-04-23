@@ -130,7 +130,10 @@ class Answer(models.Model):
                 return f"{years} years ago"
             
 class SendEmailMessage(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="userSender")
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="userReceiver")
     subject = models.CharField(max_length=200)
     message = models.TextField()
     attachment = models.ImageField(blank=True)
+    message_date = models.DateTimeField(auto_now_add=True)
 

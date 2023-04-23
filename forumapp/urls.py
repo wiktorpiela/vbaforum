@@ -16,5 +16,4 @@ urlpatterns = [
     path("edit-item/<int:itemID>/<str:itemType>/<str:pageLocation>/", views.edit_item, name="edit_item"),
     path("profile-view/<int:userID>/", views.profile_view, name="profile_view"),
     path("send-email-message/<int:userID>/", views.SendEmailMessageView.as_view(), name="send_email_message"),
-
 ]

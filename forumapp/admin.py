@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Question, Answer
+from .models import Question, Answer, SendEmailMessage
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
@@ -13,5 +13,7 @@ class QuestionAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     readonly_fields = ("question","user","likes","create_date",)
     list_display = ("question","user","create_date",)
+
+admin.site.register(SendEmailMessage)
 
 

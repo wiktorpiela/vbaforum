@@ -264,7 +264,13 @@ class SendEmailMessageView(LoginRequiredMixin ,TemplateView):
             attachment = request.FILES.get("attachment")
             user_receiver =  get_object_or_404(User, pk=userID)
             form = SendEmailMessageForm(request.POST, request.FILES)
+
             if form.is_valid():
+                formSaved = form.save(commit=False)
+                formSaved.sender = request.user
+                formSaved.receiver = user_receiver
+                formSaved.save()
+
                 email = EmailMessage(
                     subject=f"VBA Forum on behalf of user: {request.user}",
                     body = f"""

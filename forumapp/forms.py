@@ -14,4 +14,4 @@ class AnswerForm(forms.ModelForm):
 class SendEmailMessageForm(forms.ModelForm):
     class Meta:
         model = SendEmailMessage
-        fields = "__all__"
+        fields = ("subject", "message", "attachment",)
