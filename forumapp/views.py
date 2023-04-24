@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Question, Answer
+from .models import Question, Answer, SendEmailMessage
 from .forms import QuestionForm, AnswerForm, SendEmailMessageForm
 from taggit.models import Tag
 from django.contrib import messages
@@ -104,31 +104,19 @@ def add_answer(request, questID):
             return render(request, "add_answer.html", {"question":quest})
 
 @login_required
-def delete_my_item(request, itemID, itemType, pageLocation):
+def delete_my_item(request, itemID, itemType):
     item_to_remove = get_object_or_404(Question, pk=itemID, user=request.user)\
           if itemType == "question" else get_object_or_404(Answer, pk=itemID, user=request.user)
-    depID = item_to_remove.question.id if itemType != "question" else None
+    depID = item_to_remove.question if itemType != "question" else None
+    item_title = item_to_remove.title if itemType == "question" else None
     item_to_remove.delete()
     if itemType == "question":
-        if pageLocation=="quest-details":
-            return redirect("forumapp:home")
-        elif pageLocation=="quest-my":
-            # itemsQueryset = Question.objects.filter(user=request.user)
-            # return render(request, "display_collection_items.html",
-            #               {"items":itemsQueryset,
-            #                "itemType":"my",
-            #                "type":itemType})
-            pass
-        elif pageLocation=="quest-fav":
-            pass
+        messages.error(request, f"{itemType.capitalize()} '{item_title}' has been successfully deleted.")
+        return render(request, "item_action_done.html")
     else:
-        if pageLocation=="quest-details":
-            return redirect("forumapp:question_details", questID=depID)
-        elif pageLocation=="ans-my":
-            pass
-        elif pageLocation=="ans-fav":
-            pass
-                
+        messages.error(request, f"{itemType.capitalize()} of question: '{depID.title}' has been successfully deleted.")
+        return render(request, "item_action_done.html")
+              
 @login_required
 def like_dislike_item(request, itemID, itemType):
     item_to_like = get_object_or_404(Question, pk=itemID) if itemType == "question" else get_object_or_404(Answer, pk=itemID)
@@ -144,8 +132,13 @@ def like_dislike_item(request, itemID, itemType):
         return redirect("forumapp:question_details", questID=item_to_like.question.id)
 
 @login_required
-def display_collection(request, type):
-    returnType = "questions" if type == "q" else "answers"
+def display_collection(request, type): 
+    if type == "q":
+        returnType = "questions"
+    elif type=="answers":
+        returnType = "answers"
+    else:
+        returnType = "community"
     return render(request, "display_collection.html", {"type":type,
                                                        "returnType":returnType})
 
@@ -220,21 +213,13 @@ def edit_item(request, itemID, itemType, pageLocation):
         
         if editedItem.is_valid():
             editedItem.save()
+
             if itemType=="question":
-                if pageLocation=="quest-details":
-                    return redirect("forumapp:question_details", questID=itemID)
-                elif pageLocation=="quest-my":
-                    return HttpResponseRedirect(reverse("forumapp:display_collection_items", kwargs={"type":"q","itemType":"my"}))
-                    # return redirect("forumapp:display_collection_items", type = "q", itemType = "my")
-                elif pageLocation=="quest-fav":
-                    return redirect("forumapp:display_collection_items", type = "q", itemType = "fav")
+                messages.error(request, f"{itemType.capitalize()} '{item_to_edit.title}' has been successfully modified! ")
+                return render(request, "item_action_done.html")
             else:
-                if pageLocation=="ans-my":
-                    return redirect("forumapp:display_collection_items", type = "a", itemType = "my")
-                elif pageLocation=="ans-fav":
-                    return redirect("forumapp:display_collection_items", type = "a", itemType = "fav")
-                elif pageLocation=="quest-details":
-                    return redirect("forumapp:question_details", questID=item_to_edit.question.id)
+                messages.error(request, f"{itemType.capitalize()} of question '{item_to_edit.question.title}' has been successfully modified! ")
+                return render(request, "item_action_done.html")
         else:
             messages.error(request, "Something went wrong, data hasn't been saved. Try again!")
             return render(request, "edit_item.html", {"item":item_to_edit,
@@ -288,6 +273,84 @@ class SendEmailMessageView(LoginRequiredMixin ,TemplateView):
             else:
                 messages.error(request, "Something went worng. No email message sent.")
                 return redirect("forumapp:send_email_message",userID=userID)
+            
+@login_required
+def display_my_conversations(request):
+    roles = UserProfile.roles
+    #wybierz takie wiadomosci w ktorych jestem nadawca lub odbiorca
+    userAssociatedMEssages = SendEmailMessage.objects.filter(Q(sender=request.user) | Q(receiver=request.user))
+    #wez takie unikalne id userów z ktorymi miałem wiadomości (nie moje id)
+    receivers = list(userAssociatedMEssages.values_list("receiver").distinct())
+    senders = list(userAssociatedMEssages.values_list("sender").distinct())
+    receivers_list = []
+    sender_list = []
+    for x in range(len(receivers)):
+        receivers_list.append(receivers[x][0])
+    for x in range(len(senders)):
+        sender_list.append(senders[x][0])
+
+    allIds = receivers_list + sender_list
+    allContacts =[]
+    for id in allIds:
+        if id != request.user.id:
+            allContacts.append(id)
+
+    contacts_coversations = User.objects.filter(id__in=allContacts)
+    
+    return render(request, 
+                  "display_my_conversations.html",
+                  {"my_conv":contacts_coversations,
+                   "roles":roles,
+                   #"messagesCount":messagesCount
+                   })
+
+@login_required
+def conversation_details(request, receiverID):
+    userReceiver = get_object_or_404(User, pk=receiverID)
+    all_messages = SendEmailMessage.objects.filter(receiver=receiverID)
+    for message in all_messages:
+        if message.sender == request.user:
+            message.is_your_message = True
+    return render(request, 
+                  "conversation_details.html",
+                  {"all_messages":all_messages,
+                   "userReceiver":userReceiver})
+
+@login_required
+def all_users(request):
+    all_active_users = User.objects.filter(Q(is_active = True) & Q(is_staff = False)).all()
+    roles = UserProfile.roles
+    return render(request, "all_users.html",
+                  {"all_active_users":all_active_users,
+                   "roles":roles})
+
+def browse_users(request):
+    keywords = request.POST.get("browse_users").split(" ")
+    roles = UserProfile.roles[:-1]
+
+    # long = []
+    # short = []
+
+    # for role in roles:
+    #     short.append(role[0])
+    #     long.append(role[1])
+
+    for word in keywords:
+        queryset = User.objects.filter(
+            (Q(is_active = True) & Q(is_staff = False)) &
+            (Q(username__icontains = word) | 
+            Q(userprofile__role__icontains = word)) 
+            )
+        try:
+            questions = questions | queryset
+        except UnboundLocalError:
+            questions = queryset
+        questions = questions.all()
+        return render(request, "browse_users.html",
+                      {"found_users":questions,
+                       "roles":roles})
+    
+
 
 
     

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Conversations details {% endblock title %}
+
+{% block content %}
+
+    <h1>Conversations with {{userReceiver}}</h1>
+
+    {% for message in all_messages %}
+        <h4>{{message.subject}}</h4>
+        <p>{{message.message}}</p>
+        
+        {% if message.attachment %}
+            {{message.attachmnet}}
+        {% endif %}
+            
+
+
+    {% endfor %}
+
+
+{% endblock content %}

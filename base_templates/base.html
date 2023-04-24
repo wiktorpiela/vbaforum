@@ -33,7 +33,7 @@
             <a href="{% url 'forumapp:new_question' %}">New question</a>
             <a href="{% url 'forumapp:display_collection' 'q' %}">Questions</a>
             <a href="{% url 'forumapp:display_collection' 'a' %}">Answers</a>
-            <a href="#">Chat room</a>
+            <a href="{% url 'forumapp:display_collection' 'c' %}">Community</a>
           
             {% if user.userprofile %}
                 <a href="{% url 'accounts:profile_view' %}">

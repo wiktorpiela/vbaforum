@@ -8,8 +8,7 @@
 
     <div>
         <h1 class="main-header">Collection review - {{returnType|capfirst}}</h1>
-        <div class="collection-icon-desc">
-            
+        <div class="collection-icon-desc">  
             {% if type == "q" %}
                 <a href="{% url 'forumapp:display_collection_items' 'questions' 'my' %}">
                     <ion-icon name="list" class="icon"></ion-icon>
@@ -19,7 +18,7 @@
                     <ion-icon name="star" class="icon"></ion-icon>
                     <p>Favorite questions</p>
                 </a>
-            {% else %}
+            {% elif type == "a" %}
                 <a href="{% url 'forumapp:display_collection_items' 'answers' 'my' %}">
                     <ion-icon name="list" class="icon"></ion-icon>
                     <p>My answers</p>
@@ -27,7 +26,24 @@
                 <a href="{% url 'forumapp:display_collection_items' 'answers' 'fav' %}">
                     <ion-icon name="star" class="icon"></ion-icon>
                     <p>Favorite answers</p>
-                </a> 
+                </a>
+            {% else %}
+                <a href="{% url 'forumapp:display_my_conversations' %}">
+                    <ion-icon name="chatbubbles"></ion-icon>
+                    <p>Your conversations</p>
+                </a>
+                <a href="#">
+                    <ion-icon name="people"></ion-icon>
+                    <p>Your contacts</p>
+                </a>
+                <a href="{% url 'forumapp:all_users' %}">
+                    <ion-icon name="search"></ion-icon>
+                    <p>User's browser</p>
+                </a>
+                <a href="#">
+                    <ion-icon name="chatbox-ellipses"></ion-icon>
+                    <p>Chat room</p>
+                </a>
             {% endif %}
         </div>
     </div>

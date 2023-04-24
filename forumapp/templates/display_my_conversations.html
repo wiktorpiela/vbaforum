@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} {{user.username}} conversations {% endblock title %}
+
+{% block content %}
+
+    {% if my_conv %}
+        <h1>Your conversations</h1>
+        {% for conv in my_conv %}
+            <a href="{% url 'forumapp:conversation_details' conv.id %}">
+                <ion-icon name="chatbubbles"></ion-icon>
+                <img src="{{conv.userprofile.avatar.url}}" alt="pic" height="100" width="100">
+                <p>{{conv}}</p>
+                {% for short, long in roles %}
+                    {% if short == conv.userprofile.role %}
+                        <p>{{long}}</p>  
+                    {% endif %}    
+                {% endfor %}
+                <!-- <p>{{messagesCount}}</p> -->
+            </a>
+        {% endfor %}
+    {% else %}
+        <h1>You don't have any conversations yet!</h1>
+  
+    {% endif %}
+    
+ 
+{% endblock content %}
+    

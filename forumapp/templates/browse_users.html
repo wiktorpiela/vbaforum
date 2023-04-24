@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} Found users {% endblock title %}
+
+{% block content %}
+
+    {% if found_users %}
+        <h1>Searching results: {{found_users.count}} active user{{found_users.count|pluralize}} on VBA Forum</h1>
+        <form action="{% url 'forumapp:browse_users' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="browse_users" placeholder="Search by username or user role ..." required>
+            <button type="submit" class>Go!</button>
+            <a href="{% url 'forumapp:all_users' %}">Reset</a>
+        </form>
+        {% for user in found_users %}
+            <a href="{% url 'forumapp:profile_view' user.id %}">
+                <img src="{{user.userprofile.avatar.url}}" alt="pic">
+                <p>{{user.username}}</p>
+                {% for short, long in roles %}
+                    {% if user.userprofile.role == short %}
+                        <p>{{long}}</p>
+                    {% endif %}
+                {% endfor %}
+                <p>Joined: {{user.date_joined|date:'j E Y'}}</p>
+            </a>
+        {% endfor %}
+
+    {% else %}
+        <h1>Currently no active users on VBA Forum</h1> 
+    {% endif %}
+    
+    
+{% endblock content %}

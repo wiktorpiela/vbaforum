@@ -16,4 +16,8 @@ urlpatterns = [
     path("edit-item/<int:itemID>/<str:itemType>/<str:pageLocation>/", views.edit_item, name="edit_item"),
     path("profile-view/<int:userID>/", views.profile_view, name="profile_view"),
     path("send-email-message/<int:userID>/", views.SendEmailMessageView.as_view(), name="send_email_message"),
+    path("display-my-conversations", views.display_my_conversations, name="display_my_conversations"),
+    path("conversation-details/<int:receiverID>/", views.conversation_details, name="conversation_details"),
+    path("all-users/", views.all_users, name="all_users"),
+    path("browse-users/", views.browse_users, name="browse_users"),
 ]
