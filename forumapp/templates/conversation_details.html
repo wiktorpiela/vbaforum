@@ -4,19 +4,24 @@
 
 {% block content %}
 
-    <h1>Conversations with {{userReceiver}}</h1>
+    <h1>Conversations with {{userContact}}</h1>
 
     {% for message in all_messages %}
-        <h4>{{message.subject}}</h4>
-        <p>{{message.message}}</p>
-        
-        {% if message.attachment %}
-            {{message.attachmnet}}
-        {% endif %}
+        <div>
+            <h4>{{message.subject}}</h4>
+            <p>{{message.message}}</p>
+            <p>{{message.are_you_sender}}</p>
+            <p>{{message.message_date}}</p>
             
-
+            {% if message.attachment %}
+                {{message.attachment}}
+            {% endif %}
+            <a href="{% url 'forumapp:reply_to_message' userContact.id message.id %}">Reply</a>
+        </div>
 
     {% endfor %}
+
+    <a href="{% url 'forumapp:send_email_message' userContact.id  %}">Send new message to {{userContact}}</a>
 
 
 {% endblock content %}

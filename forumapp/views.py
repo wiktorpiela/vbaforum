@@ -135,7 +135,7 @@ def like_dislike_item(request, itemID, itemType):
 def display_collection(request, type): 
     if type == "q":
         returnType = "questions"
-    elif type=="answers":
+    elif type=="a":
         returnType = "answers"
     else:
         returnType = "community"
@@ -233,7 +233,7 @@ def profile_view(request, userID):
                   {"userProf":this_user,
                    "roles":roles})
 
-class SendEmailMessageView(LoginRequiredMixin ,TemplateView):
+class SendEmailMessageView(LoginRequiredMixin, TemplateView):
     template_name = "send_email_message.html"
     messageForm = SendEmailMessageForm
 
@@ -296,25 +296,30 @@ def display_my_conversations(request):
             allContacts.append(id)
 
     contacts_coversations = User.objects.filter(id__in=allContacts)
-    
+
     return render(request, 
                   "display_my_conversations.html",
                   {"my_conv":contacts_coversations,
-                   "roles":roles,
-                   #"messagesCount":messagesCount
+                   "roles":roles
                    })
 
 @login_required
-def conversation_details(request, receiverID):
-    userReceiver = get_object_or_404(User, pk=receiverID)
-    all_messages = SendEmailMessage.objects.filter(receiver=receiverID)
+def conversation_details(request, userContactID):
+    userContact = get_object_or_404(User, pk=userContactID)
+    all_messages = SendEmailMessage.objects.filter(
+        Q(receiver=userContactID) |
+        Q(sender=userContactID)
+        )
     for message in all_messages:
         if message.sender == request.user:
-            message.is_your_message = True
+            message.are_you_sender = True
+        else:
+            message.are_you_sender = False
+
     return render(request, 
                   "conversation_details.html",
                   {"all_messages":all_messages,
-                   "userReceiver":userReceiver})
+                   "userContact":userContact})
 
 @login_required
 def all_users(request):
@@ -324,6 +329,7 @@ def all_users(request):
                   {"all_active_users":all_active_users,
                    "roles":roles})
 
+@login_required
 def browse_users(request):
     keywords = request.POST.get("browse_users").split(" ")
     roles = UserProfile.roles[:-1]
@@ -349,6 +355,47 @@ def browse_users(request):
         return render(request, "browse_users.html",
                       {"found_users":questions,
                        "roles":roles})
+    
+@login_required
+def reply_to_message(request, userContactID, messageID):
+    userContact = get_object_or_404(User, pk=userContactID)
+    messageTo = get_object_or_404(SendEmailMessage, pk=messageID)
+
+    if request.method == "GET":
+        return render(request, "reply_to_message.html",
+                      {"userContact":userContact,
+                       "messageTo":messageTo})
+    
+    else:
+        message_subject = request.POST.get("subject")
+        message = request.POST.get("message")
+        attachment = request.FILES.get("attachment")
+        form = SendEmailMessageForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            formSaved = form.save(commit=False)
+            formSaved.sender = request.user
+            formSaved.receiver = userContact
+            formSaved.save()
+
+            email = EmailMessage(
+                subject=f"VBA Forum on behalf of user: {request.user}",
+                body = f"""
+                <h3>Title: {message_subject}</h3> <br> 
+                {message} <br> 
+                Regards, {request.user}""",
+                from_email= settings.DEFAULT_FROM_EMAIL,
+                to=[userContact.email])
+            email.content_subtype = "html"
+            if attachment:
+                email.attach(attachment.name, attachment.read(), attachment.content_type)
+            email.send()
+            messages.error(request, "Your email has been sent!")
+            return redirect("forumapp:conversation_details", userContactID=userContactID)
+        else:
+            messages.error(request, "Something went worng. No email message sent.")
+            return redirect("forumapp:conversation_details",userContactID=userContactID)
+
     
 
 

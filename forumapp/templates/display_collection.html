@@ -7,7 +7,7 @@
 {% block content %}
 
     <div>
-        <h1 class="main-header">Collection review - {{returnType|capfirst}}</h1>
+        <h1 class="main-header">{{returnType|capfirst}}</h1>
         <div class="collection-icon-desc">  
             {% if type == "q" %}
                 <a href="{% url 'forumapp:display_collection_items' 'questions' 'my' %}">
