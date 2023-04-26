@@ -30,11 +30,11 @@
             {% else %}
                 <a href="{% url 'forumapp:display_my_conversations' %}">
                     <ion-icon name="chatbubbles"></ion-icon>
-                    <p>Your conversations</p>
+                    <p>My conversations</p>
                 </a>
-                <a href="#">
+                <a href="{% url 'forumapp:my_contacts' %}">
                     <ion-icon name="people"></ion-icon>
-                    <p>Your contacts</p>
+                    <p>My contacts</p>
                 </a>
                 <a href="{% url 'forumapp:all_users' %}">
                     <ion-icon name="search"></ion-icon>

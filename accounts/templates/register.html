@@ -1,26 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Account registration
-{% endblock title %}
+{% block title %} Account registration {% endblock title %}
 
 {% block content %}
 
-    {% if message %}
-        <h3>{{message}}</h3> 
-    {% endif %}
-
-    {% if error %}
-        <h3>{{error}}</h3> 
-    {% endif %}
-
     {% if passError %}
-        <h3>Password doesn't satisfy below requirement{{length|pluralize}}:</h3>
-        <ul>
-            {% for err in passError %}
-                <li>{{err}}</li>
-            {% endfor %}
-        </ul>    
+        <div class="register-info">
+            <h3>Password doesn't satisfy below requirement{{length|pluralize}}:</h3>
+            <ul>
+                {% for err in passError %}
+                    <li>{{err}}</li>
+                {% endfor %}
+            </ul>  
+        </div>
     {% endif %}
 
     {% include 'messages.html' %}

@@ -21,4 +21,6 @@ urlpatterns = [
     path("all-users/", views.all_users, name="all_users"),
     path("browse-users/", views.browse_users, name="browse_users"),
     path("reply_to_message/<int:userContactID>/<int:messageID>/", views.reply_to_message, name="reply_to_message"),
+    path("follow-unfollow/<int:followingUserID>/", views.follow_unfollow, name="follow_unfollow"),
+    path("my-contacts/", views.my_contacts, name="my_contacts"),
 ]

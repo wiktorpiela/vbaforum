@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} My contacts {% endblock title %}
+
+{% block content %}
+
+    {% if myContacts %}
+        {% for contact in myContacts %}
+            <img src="{{contact.user_id.userprofile.avatar.url}}" alt="pic">
+            <p>{{contact.user_id.username}}</p> 
+            <a href="{% url 'forumapp:follow_unfollow' contact.following_user_id.id %}">Unfollow</a>
+        {% endfor %}
+    {% endif %}
+
+{% endblock content %}
+    
+    

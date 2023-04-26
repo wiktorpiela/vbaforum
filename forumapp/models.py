@@ -137,3 +137,8 @@ class SendEmailMessage(models.Model):
     attachment = models.ImageField(blank=True)
     message_date = models.DateTimeField(auto_now_add=True)
 
+class UserFollowing(models.Model):
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name="following")
+    following_user_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name="followers")
+    created = models.DateTimeField(auto_now_add=True)
+

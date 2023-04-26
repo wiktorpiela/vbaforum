@@ -59,27 +59,24 @@ def register(request):
                             """)
                         return redirect("accounts:register")
                     else:
-                        error = "Something went wrog. Please try again."
-                        return render(request, "register.html", {"roles":roles,
-                                                                 "error":error})
+                        messages.error("Something went wrong. Please try again.")
+                        return render(request, "register.html", {"roles":roles})
                     
                 elif emailTaken:
-                    error = "This email is already taken! Please try again."
-                    return render(request, "register.html", {"roles":roles,
-                                                             "error":error})
+                    messages.error(request, "This email is already taken! Please try again.")
+                    return render(request, "register.html", {"roles":roles})
+                
                 elif usernameTaken:
-                    error = "This username is already taken! Please try again."
-                    return render(request, "register.html", {"roles":roles,
-                                                             "error":error})
+                    messages.error(request, "This username is already taken! Please try again.")
+                    return render(request, "register.html", {"roles":roles})
+                
                 elif not emailValid:
-                    error = "Wrong email format!  Please try again."
-                    return render(request, "register.html", {"roles":roles,
-                                                             "error":error})
+                    messages.error(request,"Wrong email format!  Please try again.")
+                    return render(request, "register.html", {"roles":roles})
 
         else:
-            error = "Passwords don't match! Please try again."
-            return render(request, "register.html", {"roles":roles,
-                                                     "error":error})
+            messages.error(request, "Passwords don't match! Please try again.")
+            return render(request, "register.html", {"roles":roles})
         
 def login_user(request):
     if request.method == "GET":

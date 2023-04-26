@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Question, Answer, SendEmailMessage
+from .models import Question, Answer, SendEmailMessage, UserFollowing
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
@@ -15,5 +15,7 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ("question","user","create_date",)
 
 admin.site.register(SendEmailMessage)
+
+admin.site.register(UserFollowing)
 
 
