@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Changing profile
-{% endblock title %}
+{% block title %} Changing profile {% endblock title %}
 
 {% block content %}
 
@@ -45,7 +43,7 @@
                 <input type="file" name="avatar" accept="image/*" id="id_avatar">
             </div>
 
-            <div class="main-form-component main-form-component-textarea">
+            <div class="main-form-component main-form-component-bio">
                 <label for="id_bio">Bio</label>
                 <textarea name="bio" cols="40" rows="10" maxlength="500" id="id_bio">{{user.userprofile.bio}}</textarea>
             </div>

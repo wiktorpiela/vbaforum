@@ -348,7 +348,9 @@ nav form{
 /* USERPROFILE DISPLAY */
 .user-profile-avatar-desc{
     display: flex;
-    margin: 3rem 35rem;
+    margin: 3rem auto;
+    width: 54.2013rem;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -357,7 +359,7 @@ nav form{
 }
 
 .user-profile-desc p{
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 
 .user-profile-desc{
@@ -431,4 +433,26 @@ nav form{
 
 .btn-change-pass{
     width: 25rem;
+}
+
+.main-form-component textarea{
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+}
+
+.main-form-component-bio{
+    display: flex;
+    margin-top: 3rem;
+    margin-right: 10rem;
+}
+
+.user-profile-bio{
+    font-size: 1.5rem;
+    width: 54.202rem;
+    margin: 0 auto;
+    text-align: justify;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    background-color: rgb(170, 161, 161);
 }
