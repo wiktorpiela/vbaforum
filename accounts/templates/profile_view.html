@@ -7,9 +7,10 @@
 {% block content %}
 
     {% if not user.userprofile.bio %}
-        <h1>Reminder:</h1>
-        <h2>Please provide your bio !</h2>
-        
+        <div class="register-info register-info-profile-view">
+            <h1>Reminder:</h1>
+            <h2>Please provide your bio !</h2>
+        </div>
     {% endif %}
 
     <div class="user-profile-all-content">

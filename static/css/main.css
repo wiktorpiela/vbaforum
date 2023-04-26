@@ -398,3 +398,33 @@ nav form{
     text-align: center;
     margin-bottom: 2rem;
 }
+
+.user-profile-options a{
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-color: black;
+    text-decoration: none;
+    border: 0.2rem solid black;
+    text-transform: none;
+    font-size: 1.5rem;
+}
+
+.user-profile-options{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0rem 22rem;
+    
+}
+
+.user-profile-options a:hover{
+    background-color: rgb(170, 161, 161);
+    text-decoration: none;
+}
+
+.register-info-profile-view{
+    width: 54.202rem;
+    margin-left: 30rem;
+    margin-right: 22rem;
+}
