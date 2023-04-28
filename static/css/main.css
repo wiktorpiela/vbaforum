@@ -512,7 +512,7 @@ nav form{
 }
 
 .user-mini{
-    flex: 0 0 33%;
+    flex: 0 1rem 25%;
     background-color: rgb(170, 161, 161);
     padding: 1.5rem;
     margin-bottom: 3rem;

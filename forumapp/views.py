@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Question, Answer, SendEmailMessage, UserFollowing
+from .models import Question, Answer, SendEmailMessage
 from .forms import QuestionForm, AnswerForm, SendEmailMessageForm
 from taggit.models import Tag
 from django.contrib import messages
@@ -229,9 +229,12 @@ def profile_view(request, userID):
     this_user = get_object_or_404(User, pk=userID)
     this_user.is_your_profile = True if request.user == this_user else False
     roles = UserProfile.roles[:-1]  
-    return render(request, "forumapp_profile_view.html", 
+    quest_posted_count = Question.objects.filter(user=this_user).count()
+    return render(request, 
+                  "forumapp_profile_view.html", 
                   {"userProf":this_user,
-                   "roles":roles})
+                   "roles":roles,
+                   "quest_posted_count":quest_posted_count})
 
 class SendEmailMessageView(LoginRequiredMixin, TemplateView):
     template_name = "send_email_message.html"
@@ -399,18 +402,13 @@ def reply_to_message(request, userContactID, messageID):
 @login_required
 def follow_unfollow(request, followingUserID):
     userToFollow = get_object_or_404(User, pk=followingUserID)
-    isFollowed = userToFollow.followers.filter(user_id = request.user).exists()
-    if isFollowed:
-        userToFollow.followers.filter(user_id = request.user).delete()
-    else:
-        UserFollowing.objects.create(user_id = request.user,
-                                     following_user_id = userToFollow)
     return redirect("forumapp:home")
+
+
 
 @login_required
 def my_contacts(request):
-    myContacts = request.user.followers.all()
-    return render(request, "my_contacts.html", {"myContacts":myContacts})
+    return redirect("forumapp:home")
 
 
 

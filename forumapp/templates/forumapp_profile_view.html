@@ -15,8 +15,8 @@
                 <img src="{{userProf.userprofile.avatar.url}}" alt="pic" height="200" width="200">
             </div>
             <div class="user-profile-desc">
-                <p>{{userProf.username}}</p>
-                <p>{{userProf.email}}</p>
+                <p>Username: {{userProf.username}}</p>
+                <p>Email: {{userProf.email}}</p>
                 {% for short, long in roles %}
                     {% if short == userProf.userprofile.role %}
                         <p>Current role: {{long}}</p>
@@ -29,7 +29,9 @@
                         <p>Email notifilations: OFF</p>
                     {% else %}
                         <p>Email notifilations: ON</p>   
-                    {% endif %} 
+                    {% endif %}
+                {% else %}
+                    <p>Posted: {{quest_posted_count}} question{{quest_posted_count|pluralize}}</p> 
                 {% endif %}       
             </div>  
         </div>
