@@ -24,7 +24,7 @@
 
         <form action="{% url 'forumapp:search' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="search" placeholder="Search by title, text, author or tags ..." required>
+            <input type="text" name="search" placeholder="Search posts by title, text, author or tags ..." required>
             <button type="submit" class>Go!</button>
             <a href="{% url 'forumapp:home' %}">Reset</a>
         </form>

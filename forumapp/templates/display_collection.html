@@ -6,8 +6,9 @@
 
 {% block content %}
 
-    <div>
-        <h1 class="main-header">{{returnType|capfirst}}</h1>
+    <h1 class="main-header">{{returnType|capfirst}}</h1>
+
+    <div class="collection-icon-desc-main">
         <div class="collection-icon-desc">  
             {% if type == "q" %}
                 <a href="{% url 'forumapp:display_collection_items' 'questions' 'my' %}">
@@ -27,6 +28,8 @@
                     <ion-icon name="star" class="icon"></ion-icon>
                     <p>Favorite answers</p>
                 </a>
+        </div>
+        <div class="collection-icon-desc">
             {% else %}
                 <a href="{% url 'forumapp:display_my_conversations' %}">
                     <ion-icon name="chatbubbles"></ion-icon>

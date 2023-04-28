@@ -320,7 +320,7 @@ nav form{
 
 .main-form-component-new-quest input[type='text'],
 .main-form-component-new-quest input[type='file']{
-    border-radius: 0rem;
+    border-radius: 1.5rem;
     width: 40.889rem;
 }
 
@@ -455,4 +455,89 @@ nav form{
     padding: 1.5rem;
     border-radius: 1.5rem;
     background-color: rgb(170, 161, 161);
+}
+
+.browe-users-form form input[type='text'],
+.browe-users-form form button{
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    margin-right: 1rem;
+}
+
+.browe-users-form form button:hover{
+    background-color: rgb(170, 161, 161);
+}
+
+.browe-users-form form a{
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-color: black;
+    text-decoration: none;
+    border: 0.2rem solid black;
+    text-transform: none;
+}
+
+.browe-users-form form a:hover{
+    color: black;
+    background-color: rgb(170, 161, 161);
+}
+
+.browe-users-form form form{
+    display: flex;
+}
+
+.browe-users-form{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    margin-left: 34rem;
+}
+
+.browe-users-form form{
+    display: flex;  
+}
+
+.browe-users-form form input[type='text']{
+    width: 33rem;
+}
+
+.users-list{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.user-mini{
+    flex: 0 0 33%;
+    background-color: rgb(170, 161, 161);
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    border-radius: 1.5rem;
+    border: 0.5rem solid #32889f;
+    text-align: center;
+}
+
+.user-mini img{
+    height: 20rem;
+    width: 20rem;
+    border-radius: 1.5rem;
+}
+
+.user-mini a{
+    color: black;
+    font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 15rem;
+}
+
+.user-mini a:hover{
+    text-decoration: none;
+}
+
+.role-div{
+    margin-bottom: 1rem;
 }

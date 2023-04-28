@@ -5,29 +5,41 @@
 {% block content %}
 
     {% if all_active_users %}
-    <h1>Currently {{all_active_users.count}} active user{{all_active_users.count|pluralize}} on VBA Forum</h1>
-    <form action="{% url 'forumapp:browse_users' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="browse_users" placeholder="Search by username or user role ..." required>
-        <button type="submit" class>Go!</button>
-        <a href="{% url 'forumapp:all_users' %}">Reset</a>
-    </form>
-        {% for user in all_active_users %}
-            <a href="{% url 'forumapp:profile_view' user.id %}">
-                <img src="{{user.userprofile.avatar.url}}" alt="pic">
-                <p>{{user.username}}</p>
-                {% for short, long in roles %}
-                    {% if user.userprofile.role == short %}
-                        <p>{{long}}</p>
-                    {% endif %}
-                {% endfor %}
-                <p>Joined: {{user.date_joined|date:'j E Y'}}</p>
-            </a>
-        {% endfor %}
-    {% else %}
-        <h1>Currently no active users on VBA Forum</h1> 
-    {% endif %}
-    
+        <h1 class="main-header">Currently {{all_active_users.count}} active user{{all_active_users.count|pluralize}} on VBA Forum</h1>
+
+        <div class="browe-users-form">
+            <form action="{% url 'forumapp:browse_users' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="browse_users" placeholder="Search by username or user role ..." required>
+                <button type="submit" class>Go!</button>
+                <a href="{% url 'forumapp:all_users' %}">Reset</a>
+            </form>
+        </div>
+
+        <div class="users-list">
+            {% for user in all_active_users %}
+                <div class="user-mini">
+                    <a href="{% url 'forumapp:profile_view' user.id %}">
+                        <img src="{{user.userprofile.avatar.url}}" alt="pic">
+                        <p>{{user.username}}</p>
+                        {% for short, long in roles %}
+                            {% if user.userprofile.role == short %}
+                                <div class="question-wall-tags role-div">
+                                    <small>{{long}}</small>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <p>Joined: {{user.date_joined|date:'j E Y'}}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+
+
+        {% else %}
+            <h1 class="main-header">Currently no active users on VBA Forum</h1> 
+        {% endif %}
     
 {% endblock content %}
     

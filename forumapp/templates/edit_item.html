@@ -61,7 +61,8 @@
                     
                 <div class="main-form-component main-form-component-new-quest">
                     <label for="id_tags">Tags</label>
-                    <input type="text" name="tags" value="{% for tag in item.tags.all %} {{tag}} {% endfor %}" required="" id="id_tags">
+                    <!-- <input type="text" name="tags" value="{% for tag in item.tags.all %} {{tag}} {% endfor %}" required="" id="id_tags"> -->
+                    <input type="text" name="tags" required="" id="id_tags" data-role="tagsinput" class="form-control" value="{% for tag in item.tags.all %} {{tag}} {% endfor %}">
                 </div>
                 
                 <div class="form-btn">
