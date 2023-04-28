@@ -402,6 +402,7 @@ def reply_to_message(request, userContactID, messageID):
 @login_required
 def follow_unfollow(request, followingUserID):
     userToFollow = get_object_or_404(User, pk=followingUserID)
+    print(userToFollow)
     return redirect("forumapp:home")
 
 
