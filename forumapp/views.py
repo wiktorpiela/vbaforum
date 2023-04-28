@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question, Answer, SendEmailMessage
+from accounts.models import UserProfile
 from .forms import QuestionForm, AnswerForm, SendEmailMessageForm
 from taggit.models import Tag
 from django.contrib import messages
@@ -401,8 +402,15 @@ def reply_to_message(request, userContactID, messageID):
         
 @login_required
 def follow_unfollow(request, followingUserID):
-    userToFollow = get_object_or_404(User, pk=followingUserID)
-    print(userToFollow)
+    userToFollow = User.objects.get(id=followingUserID)
+    userFollower = UserProfile.objects.get(user_id=request.user)
+    isFollowed = userToFollow.following.filter(user_id=userFollower.user.id).exists()
+    
+    if isFollowed:
+        userToFollow.following.remove(userFollower)
+    else:
+        userToFollow.following.add(userFollower)
+
     return redirect("forumapp:home")
 
 

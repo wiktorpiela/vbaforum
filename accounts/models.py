@@ -34,6 +34,8 @@ class UserProfile(models.Model):
     stop_notifications = models.BooleanField(default=False,
                                              help_text= "if user wants to turn off email notification when question has been answered")
     
+    following = models.ManyToManyField(User, blank=True, related_name="following")
+
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
