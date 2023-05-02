@@ -21,7 +21,7 @@
 
         
         {% if itemType == "question" %}
-            <form action="{% url 'forumapp:edit_item' item.id 'question' location %}" method="post" enctype="multipart/form-data">
+            <form action="{% url 'forumapp:edit_item' item.id 'question' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="main-form-component main-form-component-new-quest">
                     <label for="id_title">Title</label>
@@ -129,7 +129,7 @@
     
                 <h1 class="main-header">Editing answer...</h1>
         
-                <form action="{% url 'forumapp:edit_item' item.id 'answer' location %}" method="post" enctype="multipart/form-data">
+                <form action="{% url 'forumapp:edit_item' item.id 'answer' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <div class="main-form-component main-form-component-new-quest">

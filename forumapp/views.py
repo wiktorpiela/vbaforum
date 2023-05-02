@@ -194,7 +194,7 @@ def search(request):
         return render(request, "search.html", {"questions":questions})
     
 @login_required
-def edit_item(request, itemID, itemType, pageLocation):
+def edit_item(request, itemID, itemType):
 
     if itemType == "question":
         item_to_edit = get_object_or_404(Question, pk=itemID, user=request.user)
@@ -206,8 +206,7 @@ def edit_item(request, itemID, itemType, pageLocation):
     if request.method == "GET":
         return render(request, "edit_item.html", {"item":item_to_edit,
                                                   "itemType":itemType,
-                                                  "form":item_form,
-                                                  "location":pageLocation})
+                                                  "form":item_form})
     else:
         editedItem = QuestionForm(request.POST, request.FILES, instance=item_to_edit) \
             if itemType == "question" else AnswerForm(request.POST, request.FILES, instance=item_to_edit)
