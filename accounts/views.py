@@ -110,7 +110,9 @@ def logout_user(request):
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = "profile_view.html"
-    extra_context = {"roles":UserProfile.roles[:-1]}
+    extra_context = {
+        "roles":UserProfile.roles[:-1]
+        }
 
 class ProfileUpdateView(LoginRequiredMixin, TemplateView):
     user_form = UserForm

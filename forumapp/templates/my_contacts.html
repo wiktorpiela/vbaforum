@@ -4,12 +4,29 @@
 
 {% block content %}
 
-    {% if myContacts %}
-        {% for contact in myContacts %}
-            <img src="{{contact.user_id.userprofile.avatar.url}}" alt="pic">
-            <p>{{contact.user_id.username}}</p> 
-            <a href="{% url 'forumapp:follow_unfollow' contact.following_user_id.id %}">Unfollow</a>
-        {% endfor %}
+    {% if followingUsers %}
+        <h1 class="main-header following-users-header">Following users</h1>
+        
+        <div class="users-list">
+            {% for following in followingUsers %}
+                <div class="user-mini">
+                    <a href="{% url 'forumapp:profile_view' following.id %}">
+                        <img src="{{following.userprofile.avatar.url}}" alt="pic">
+                        <p>{{following.username}}</p>
+                        {% for short, long in roles %}
+                            {% if following.userprofile.role == short %}
+                                <div class="question-wall-tags role-div">
+                                    <small>{{long}}</small>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <p>Joined: {{following.date_joined|date:'j E Y'}}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1 class="main-header">You don't follow any users!</h1>
     {% endif %}
 
 {% endblock content %}

@@ -24,7 +24,9 @@
                         <p>{{user.username}}</p>
                         {% for short, long in roles %}
                             {% if user.userprofile.role == short %}
-                                <p>{{long}}</p>
+                                <div class="question-wall-tags role-div">
+                                    <small>{{long}}</small>
+                                </div>
                             {% endif %}
                         {% endfor %}
                         <p>Joined: {{user.date_joined|date:'j E Y'}}</p>

@@ -5,8 +5,10 @@
 {% block content %}
 
     {% if userProf.is_your_profile and not user.userprofile.bio %}
-        <h1>Reminder:</h1>
-        <h2>Please provide your bio !</h2>  
+        <div class="register-info register-info-profile-view">
+            <h1>Reminder:</h1>
+            <h2>Please provide your bio !</h2>  
+        </div>
     {% endif %}
 
     <div class="user-profile-all-content">
@@ -16,13 +18,14 @@
             </div>
             <div class="user-profile-desc">
                 <p>Username: {{userProf.username}}</p>
-                <p>Email: {{userProf.email}}</p>
+                <p>{{userProf.email}}</p>
                 {% for short, long in roles %}
                     {% if short == userProf.userprofile.role %}
                         <p>Current role: {{long}}</p>
                     {% endif %} 
                 {% endfor %}
                 <p>Joined: {{userProf.date_joined|date:'j E Y'}}</p>
+                <p>Followers: {{myFollowersCount}}</p>
                 
                 {% if userProf.is_your_profile %}
                     {% if userProf.userprofile.stop_notifications%}
@@ -31,7 +34,8 @@
                         <p>Email notifilations: ON</p>   
                     {% endif %}
                 {% else %}
-                    <p>Posted: {{quest_posted_count}} question{{quest_posted_count|pluralize}}</p> 
+                    <p>Posted: {{quest_posted_count}} question{{quest_posted_count|pluralize}}</p>
+                    <p>Followers: {{followersCount}}</p>
                 {% endif %}       
             </div>  
         </div>
@@ -50,7 +54,14 @@
                 <a href="{% url 'accounts:remove_account' %}">Delete account</a>
             {% else %}
                 <a href="{% url 'forumapp:send_email_message' userProf.id %}">Send email</a>
-                <a href="{% url 'forumapp:follow_unfollow' userProf.id %}">Follow</a>
+                
+                {% if userProf.is_followed %}
+                    <a href="{% url 'forumapp:follow_unfollow' userProf.id %}">Unfollow</a> 
+                {% else %}
+                    <a href="{% url 'forumapp:follow_unfollow' userProf.id %}">Follow</a>  
+                {% endif %}
+                    
+                
             {% endif %}
                 
         </div>

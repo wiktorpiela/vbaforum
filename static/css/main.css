@@ -102,6 +102,7 @@ nav form{
 .collection-icon-desc{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     text-align: center;
     margin: 0 auto;
     margin-top: 3rem;
@@ -109,6 +110,7 @@ nav form{
 }
 
 .collection-icon-desc a{
+    flex: 0 1rem 50%;
     text-decoration: none;
     color: #32889f;
     border-radius: 1.5rem;
@@ -116,6 +118,7 @@ nav form{
     padding: 1rem 1rem;
     font-size: 2rem;
     flex: 0 0 calc(50% - 1rem);
+    margin-top: 2rem;
 }
 
 .collection-icon-desc a:hover{
@@ -359,7 +362,8 @@ nav form{
 }
 
 .user-profile-desc p{
-    font-size: 2.2rem;
+    font-size: 2rem;
+    
 }
 
 .user-profile-desc{
@@ -541,3 +545,8 @@ nav form{
 .role-div{
     margin-bottom: 1rem;
 }
+
+.following-users-header{
+    margin-bottom: 2rem;
+}
+

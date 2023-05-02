@@ -52,5 +52,8 @@ class UserProfile(models.Model):
         for short, long in self.roles:
             if self.role == short:
                 return long
+    
+    def total_followers(self):
+        return self.following.count()
 
 

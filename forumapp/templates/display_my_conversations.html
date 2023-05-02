@@ -5,7 +5,7 @@
 {% block content %}
 
     {% if my_conv %}
-        <h1>Your conversations</h1>
+        <h1 class="main-header">My conversations</h1>
         {% for conv in my_conv %}
             <a href="{% url 'forumapp:conversation_details' conv.id %}">
                 <ion-icon name="chatbubbles"></ion-icon>
@@ -19,8 +19,7 @@
             </a>
         {% endfor %}
     {% else %}
-        <h1>You don't have any conversations yet!</h1>
-  
+        <h1 class="main-header">You don't have any conversations yet!</h1>
     {% endif %}
     
  

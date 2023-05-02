@@ -231,11 +231,21 @@ def profile_view(request, userID):
     this_user.is_your_profile = True if request.user == this_user else False
     roles = UserProfile.roles[:-1]  
     quest_posted_count = Question.objects.filter(user=this_user).count()
+    myFollowersCount = None
+    followersCount = this_user.following.count()
+    isFollowed = this_user.following.filter(user_id=request.user.id).exists()
+    if isFollowed:
+        this_user.is_followed = True
+    else:
+        this_user.is_followed = False
+
     return render(request, 
                   "forumapp_profile_view.html", 
                   {"userProf":this_user,
                    "roles":roles,
-                   "quest_posted_count":quest_posted_count})
+                   "quest_posted_count":quest_posted_count,
+                   "followersCount":followersCount,
+                   "myFollowersCount":myFollowersCount})
 
 class SendEmailMessageView(LoginRequiredMixin, TemplateView):
     template_name = "send_email_message.html"
@@ -411,13 +421,20 @@ def follow_unfollow(request, followingUserID):
     else:
         userToFollow.following.add(userFollower)
 
-    return redirect("forumapp:home")
-
-
+    return redirect("forumapp:profile_view", userID=followingUserID)
 
 @login_required
 def my_contacts(request):
-    return redirect("forumapp:home")
+    followingUsers = UserProfile.objects.prefetch_related("following")\
+        .get(pk=request.user.id).following.order_by("username")
+    roles = UserProfile.roles
+    return render(request,
+                  "my_contacts.html",
+                  {"followingUsers":followingUsers,
+                   "roles":roles})
+
+
+    
 
 
 

@@ -1,54 +1,50 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Collection - {{returnType}}
-{% endblock title %}
+{% block title %} {{returnType|capfirst}} {% endblock title %}
 
 {% block content %}
 
     <h1 class="main-header">{{returnType|capfirst}}</h1>
 
-    <div class="collection-icon-desc-main">
-        <div class="collection-icon-desc">  
-            {% if type == "q" %}
-                <a href="{% url 'forumapp:display_collection_items' 'questions' 'my' %}">
-                    <ion-icon name="list" class="icon"></ion-icon>
-                    <p>My questions</p>
-                </a>
-                <a href="{% url 'forumapp:display_collection_items' 'questions' 'fav' %}">
-                    <ion-icon name="star" class="icon"></ion-icon>
-                    <p>Favorite questions</p>
-                </a>
-            {% elif type == "a" %}
-                <a href="{% url 'forumapp:display_collection_items' 'answers' 'my' %}">
-                    <ion-icon name="list" class="icon"></ion-icon>
-                    <p>My answers</p>
-                </a>
-                <a href="{% url 'forumapp:display_collection_items' 'answers' 'fav' %}">
-                    <ion-icon name="star" class="icon"></ion-icon>
-                    <p>Favorite answers</p>
-                </a>
-        </div>
-        <div class="collection-icon-desc">
-            {% else %}
-                <a href="{% url 'forumapp:display_my_conversations' %}">
-                    <ion-icon name="chatbubbles"></ion-icon>
-                    <p>My conversations</p>
-                </a>
-                <a href="{% url 'forumapp:my_contacts' %}">
-                    <ion-icon name="people"></ion-icon>
-                    <p>My contacts</p>
-                </a>
-                <a href="{% url 'forumapp:all_users' %}">
-                    <ion-icon name="search"></ion-icon>
-                    <p>User's browser</p>
-                </a>
-                <a href="#">
-                    <ion-icon name="chatbox-ellipses"></ion-icon>
-                    <p>Chat room</p>
-                </a>
-            {% endif %}
-        </div>
+    <div class="collection-icon-desc">  
+        {% if type == "q" %}
+            <a href="{% url 'forumapp:display_collection_items' 'questions' 'my' %}">
+                <ion-icon name="list" class="icon"></ion-icon>
+                <p>My questions</p>
+            </a>
+            <a href="{% url 'forumapp:display_collection_items' 'questions' 'fav' %}">
+                <ion-icon name="star" class="icon"></ion-icon>
+                <p>Favorite questions</p>
+            </a>
+        {% elif type == "a" %}
+            <a href="{% url 'forumapp:display_collection_items' 'answers' 'my' %}">
+                <ion-icon name="list" class="icon"></ion-icon>
+                <p>My answers</p>
+            </a>
+            <a href="{% url 'forumapp:display_collection_items' 'answers' 'fav' %}">
+                <ion-icon name="star" class="icon"></ion-icon>
+                <p>Favorite answers</p>
+            </a>
+    </div>
+    <div class="collection-icon-desc">
+        {% else %}
+            <a href="{% url 'forumapp:display_my_conversations' %}">
+                <ion-icon name="chatbubbles"></ion-icon>
+                <p>My conversations</p>
+            </a>
+            <a href="{% url 'forumapp:my_contacts' %}">
+                <ion-icon name="people"></ion-icon>
+                <p>My contacts</p>
+            </a>
+            <a href="{% url 'forumapp:all_users' %}">
+                <ion-icon name="search"></ion-icon>
+                <p>User's browser</p>
+            </a>
+            <a href="#">
+                <ion-icon name="chatbox-ellipses"></ion-icon>
+                <p>Chat room</p>
+            </a>
+        {% endif %}
     </div>
  
 {% endblock content %}
