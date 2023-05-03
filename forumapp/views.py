@@ -232,9 +232,9 @@ def edit_item(request, itemID, itemType):
 def profile_view(request, userID):
     this_user = get_object_or_404(User, pk=userID)
     this_user.is_your_profile = True if request.user == this_user else False
-    roles = UserProfile.roles[:-1]  
+    roles = UserProfile.roles[:-1]
     quest_posted_count = Question.objects.filter(user=this_user).count()
-    followersCount = this_user.following.count()
+    followersCount = this_user.following.filter(user_id=userID)
     isFollowed = this_user.following.filter(user_id=request.user.id).exists()
     if isFollowed:
         this_user.is_followed = True
