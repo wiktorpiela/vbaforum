@@ -581,7 +581,6 @@ nav form{
     margin-bottom: 2rem;
 }
 
-
 .talk-bubble{
     width: 40rem;
     margin: 5rem auto;
@@ -608,23 +607,120 @@ nav form{
     border-bottom: 1rem solid transparent;
     right: -2rem;
     top: 0.6rem;
-  }
+}
 
-  .talk-bubble img{
+.talk-bubble img{
     border-radius: 1.5rem;
     height: 15rem;
     width: 15rem;
-  }
+}
 
-  .talk-bubble a{
+.talk-bubble a{
     font-size: 2rem;
     color: black;
-  }
+}
 
-  .talk-bubble a:hover{
+.talk-bubble a:hover{
     color: black;
     text-decoration: none;
+}
+
+.messages-wall{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
+
+.contact-side img,
+.my-user-side img {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 1.5rem;
+  }
+
+.contact-side p,
+.my-user-side p{
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+.contact-side,
+.my-user-side{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.sender-message-container{
+    position: relative;
+	background: #00aabb;
+	border-radius: .4em;
+    margin-left: 2rem;
+    margin-right: 10rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.sender-message-container:after{
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 2.8rem solid transparent;
+	border-right-color: #00aabb;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -1.4rem;
+	margin-left: -2.8rem;
+}
+
+.receiver-message-container{
+    position: relative;
+	background: #00aabb;
+	border-radius: .4em;
+    margin-left: 10rem;
+    margin-right: 2rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.receiver-message-container:after{
+    content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 2.8rem solid transparent;
+	border-left-color: #00aabb;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -1.4rem;
+	margin-right: -2.8rem;
+}
+
+.sender-message-container h4,
+.receiver-message-container h4{
+    font-size: 2rem;
+}
+
+.sender-message-container p,
+.receiver-message-container p{
+    font-size: 1.5rem;
+}
+
+.sender-message-container a,
+.receiver-message-container a{
+    color: black;
+}
+
+.sender-message-container a:hover,
+.receiver-message-container a:hover{
+    text-decoration: none;
+    color: rgb(90, 85, 85);
+}
 
 
 

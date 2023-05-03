@@ -307,7 +307,7 @@ def display_my_conversations(request):
     allIds = receivers_list + sender_list
     allContacts =[]
     for id in allIds:
-        if id != request.user.id:
+        if id != request.user.id and id not in allContacts:
             allContacts.append(id)
 
     # contacts_coversations = User.objects.filter(id__in=allContacts)
@@ -324,7 +324,7 @@ def display_my_conversations(request):
         users.append(tempUser)
 
     convContactLength = list(zip(users, convLength))
-
+    
     return render(request, 
                   "display_my_conversations.html",
                   {"convContactAndLength":convContactLength,
@@ -332,6 +332,7 @@ def display_my_conversations(request):
 
 @login_required
 def conversation_details(request, userContactID):
+    roles = UserProfile.roles
     userContact = get_object_or_404(User, pk=userContactID)
     all_messages = SendEmailMessage.objects.filter(
         (Q(receiver=request.user) | Q(sender=request.user)) &
@@ -347,7 +348,8 @@ def conversation_details(request, userContactID):
     return render(request, 
                   "conversation_details.html",
                   {"all_messages":all_messages,
-                   "userContact":userContact})
+                   "userContact":userContact,
+                   "roles":roles})
 
 @login_required
 def all_users(request):

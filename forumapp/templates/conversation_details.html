@@ -4,24 +4,79 @@
 
 {% block content %}
 
-    <h1>Conversations with {{userContact}}</h1>
+    <h1 class="main-header">Conversation with {{userContact}}</h1>
 
-    {% for message in all_messages %}
-        <div>
-            <h4>{{message.subject}}</h4>
-            <p>{{message.message}}</p>
-            <p>{{message.are_you_sender}}</p>
-            <p>{{message.message_date}}</p>
-            
-            {% if message.attachment %}
-                {{message.attachment}}
-            {% endif %}
-            <a href="{% url 'forumapp:reply_to_message' userContact.id message.id %}">Reply</a>
+    <div class="messages-wall">
+
+        <div class="contact-side">
+            <img src="{{userContact.userprofile.avatar.url}}" alt="pic">
+            <p>{{userContact.username}}</p>
+            {% for short, long in roles %}
+                {% if short == userContact.userprofile.role %}
+                    <div class="question-wall-tags role-div">
+                        <small>{{long}}</small>
+                    </div>   
+                {% endif %}    
+            {% endfor %}
         </div>
 
-    {% endfor %}
+        <div class="messages-content">
 
-    <a href="{% url 'forumapp:send_email_message' userContact.id  %}">Send new message to {{userContact}}</a>
+            {% for message in all_messages %}
+            
+                {% if not message.are_you_sender %}
+                    <div class="sender-message-container">
+                        <h4>{{message.subject}}</h4>
+                        <p>{{message.message}}</p>
+                        <!-- <p>{{message.are_you_sender}}</p> -->
+                        {% if message.attachment %}
+                            {{message.attachment}}
+                        {% endif %}
+                        <div>
+                            <small>Sent: {{message.message_date}}</small>
+                            <a href="{% url 'forumapp:reply_to_message' userContact.id message.id %}">Reply</a>
+                        </div>
+
+                    </div>
+                {% else %}
+                    <div class="receiver-message-container">
+                        <h4>{{message.subject}}</h4>
+                        <p>{{message.message}}</p>
+                        <!-- <p>{{message.are_you_sender}}</p> -->
+                        {% if message.attachment %}
+                            <a href="{{message.attachment.url}}">Attachment</a>
+                        {% endif %}
+                        <div>
+                            <small>Sent: {{message.message_date}}</small>
+                            <a href="{% url 'forumapp:reply_to_message' userContact.id message.id %}">Reply</a>
+                        </div>
+
+                    </div> 
+                {% endif %}
+                
+            {% endfor %}
+
+            <div class="user-profile-options">
+                <a href="{% url 'forumapp:send_email_message' userContact.id  %}">Send new message to {{userContact}}</a>
+            </div>
+            
+        </div>
+
+        <div class="my-user-side">
+            <img src="{{user.userprofile.avatar.url}}" alt="pic">
+            <p>{{user.username}}</p>
+            {% for short, long in roles %}
+                {% if short == user.userprofile.role %}
+                    <div class="question-wall-tags role-div">
+                        <small>{{long}}</small>
+                    </div>   
+                {% endif %}    
+            {% endfor %}
+
+        </div>
+
+    </div>
+
 
 
 {% endblock content %}
