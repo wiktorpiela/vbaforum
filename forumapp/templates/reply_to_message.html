@@ -6,13 +6,11 @@
 
     {% include 'messages.html' %}
 
-    <h1 class="main-header">
-        Replying to message '{{messageTo.subject}}' of {{userContact.username}}
-    </h1>
+    <h1 class="main-header"> Replying to message '{{messageTo.subject}}' of {{userContact.username}}</h1>
 
     <div class="answer-composing">
 
-        <div class="question-wall detailed-quest">
+        <div class="question-wall detailed-quest replying-message">
             <div>
                 <h4>{{messageTo.subject}}</h4>
                 <p>{{messageTo.message}}</p>
@@ -24,21 +22,19 @@
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="main-form-component main-form-component-new-quest">
-                    <label for="id_subject">Title</label>
-                    <input type="text" name="subject" maxlength="300" required="" id="id_title">
+                    <input type="text" name="subject" maxlength="300" required="" id="id_title" placeholder="Subject">
                 </div>
         
                 <div class="main-form-component main-form-component-new-quest">
-                    <label for="id_message">Text</label>
-                    <textarea name="message" cols="40" rows="10" required="" id="id_text"></textarea>
+                    <textarea name="message" cols="40" rows="10" required="" id="id_text" placeholder="Message"></textarea>
                 </div>
         
                 <div class="main-form-component main-form-component-new-quest">
-                    <label for="id_attachment">Image</label>
+                    <label for="id_attachment">Add attachment</label>
                     <input type="file" name="attachment" accept="image/*" id="id_image">
                 </div>
         
-                <div class="form-btn">
+                <div class="form-btn form-btn-form">
                     <button type="submit" class="btn">Send response</button>
                 </div>
             </form>

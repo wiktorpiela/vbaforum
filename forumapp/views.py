@@ -254,9 +254,23 @@ class SendEmailMessageView(LoginRequiredMixin, TemplateView):
 
     def get(self, request, userID):
         user_receiver =  get_object_or_404(User, pk=userID)
+        roles = UserProfile.roles
+        all_messages = SendEmailMessage.objects.filter(
+            (Q(receiver=request.user) | Q(sender=request.user)) &
+            (Q(receiver=userID) | Q(sender=userID))
+            ).order_by("message_date")
+    
+        for message in all_messages:
+            if message.sender == request.user:
+                message.are_you_sender = True
+            else:
+                message.are_you_sender = False
+
         return render(request, 
                       self.template_name, 
-                      {"user_receiver":user_receiver})
+                      {"user_receiver":user_receiver,
+                       "roles":roles,
+                       "all_messages":all_messages})
     
     def post(self, request, userID):
             message_subject = request.POST.get("subject")
@@ -324,7 +338,7 @@ def display_my_conversations(request):
         users.append(tempUser)
 
     convContactLength = list(zip(users, convLength))
-    
+
     return render(request, 
                   "display_my_conversations.html",
                   {"convContactAndLength":convContactLength,
