@@ -18,8 +18,13 @@
                 <div class="user-info-post">
                     <img src="{{question.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
                     <h6>{{question.user}}</h6>
-                    <small>{{author_role}}</small>
-                    <small>Joined {{question.user.date_joined|date:'j-M-o'}}</small>
+                    <div class="question-wall-tags role-div">
+                        <small>{{question.user.userprofile.display_fullname_user_role}}</small>
+                    </div>
+                    <small>Followers: {{question.user.userprofile.total_followers}}</small>
+                    <small>Posted: {{quest_posted_count}}</small>
+                    
+                    
                 </div>
     
                 <div class="quest-detailed-content-image">
@@ -53,15 +58,7 @@
                             {% for tag in question.tags.all %}
                                 <small>#{{tag}}</small>
                             {% endfor %}   
-                        </div>
-    
-                        <!-- <div class="question-actions">
-                            <a href="{% url 'forumapp:add_answer' question.id %}">Answer this question</a>
-                            {% if question.is_your %}
-                                <a href="#">Edit question</a> 
-                            {% endif %}  
-                        </div> -->
-                        
+                        </div>                        
                     </div>
     
                 </div>
@@ -70,10 +67,10 @@
     
         </div>
 
+        <h1 class="main-header">Writing answer...</h1>
+
         <div class="main-form new-quest-from">
 
-            <h1 class="main-header">Writing answer...</h1>
-    
             <form action="{% url 'forumapp:add_answer' question.id %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
     
@@ -92,7 +89,7 @@
                     <input type="file" name="image" accept="image/*" id="id_image">
                 </div>
     
-                <div class="form-btn">
+                <div class="form-btn form-btn-form">
                     <button type="submit" class="btn">Post answer</button>
                 </div>
                 

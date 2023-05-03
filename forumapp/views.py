@@ -39,6 +39,7 @@ def new_question(request):
         
 def question_details(request, questID):
     quest = get_object_or_404(Question, pk=questID)
+    quest_posted_count = Question.objects.filter(user=quest.user).count()
 
     quest.is_your = True if quest.user == request.user else False
     quest.is_liked = True if quest.likes.filter(id=request.user.id).exists() else False
@@ -58,13 +59,16 @@ def question_details(request, questID):
             answer.is_your = False
 
     return render(request, "question_details.html", {"question":quest,
-                                                     "answers":answers})
+                                                     "answers":answers,
+                                                     "quest_posted_count":quest_posted_count})
 
 @login_required
 def add_answer(request, questID):
     quest = get_object_or_404(Question, pk=questID)
+    quest_posted_count = Question.objects.filter(user=quest.user).count()
     if request.method == "GET":
-        return render(request, "add_answer.html",{"question":quest})
+        return render(request, "add_answer.html",{"question":quest,
+                                                  "quest_posted_count":quest_posted_count})
     else:
         form = AnswerForm(request.POST, request.FILES)
         stopNotification = quest.user.userprofile.stop_notifications
@@ -230,7 +234,6 @@ def profile_view(request, userID):
     this_user.is_your_profile = True if request.user == this_user else False
     roles = UserProfile.roles[:-1]  
     quest_posted_count = Question.objects.filter(user=this_user).count()
-    myFollowersCount = None
     followersCount = this_user.following.count()
     isFollowed = this_user.following.filter(user_id=request.user.id).exists()
     if isFollowed:
@@ -243,8 +246,7 @@ def profile_view(request, userID):
                   {"userProf":this_user,
                    "roles":roles,
                    "quest_posted_count":quest_posted_count,
-                   "followersCount":followersCount,
-                   "myFollowersCount":myFollowersCount})
+                   "followersCount":followersCount})
 
 class SendEmailMessageView(LoginRequiredMixin, TemplateView):
     template_name = "send_email_message.html"
@@ -291,10 +293,10 @@ class SendEmailMessageView(LoginRequiredMixin, TemplateView):
 def display_my_conversations(request):
     roles = UserProfile.roles
     #wybierz takie wiadomosci w ktorych jestem nadawca lub odbiorca
-    userAssociatedMEssages = SendEmailMessage.objects.filter(Q(sender=request.user) | Q(receiver=request.user))
+    userAssociatedMessages = SendEmailMessage.objects.filter(Q(sender=request.user) | Q(receiver=request.user))
     #wez takie unikalne id userów z ktorymi miałem wiadomości (nie moje id)
-    receivers = list(userAssociatedMEssages.values_list("receiver").distinct())
-    senders = list(userAssociatedMEssages.values_list("sender").distinct())
+    receivers = list(userAssociatedMessages.values_list("receiver").distinct())
+    senders = list(userAssociatedMessages.values_list("sender").distinct())
     receivers_list = []
     sender_list = []
     for x in range(len(receivers)):
@@ -308,21 +310,34 @@ def display_my_conversations(request):
         if id != request.user.id:
             allContacts.append(id)
 
-    contacts_coversations = User.objects.filter(id__in=allContacts)
+    # contacts_coversations = User.objects.filter(id__in=allContacts)
+
+    #dlugosci konwersjacji dla tych uzytkowników
+    convLength = []
+    for contanct in allContacts:
+        conv_len = userAssociatedMessages.filter(Q(sender=contanct) | Q(receiver=contanct)).count()
+        convLength.append(conv_len)
+
+    users=[]
+    for contactID in allContacts:
+        tempUser = User.objects.get(pk=contactID)
+        users.append(tempUser)
+
+    convContactLength = list(zip(users, convLength))
 
     return render(request, 
                   "display_my_conversations.html",
-                  {"my_conv":contacts_coversations,
-                   "roles":roles
-                   })
+                  {"convContactAndLength":convContactLength,
+                   "roles":roles})
 
 @login_required
 def conversation_details(request, userContactID):
     userContact = get_object_or_404(User, pk=userContactID)
     all_messages = SendEmailMessage.objects.filter(
-        Q(receiver=userContactID) |
-        Q(sender=userContactID)
-        )
+        (Q(receiver=request.user) | Q(sender=request.user)) &
+        (Q(receiver=userContactID) | Q(sender=userContactID))
+        ).order_by("message_date")
+    
     for message in all_messages:
         if message.sender == request.user:
             message.are_you_sender = True

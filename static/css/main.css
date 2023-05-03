@@ -144,6 +144,14 @@ nav form{
     text-justify: inter-word;
 }
 
+.code-example{
+    text-align: left;
+}
+
+.detailed-quest{
+    max-width: 120rem;
+}
+
 .question-wall a{
     color: black;
 }
@@ -157,10 +165,11 @@ nav form{
     background-color: #32889f;
     padding: 0.5rem;
     border-radius: 1rem;
+    font-size: 1.25rem;
 }
 
 .question-wall h4{
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 .question-wall h6{
@@ -168,7 +177,7 @@ nav form{
 }
 
 .question-wall p{
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 .question-wall-inside{
@@ -254,11 +263,20 @@ nav form{
 /* FORMS */
 .main-form{
     margin-top: 4rem;
-    font-size: 2rem;
+    font-size: 1.75rem;
+    text-align: center;
 }
 
 .main-form label{
     width: 21rem;
+    margin-right: 30rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.register-main-form label{
+    width: 21rem;
+    margin-right: 5rem;
 }
 
 .main-form h1{
@@ -293,6 +311,11 @@ nav form{
     text-align: center;
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
+    
+}
+
+.form-btn-form{
+    margin-left: 15rem;
 }
 
 .main-form form input,
@@ -324,16 +347,19 @@ nav form{
 .main-form-component-new-quest input[type='text'],
 .main-form-component-new-quest input[type='file']{
     border-radius: 1.5rem;
-    width: 40.889rem;
+    /* width: 40.889rem; */
+    width: 70rem;
 }
 
 .new-quest-from{
     margin-bottom: 3rem;
+    margin-right: 16rem;
 }
 
 .new-quest-from textarea{
     height: 9rem;
     padding: 0.5rem 1rem;
+    width: 70rem;
 }
 
 .new-quest-from label{
@@ -341,7 +367,7 @@ nav form{
 }
 
 .answer-composing{
-    display: flex;
+    /* display: flex; */
 }
 
 .question-actions{
@@ -448,6 +474,11 @@ nav form{
     display: flex;
     margin-top: 3rem;
     margin-right: 10rem;
+    text-align: left;
+}
+
+.main-form-component-bio textarea{
+    width: 100rem;
 }
 
 .user-profile-bio{
@@ -549,4 +580,51 @@ nav form{
 .following-users-header{
     margin-bottom: 2rem;
 }
+
+
+.talk-bubble{
+    width: 40rem;
+    margin: 5rem auto;
+    border: 0.4rem solid #32889f;
+    padding: 2rem;
+    text-align: center;
+    color: #32889f;
+    position: relative;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(170, 161, 161);
+    align-items: center;
+}
+
+.sb1:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 1rem solid #32889f;
+    border-right: 1rem solid transparent;
+    border-top: 1rem solid #32889f;
+    border-bottom: 1rem solid transparent;
+    right: -2rem;
+    top: 0.6rem;
+  }
+
+  .talk-bubble img{
+    border-radius: 1.5rem;
+    height: 15rem;
+    width: 15rem;
+  }
+
+  .talk-bubble a{
+    font-size: 2rem;
+    color: black;
+  }
+
+  .talk-bubble a:hover{
+    color: black;
+    text-decoration: none;
+  }
+
+
 

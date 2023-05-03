@@ -15,8 +15,11 @@
                     <img src="{{question.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
                 </a>
                 <h6>{{question.user}}</h6>
-                <small>{{question.user.userprofile.display_fullname_user_role}}</small>
-                <small>Joined {{question.user.date_joined|date:'j-M-o'}}</small>
+                <div class="question-wall-tags role-div">
+                    <small>{{question.user.userprofile.display_fullname_user_role}}</small>
+                </div>
+                <small>Followers: {{question.user.userprofile.total_followers}}</small>
+                <small>Posted: {{quest_posted_count}}</small>
             </div>
 
             <div class="quest-detailed-content-image">
@@ -91,8 +94,13 @@
                             </a>
                             
                             <h6>{{answer.user}}</h6>
-                            <small>{{answer.user.userprofile.display_fullname_user_role}}</small>
-                            <small>Joined {{answer.user.date_joined|date:'j-M-o'}}</small>
+                            <div class="question-wall-tags role-div">
+                                <small>{{answer.user.userprofile.display_fullname_user_role}}</small>
+                            </div>
+
+                            <small>Followers: {{answer.user.userprofile.total_followers}}</small>
+                            <small>Posted: {{quest_posted_count}}</small>
+                            
                         </div>
 
                         <div class="quest-detailed-content-image">

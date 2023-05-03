@@ -4,19 +4,29 @@
 
 {% block content %}
 
-    {% if my_conv %}
+    {% if convContactAndLength %}
         <h1 class="main-header">My conversations</h1>
-        {% for conv in my_conv %}
-            <a href="{% url 'forumapp:conversation_details' conv.id %}">
-                <ion-icon name="chatbubbles"></ion-icon>
-                <img src="{{conv.userprofile.avatar.url}}" alt="pic" height="100" width="100">
-                <p>{{conv}}</p>
-                {% for short, long in roles %}
-                    {% if short == conv.userprofile.role %}
-                        <p>{{long}}</p>  
-                    {% endif %}    
-                {% endfor %}
-            </a>
+        {% for convName, convLength in convContactAndLength %}
+            <div class="talk-bubble sb1">
+                <div>
+                    <a href="{% url 'forumapp:conversation_details' convName.id %}">
+                        <img src="{{convName.userprofile.avatar.url}}" alt="pic">
+                    </a>  
+                </div>
+                <div>
+                    <a href="{% url 'forumapp:conversation_details' convName.id %}">
+                        <p>{{convName}}</p>
+                        {% for short, long in roles %}
+                            {% if short == convName.userprofile.role %}
+                                <div class="question-wall-tags role-div">
+                                    <small>{{long}}</small>
+                                </div>   
+                            {% endif %}    
+                        {% endfor %}
+                        <p><ion-icon name="chatbubbles-outline"></ion-icon>{{convLength}}</p>     
+                    </a>
+                </div>
+            </div>
         {% endfor %}
     {% else %}
         <h1 class="main-header">You don't have any conversations yet!</h1>
