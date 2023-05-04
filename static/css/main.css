@@ -730,5 +730,68 @@ nav form{
     width: 67.233rem;
 }
 
+.chatrooms-list{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+}
+
+.single-room-list{
+    flex: 0 1rem 33%;
+    text-align: center;
+    background-color: #32889f;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    width: 20rem;
+}
+
+.single-room-list h4{
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    color: white;  
+}
+
+.single-room-list h5{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;  
+}
+
+.single-room-list p{
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: white;  
+}
+
+.join-room-btn{
+    font-size: 2rem;
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-color: black;
+    text-decoration: none;
+    border: 0.2rem solid black;
+    text-transform: none;
+    width: 10rem;
+}
+
+.join-room-btn:hover{
+    background-color: rgb(170, 161, 161);
+    text-decoration: none;
+    color: black;
+}
+
+.send-request-icon{
+    color: white;
+    font-size: 4rem;
+}
+
+.send-request-icon:hover{
+    color: #35393a;
+}
+
+
 
 

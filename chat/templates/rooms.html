@@ -4,13 +4,22 @@
 
 {% block content %}
     {% if rooms %}
-        <h1>Rooms</h1>
-        {% for room in rooms %}
-            {{room.name}} 
-            <a href="{% url 'chat:room' room.slug %}">Join</a>
-        {% endfor %}
+        <h1 class="main-header">Rooms</h1>
+        <div class="chatrooms-list">
+            {% for room in rooms %}
+                <div class="single-room-list">
+                    <h4>{{room.name}}</h4>
+                    <a href="{% url 'chat:room' room.slug %}" class="join-room-btn">Join</a>
+                </div>
+            {% endfor %}
+            <div class="single-room-list">
+                <h5>Add new room</h4>
+                <p>Send request to admin to create new room</p>
+                <a href="{% url 'chat:send_create_room_request' %}" class="send-request-icon"><ion-icon name="add"></ion-icon></a>
+            </div>
+        </div>
     {% else %}
-        <h1>No chat rooms</h1>
+        <h1 class="main-header">No chat rooms</h1>
     {% endif %}
     
 {% endblock content %}

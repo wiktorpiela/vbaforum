@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} New chatroom request {% endblock title %}
+
+{% block content %}
+
+    {% include 'messages.html' %}
+
+    <h1 class="main-header">New chatroom request</h1>
+
+    <div class="main-form new-quest-from">
+        <form action="{% url 'chat:send_create_room_request' %}" method="post">
+            {% csrf_token %}
+            <div class="main-form-component main-form-component-new-quest">
+                <input type="text" name="request_subject" maxlength="300" required="" id="id_title" placeholder="Subject" value="Dear Admin">
+            </div>
+            <div class="main-form-component main-form-component-new-quest">
+                <textarea name="request_message" cols="40" rows="10" required="" id="id_text" placeholder="Message">I am asking you to create a new chatroom named XYZ</textarea>
+            </div>
+            <div class="form-btn form-btn-form">
+                <button type="submit" class="btn">Send request</button>
+            </div>
+        </form>
+    </div>
+ 
+{% endblock content %}
+    
+    
