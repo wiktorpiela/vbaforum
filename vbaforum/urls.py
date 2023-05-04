@@ -8,6 +8,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path('verification/', include('verify_email.urls')),
     path("auth/", include("django.contrib.auth.urls")),
+    path("chat/", include("chat.urls")),
     path("", include("forumapp.urls")),
 ]
 

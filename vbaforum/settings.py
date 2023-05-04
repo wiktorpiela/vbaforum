@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "channels",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     "forumapp",
     "verify_email.apps.VerifyEmailConfig",
     "taggit",
+    "chat",
 ]
 
 MIDDLEWARE = [
@@ -61,8 +63,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'vbaforum.wsgi.application'
+# WSGI_APPLICATION = 'vbaforum.wsgi.application'
+ASGI_APPLICATION = 'vbaforum.asgi.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND":"channels.layers.InMemoryChannelLayer"
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

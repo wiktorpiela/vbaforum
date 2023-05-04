@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Chat rooms {% endblock title %}
+
+{% block content %}
+    {% if rooms %}
+        <h1>Rooms</h1>
+        {% for room in rooms %}
+            {{room.name}} 
+            <a href="{% url 'chat:room' room.slug %}">Join</a>
+        {% endfor %}
+    {% else %}
+        <h1>No chat rooms</h1>
+    {% endif %}
+    
+{% endblock content %}
+    
+    
