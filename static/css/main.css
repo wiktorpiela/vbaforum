@@ -792,6 +792,50 @@ nav form{
     color: #35393a;
 }
 
+.all-chat-messages-content{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    background-color: #32889f;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 1.5rem;
+}
+
+.single-chat-message{
+    display: flex;
+    text-align: center;
+}
+
+.single-chat-message strong{
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.single-chat-message p{
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+.chat-messages{
+    text-align: center; 
+}
+
+.chat-messages-form form{
+    display: flex;
+    align-items: baseline;
+    margin-right: 70rem;
+}
+
+.chat-messages-btn{
+    font-size: 2rem;
+    height: 3.945rem;
+    width: 10rem;
+}
+
+.chat-messages-input{
+    width: 58rem;
+}
+
 
 
 

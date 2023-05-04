@@ -5,17 +5,27 @@
 {% block content %}
     <h1 class="main-header">Room {{room.name}}</h1>
 
-    <div>
-        <div id="chat-messages">
-            {% for m in messages %}<b>{{ m.user.username }}</b>: {{ m.content }}<br>{% endfor %}
+    <div class="all-chat-messages-content">
+        <div id="chat-messages" class="chat-messages">
+            {% for m in messages %}
+            <div class="single-chat-message">
+                <strong>{{m.user.username}}:</strong>
+                <p>{{m.content}}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="main-form new-quest-from chat-messages-form">
+            <form action="{% url 'chat:room' room.slug %}" method="post">
+                <div class="main-form-component main-form-component-new-quest chat-messages-input">
+                    <input type="text" name="content" placeholder="Type message..." id="chat-message-input">
+                </div>
+                {% csrf_token %}
+                <div class="form-btn form-btn-form">
+                    <button type="submit" id="chat-message-submit" class="btn chat-messages-btn">Send</button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <form action="{% url 'chat:room' room.slug %}" method="post">
-        <input type="text" name="content" placeholder="Type message..." id="chat-message-input">
-        {% csrf_token %}
-        <button type="submit" id="chat-message-submit">Send</button>
-    </form>
 
 {% endblock content %}
 
