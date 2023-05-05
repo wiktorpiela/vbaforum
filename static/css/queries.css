@@ -1,0 +1,110 @@
+/* big tablets/small notebooks (nesthub) */
+/* 1024px - 1200px <=1200px */
+@media only screen and (max-width: 1200px) {
+    html, body{
+        font-size: 8px;
+    }
+
+    nav form input[type='text']{
+        width: 30rem;
+        font-size: 1.4rem;
+    }
+
+    .forum-pic{
+        width: 12rem;
+        height: 4rem;
+    }
+
+    .user-pic{
+        width: 4rem;
+        height: 4rem;
+    }
+
+    nav a{
+        font-size: 1.5rem;
+    }
+
+    .nav-from-btn{
+        font-size: 1.5rem;
+    }
+
+    nav form{
+        font-size: 1.5rem;
+    }
+
+    .user-info-post small{
+        font-size: 1rem;
+    }
+
+    .user-info-post{
+        margin-right: 1.2rem;
+        margin-left: 0rem;
+        width: 10%;
+    }
+
+    .quest-detailed-content-image{
+        width: 90%;
+    }
+
+    .question-wall-inside-first h6{
+        font-size: 1.3rem;
+    }
+
+    .question-wall-inside-first p,
+    .question-wall-inside-first code,
+    .question-actions,
+    .question-wall-tags{
+        font-size: 1.5rem;
+    }
+
+    .question-wall-inside-second img{
+        height: 25rem;
+        width: 30rem;
+    }
+
+    .detailed-quest{
+        max-width: 100rem;
+    }
+
+    .user-mini{
+        flex: 0 1 33%;
+        padding: 1rem;
+    }
+
+    .user-mini img{
+        height: 15rem;
+        width: 15rem;
+    }
+
+    .users-list{
+        margin: 0 20rem;
+    }
+
+    .all-chat-messages-content{
+        width: 100rem;
+        text-align: center;
+        margin-left: 14rem;
+    }
+
+
+
+
+}
+
+/* ipad mini */
+/* 768px - 1023px <=1023px */
+@media only screen and (max-width: 1023px) {
+
+}
+
+/* phones (iphone SE) */
+/* 375px - 767px <=767px */
+@media only screen and (max-width: 767px) {
+
+}
+
+/* small phones najmniejsze urzadzenie mobilne */ 
+/* 0px - 374px <=374px */
+@media only screen and (max-width: 374px) {
+
+}

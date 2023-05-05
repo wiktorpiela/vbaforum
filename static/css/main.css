@@ -58,7 +58,7 @@ nav form button:hover{
     background-color: rgb(170, 161, 161);
 }
 
-nav form a{
+.nav-from-btn{
     background-color: white;
     color: black;
     border-radius: 1.5rem;
@@ -69,7 +69,7 @@ nav form a{
     text-transform: none;
 }
 
-nav form a:hover{
+.nav-from-btn:hover{
     color: black;
     background-color: rgb(170, 161, 161);
 }
@@ -799,7 +799,7 @@ nav form{
 
 .single-chat-message{
     display: flex;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .single-chat-message strong{

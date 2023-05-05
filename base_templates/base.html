@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/tagsinput.css" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/queries.css' %}">
     <title>
         {% block title %}
 
@@ -25,14 +26,14 @@
     <nav>
         
         <a href="{% url 'forumapp:home' %}">
-            <img src="{% static 'css/img/logo.png' %}" alt="pic" height="50" width="150">
+            <img src="{% static 'css/img/logo.png' %}" alt="pic" height="50" width="150" class="forum-pic">
         </a>
 
         <form action="{% url 'forumapp:search' %}" method="post">
             {% csrf_token %}
             <input type="text" name="search" placeholder="Search posts by title, text, author or tags ..." required>
             <button type="submit" class>Go!</button>
-            <a href="{% url 'forumapp:home' %}">Reset</a>
+            <a href="{% url 'forumapp:home' %}" class="nav-from-btn">Reset</a>
         </form>
 
         {% if user.is_authenticated %}
@@ -43,7 +44,7 @@
           
             {% if user.userprofile %}
                 <a href="{% url 'accounts:profile_view' %}">
-                    <img src="{{user.userprofile.avatar.url}}" alt="pics" height="50" width="50">
+                    <img src="{{user.userprofile.avatar.url}}" alt="pics" height="50" width="50" class="user-pic">
                 </a>  
             {% endif %} 
             <a href="{% url 'accounts:logout_user' %}">Log out</a>
