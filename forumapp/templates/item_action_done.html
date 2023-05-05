@@ -6,7 +6,10 @@
 
 {% include 'messages.html' %}
 
-    <a href="{% url 'forumapp:home' %}">Home page</a>
+    <div class="go-back-homepage-container">
+        <a href="{% url 'forumapp:home' %}" class="go-back-homepage"><ion-icon name="home-outline"></ion-icon>Home page</a>
+    </div>
+    
     
 {% endblock content %}
     

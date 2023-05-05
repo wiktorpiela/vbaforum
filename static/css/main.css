@@ -366,10 +366,6 @@ nav form{
     text-transform: uppercase;
 }
 
-.answer-composing{
-    /* display: flex; */
-}
-
 .question-actions{
     margin-top: 1rem;
 }
@@ -836,6 +832,20 @@ nav form{
     width: 58rem;
 }
 
+.go-back-homepage{
+    font-size: 3rem;
+    color: black;
+}
+
+.go-back-homepage:hover{
+    text-decoration: none;
+    color: #32889f;
+}
+
+.go-back-homepage-container{
+    margin-top: 2rem;
+    text-align: center;
+}
 
 
 
