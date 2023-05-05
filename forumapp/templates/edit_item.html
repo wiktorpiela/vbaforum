@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Editing
-{% endblock title %}
-
+{% block title %} Editing {% endblock title %}
 
 {% block content %}
     
@@ -19,7 +16,6 @@
             {% endif %}  
         </div>
 
-        
         {% if itemType == "question" %}
             <form action="{% url 'forumapp:edit_item' item.id 'question' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}

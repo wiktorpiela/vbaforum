@@ -1,20 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Welcome to VBA forum
-{% endblock title %}
+{% block title %} Welcome to VBA forum {% endblock title %}
     
 {% block content %}
-
     <h1 class="main-header">VBA forum - for professionals, students and enthusiasts</h1>
 
-    
     {% if questions %}
-
         {% for question in questions %}
-
             <div class="question-wall">
-
                 <a href="{% url 'forumapp:question_details' question.id %}">
 
                     <div class="question-wall-inside">
@@ -46,13 +39,10 @@
                                 <img src="{{question.image.url}}" alt="pic" height="263" width="350"> 
                             </div>
                         {% endif %}
-                        
                     </div>
                 </a>
             </div>
-
         {% endfor %}
-
     {% else %}
             <h1 class="main-header">No results...</h1>
     {% endif %}

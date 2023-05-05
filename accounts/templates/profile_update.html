@@ -5,16 +5,13 @@
 {% block content %}
 
     {% include 'messages.html' %}
-
     <div class="main-form register-main-form">
-
         <div>
             <h1 class="main-header">Profile editing</h1>
         </div>
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-    
             <div class="main-form-component">
                 <label for="id_username">Username</label>
                 <input type="text" name="username" value="{{user.username}}" maxlength="150" required="" id="id_username">
@@ -60,11 +57,8 @@
             <div class="form-btn">
                 <button type="submit" class="btn">Update profile</button>
             </div>
-        
         </form>
-
     </div>
-
 {% endblock content %}
     
     

@@ -3,11 +3,8 @@
 {% block title %} Sending email message to {{user_receiver.username}}{% endblock title %}
     
 {% block content %}
-
     <!-- {% include 'messages.html' %} -->
-
     <h1 class="main-header">Conversation with {{user_receiver}}</h1>
-
     <div class="messages-wall">
 
         <div class="contact-side">
@@ -70,7 +67,6 @@
             {% endfor %}
 
         </div>
-
     </div>
 
     <h1 class="main-header">Composing new message to {{user_receiver.username}}</h1>
@@ -97,6 +93,5 @@
             </div>
         </form>
     </div>
-
 {% endblock content %}
     

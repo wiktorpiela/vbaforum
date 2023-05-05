@@ -18,11 +18,9 @@
     {% include 'messages.html' %}
 
     <div class="main-form register-main-form">
-
         <div>
             <h1 class="main-header">Create account</h1>
         </div>
-
         <form action="{% url 'accounts:register' %}" method="post">
             {% csrf_token %}
             <div class="main-form-component">
@@ -60,11 +58,8 @@
             <div class="form-btn">
                 <button type="submit" class="btn">Register</button>
             </div>
-            
         </form>
-
         <a href="{% url 'accounts:login_user' %}">Do you have already and account? Log in</a>
-
     </div>
 
 {% endblock content %}

@@ -5,9 +5,7 @@
 {% block content %}
 
     {% include 'messages.html' %}
-
     <div class="main-form register-main-form">
-
         <div>
             <h1 class="main-header">Sign in</h1>
         </div>
@@ -26,7 +24,6 @@
             <div class="form-btn">
                 <button type="submit" class="btn">Log in</button>
             </div>
-        
         </form>
 
         <a href="{% url 'accounts:reset_user_password' %}">Forgot password? Reset</a>

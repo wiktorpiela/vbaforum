@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    {{question.title}}
-{% endblock title %}
+{% block title %} {{question.title}} {% endblock title %}
 
 {% block content %}
-
     <div class="question-wall detailed-quest">
 
         <div class="question-wall-inside detailed-quest-inside">
@@ -71,13 +68,9 @@
                             <a href="{% url 'forumapp:delete_my_item' question.id 'question' %}">Delete</a>
                         {% endif %}  
                     </div>
-                    
                 </div>
-
             </div>
-            
         </div>
-
     </div>
 
     {% if answers %}

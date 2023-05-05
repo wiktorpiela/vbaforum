@@ -3,7 +3,6 @@
 {% block title %} {{user.username}}'s profile {% endblock title %}
     
 {% block content %}
-
     {% if not user.userprofile.bio %}
         <div class="register-info register-info-profile-view">
             <h1>Reminder:</h1>
@@ -47,9 +46,7 @@
             <a href="{% url 'accounts:profile_update' %}">Update profile</a>
             <a href="{% url 'accounts:remove_account' %}">Delete account</a>
         </div>
-
     </div>
-
 {% endblock content %}
 
     
