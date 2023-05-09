@@ -14,6 +14,11 @@ html, body {
     margin: 0 auto;
 }
 
+/* MOBILe NAV */
+.nav-burger {
+    display: none;
+}
+
 /* --------------------------- */
 /* NAVIGATION */
 /* --------------------------- */
@@ -26,6 +31,15 @@ nav{
     background-color: #32889f;
     font-size: 2rem;
     text-transform: uppercase;
+}
+
+.nav-elements a{
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+}
+
+.forum-pic2{
+    display: none;
 }
 
 nav img{
@@ -847,5 +861,37 @@ nav form{
     text-align: center;
 }
 
+pre{
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    font-family: 'Fira Code';
+}
 
+.main-form-component-avatar{
+    display: flex;
+    align-items: center;
+}
+
+.main-form-component-avatar label{
+    margin-left: 2rem;
+}
+
+.main-form-component-avatar input[type='file']{
+    width: 100rem;
+}
+
+.main-form-component-avatar textarea{
+    margin-top: 2rem;
+}
+
+.user-profile-avatar img{
+    height: 20rem;
+    width: 20rem;
+}
+
+.user-prof-update-pic{
+    height: 10rem;
+    width: 10rem;
+}
 

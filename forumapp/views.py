@@ -194,7 +194,7 @@ def search(request):
             questions = questions | queryset
         except UnboundLocalError:
             questions = queryset
-        questions = questions.order_by("-create_date")
+        questions = list(set(questions.order_by("-create_date")))
         return render(request, "search.html", {"questions":questions})
     
 @login_required
@@ -234,7 +234,10 @@ def profile_view(request, userID):
     this_user.is_your_profile = True if request.user == this_user else False
     roles = UserProfile.roles[:-1]
     quest_posted_count = Question.objects.filter(user=this_user).count()
-    followersCount = this_user.following.filter(user_id=userID)
+    followersCount = UserProfile.objects.prefetch_related("following")\
+        .get(pk=this_user.id).following.count()
+    print(this_user.id)
+    print(followersCount)
     isFollowed = this_user.following.filter(user_id=request.user.id).exists()
     if isFollowed:
         this_user.is_followed = True

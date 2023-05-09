@@ -31,7 +31,7 @@
 
                     {% if question.code_example %}
                         <div class="detailed-question-wall-inside-second code-example">
-                            <code>{{question.code_example}}</code>
+                            <pre>{{question.code_example}}</pre>
                         </div>
                     {% endif %}
 
@@ -108,7 +108,7 @@
             
                                 {% if answer.code_example %}
                                     <div class="detailed-question-wall-inside-second code-example">
-                                        <code>{{answer.code_example}}</code>
+                                        <pre>{{answer.code_example}}</pre>
                                     </div>
                                 {% endif %}
             

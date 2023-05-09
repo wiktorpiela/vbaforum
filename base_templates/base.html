@@ -24,11 +24,12 @@
 <body>
 
     <nav>
-        
         <a href="{% url 'forumapp:home' %}">
             <img src="{% static 'css/img/logo.png' %}" alt="pic" height="50" width="150" class="forum-pic">
         </a>
-
+        <a href="{% url 'forumapp:home' %}">
+            <img src="{% static 'css/img/logo2.png' %}" alt="pic" height="50" width="150" class="forum-pic2">
+        </a>
         <form action="{% url 'forumapp:search' %}" method="post">
             {% csrf_token %}
             <input type="text" name="search" placeholder="Search posts by title, text, author or tags ..." required>
@@ -37,17 +38,25 @@
         </form>
 
         {% if user.is_authenticated %}
+        <div class="mobile-adj">
+            <a class="nav-burger">
+                <ion-icon name="menu-outline"></ion-icon>
+            </a>
+        </div>
+        <div class="nav-elements">
             <a href="{% url 'forumapp:new_question' %}">New question</a>
             <a href="{% url 'forumapp:display_collection' 'q' %}">Questions</a>
             <a href="{% url 'forumapp:display_collection' 'a' %}">Answers</a>
             <a href="{% url 'forumapp:display_collection' 'c' %}">Community</a>
-          
-            {% if user.userprofile %}
-                <a href="{% url 'accounts:profile_view' %}">
-                    <img src="{{user.userprofile.avatar.url}}" alt="pics" height="50" width="50" class="user-pic">
-                </a>  
-            {% endif %} 
             <a href="{% url 'accounts:logout_user' %}">Log out</a>
+        </div>
+
+            {% if user.userprofile %}
+            <a href="{% url 'accounts:profile_view' %}">
+                <img src="{{user.userprofile.avatar.url}}" alt="pics" height="50" width="50" class="user-pic">
+            </a>  
+            {% endif %}
+
         {% else %}
             <div></div>
             <div></div>
@@ -71,6 +80,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="/static/js/tagsinput.js"></script>
+    <script src="{% static 'js/nav.js' %}"></script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

@@ -32,15 +32,15 @@
                 </select>
             </div>
 
-            <div class="main-form-component">
+            <div class="main-form-component-avatar">
                 <label for="id_avatar">Avatar</label>
                 <a href="{{user.userprofile.avatar.url}}">
-                    <img src="{{user.userprofile.avatar.url}}" alt="pic" height="100" width="100">
+                    <img src="{{user.userprofile.avatar.url}}" alt="pic" class="user-prof-update-pic">
                 </a>
                 <input type="file" name="avatar" accept="image/*" id="id_avatar">
             </div>
 
-            <div class="main-form-component main-form-component-bio">
+            <div class="main-form-component main-form-component-avatar">
                 <label for="id_bio">Bio</label>
                 <textarea name="bio" cols="40" rows="10" maxlength="500" id="id_bio">{{user.userprofile.bio}}</textarea>
             </div>

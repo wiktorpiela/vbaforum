@@ -1,5 +1,17 @@
-/* big tablets/small notebooks (nesthub) */
-/* 1024px - 1200px <=1200px */
+/* 1200px - 1700px <=1700px */
+@media only screen and (max-width: 1700px) {
+    .nav-elements a{
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    nav form input[type='text']{
+        width: 30rem;
+        font-size: 1.4rem;
+    }
+}
+
+/* nest hub small laptops big tablets */
 @media only screen and (max-width: 1200px) {
     html, body{
         font-size: 8px;
@@ -100,9 +112,22 @@
         font-size: 7px;
     }
 
+    nav img{
+        margin-right: 1rem;
+    }
+
+    .nav-elements a{
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
     nav form input[type='text']{
         width: 25rem;
         font-size: 1.2rem;
+    }
+
+    nav a{
+        font-size: 1.4rem;
     }
 
     .forum-pic{
@@ -115,7 +140,7 @@
     }
 
     .nav-from-btn{
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .user-pic{
@@ -168,6 +193,98 @@
 /* phones (iphone SE) */
 /* 375px - 767px <=767px */
 @media only screen and (max-width: 767px) {
+    html, body{
+        font-size: 5px; 
+    }
+
+    nav form input[type='text']{
+        width: 30rem;
+        font-size: 1.4rem;
+    }
+
+    .nav-burger {
+        display: flex;
+        font-size: 5rem;
+        color: white;
+    }
+
+    .nav-elements{
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        margin-right: 10rem;
+    }
+
+    .forum-pic{
+        display: none;
+    }
+
+    .forum-pic2{
+        display: inline;
+        height: 6rem;
+        width: 7rem;
+        box-shadow: none;
+        margin-right: 2rem;
+    }
+
+    .user-pic{
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .main-header{
+        font-size: 2.5rem;
+    }
+
+    .question-wall-inside-second img{
+        height: 15rem;
+        width: 20rem;
+    }
+
+    .question-wall-inside-first h4{
+        font-size: 1.5rem;
+    }
+
+    .question-wall-inside-first h6{
+        font-size: 1.25rem;
+    }
+
+    .question-wall-inside-first P{
+        font-size: 1rem;
+    }
+
+    .question-wall{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .user-profile-options{
+        width: 50rem;
+        margin: 0 auto;
+    }
+
+    .register-info-profile-view{
+        margin: 2rem auto;
+    }
+
+    .users-list{
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .user-mini{
+        margin: 2rem auto;
+    }
+
+    .browe-users-form{
+        margin: 2rem auto;
+        margin-left: 14rem;
+    }
+
 
 }
 

@@ -14,7 +14,7 @@
     <div class="user-profile-all-content">
         <div class="user-profile-avatar-desc">
             <div class="user-profile-avatar">
-                <img src="{{userProf.userprofile.avatar.url}}" alt="pic" height="200" width="200">
+                <img src="{{userProf.userprofile.avatar.url}}" alt="pic">
             </div>
             <div class="user-profile-desc">
                 <p>Username: {{userProf.username}}</p>
@@ -25,7 +25,7 @@
                     {% endif %} 
                 {% endfor %}
                 <p>Joined: {{userProf.date_joined|date:'j E Y'}}</p>
-                <p>Followers: </p>
+                <p>Followers: {{followersCount}}</p>
                 
                 {% if userProf.is_your_profile %}
                     {% if userProf.userprofile.stop_notifications%}
