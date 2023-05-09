@@ -22,7 +22,6 @@
         <div class="messages-content sending-page">
 
             {% for message in all_messages %}
-            
                 {% if not message.are_you_sender %}
                     <div class="sender-message-container">
                         <h4>{{message.subject}}</h4>
@@ -34,7 +33,6 @@
                             <small>Sent: {{message.message_date}}</small>
                             <a href="{% url 'forumapp:reply_to_message' user_receiver.id message.id %}">Reply</a>
                         </div>
-
                     </div>
                 {% else %}
                     <div class="receiver-message-container">
@@ -47,12 +45,9 @@
                             <small>Sent: {{message.message_date}}</small>
                             <a href="{% url 'forumapp:reply_to_message' user_receiver.id message.id %}">Reply</a>
                         </div>
-
                     </div> 
                 {% endif %}
-                
             {% endfor %}
-            
         </div>
 
         <div class="my-user-side">
@@ -65,12 +60,10 @@
                     </div>   
                 {% endif %}    
             {% endfor %}
-
         </div>
     </div>
 
     <h1 class="main-header">Composing new message to {{user_receiver.username}}</h1>
-
     <div class="main-form new-quest-from">
 
         <form action="" method="post" enctype="multipart/form-data">

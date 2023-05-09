@@ -6,7 +6,6 @@
 
     {% if all_active_users %}
         <h1 class="main-header">Currently {{all_active_users.count}} active user{{all_active_users.count|pluralize}} on VBA Forum</h1>
-
         <div class="browe-users-form">
             <form action="{% url 'forumapp:browse_users' %}" method="post">
                 {% csrf_token %}
@@ -37,7 +36,6 @@
         {% else %}
             <h1 class="main-header">Currently no active users on VBA Forum</h1> 
         {% endif %}
-    
 {% endblock content %}
     
     

@@ -6,7 +6,6 @@
 
     {% if followingUsers %}
         <h1 class="main-header following-users-header">Following users</h1>
-        
         <div class="users-list">
             {% for following in followingUsers %}
                 <div class="user-mini">
@@ -28,7 +27,6 @@
     {% else %}
         <h1 class="main-header">You don't follow any users!</h1>
     {% endif %}
-
 {% endblock content %}
     
     

@@ -5,9 +5,7 @@
 {% block content %}
 
     {% include 'messages.html' %}
-
     <h1 class="main-header">New chatroom request</h1>
-
     <div class="main-form new-quest-from">
         <form action="{% url 'chat:send_create_room_request' %}" method="post">
             {% csrf_token %}
@@ -22,7 +20,6 @@
             </div>
         </form>
     </div>
- 
 {% endblock content %}
     
     

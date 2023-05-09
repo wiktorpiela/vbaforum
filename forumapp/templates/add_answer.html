@@ -7,11 +7,8 @@
     {% include 'messages.html' %}
 
     <div class="answer-composing">
-
         <div class="question-wall detailed-quest">
-
             <div class="question-wall-inside detailed-quest-inside">
-    
                 <div class="user-info-post">
                     <img src="{{question.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
                     <h6>{{question.user}}</h6>
@@ -19,25 +16,19 @@
                         <small>{{question.user.userprofile.display_fullname_user_role}}</small>
                     </div>
                     <small>Followers: {{question.user.userprofile.total_followers}}</small>
-                    <small>Posted: {{quest_posted_count}}</small>
-                    
-                    
+                    <small>Posted: {{quest_posted_count}}</small> 
                 </div>
     
                 <div class="quest-detailed-content-image">
-    
                     <div class="question-wall-inside-first">
-    
                         <h4>{{question.title|capfirst}}</h4>
                         <h6>Posted {{question.display_time}}</h6>
                         <p>{{question.text}}</p> 
-    
                         {% if question.code_example %}
                             <div class="detailed-question-wall-inside-second code-example">
                                 <code>{{question.code_example}}</code>
                             </div>
                         {% endif %}
-    
                         {% if question.image %}
                             <div class="question-wall-inside-second detailed-question-wall-inside-second">
                                 <a href="{{question.image.url}}">
@@ -45,27 +36,21 @@
                                 </a>  
                             </div>
                         {% endif %}
-                    
                         <div class="counting">
                             <p><ion-icon name="thumbs-up"></ion-icon>{{question.total_likes}}</p>
                             <p><ion-icon name="chatbox"></ion-icon>{{question.total_answers}}</p>
                         </div>
-            
                         <div class="question-wall-tags">
                             {% for tag in question.tags.all %}
                                 <small>#{{tag}}</small>
                             {% endfor %}   
                         </div>                        
                     </div>
-    
                 </div>
-                
             </div>
-    
         </div>
 
         <h1 class="main-header">Writing answer...</h1>
-
         <div class="main-form new-quest-from">
 
             <form action="{% url 'forumapp:add_answer' question.id %}" method="post" enctype="multipart/form-data">
@@ -89,12 +74,9 @@
                 <div class="form-btn form-btn-form">
                     <button type="submit" class="btn">Post answer</button>
                 </div>
-                
             </form>
-    
         </div>
     </div>
-
 {% endblock content %}
     
     

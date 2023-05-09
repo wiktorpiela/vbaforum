@@ -3,7 +3,6 @@
 {% block title %} {{user.username}} conversations {% endblock title %}
 
 {% block content %}
-
     {% if convContactAndLength %}
         <h1 class="main-header">My conversations</h1>
         {% for convName, convLength in convContactAndLength %}

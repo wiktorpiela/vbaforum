@@ -9,9 +9,7 @@
     {% for question in questions %}
 
     <div class="question-wall">
-
         <a href="{% url 'forumapp:question_details' question.id %}">
-
             <div class="question-wall-inside">
                 <div class="question-wall-inside-first">
                     <h4>{{question.title|capfirst}}</h4>
@@ -33,15 +31,12 @@
                             <small>#{{tag}}</small>
                         {% endfor %}
                     </div>
-                    
                 </div>
-
                 {% if question.image %}
                     <div class="question-wall-inside-second">
                         <img src="{{question.image.url}}" alt="pic" height="263" width="350"> 
                     </div>
                 {% endif %}
-                
             </div>
         </a>
     </div>

@@ -5,9 +5,7 @@
 {% block content %}
 
     <h1 class="main-header">Conversation with {{userContact}}</h1>
-
     <div class="messages-wall">
-
         <div class="contact-side">
             <img src="{{userContact.userprofile.avatar.url}}" alt="pic">
             <p>{{userContact.username}}</p>
@@ -21,9 +19,7 @@
         </div>
 
         <div class="messages-content">
-
             {% for message in all_messages %}
-            
                 {% if not message.are_you_sender %}
                     <div class="sender-message-container">
                         <h4>{{message.subject}}</h4>
@@ -53,13 +49,10 @@
 
                     </div> 
                 {% endif %}
-                
             {% endfor %}
-
             <div class="user-profile-options">
                 <a href="{% url 'forumapp:send_email_message' userContact.id  %}">Send new message to {{userContact}}</a>
             </div>
-            
         </div>
 
         <div class="my-user-side">
@@ -72,11 +65,6 @@
                     </div>   
                 {% endif %}    
             {% endfor %}
-
         </div>
-
     </div>
-
-
-
 {% endblock content %}

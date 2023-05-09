@@ -5,9 +5,7 @@
 {% block content %}
     
     {% include 'messages.html' %}
-
     <div class="main-form new-quest-from">
-
         <div>     
             {% if itemType == "question" %}
                 <h1 class="main-header">Question editing</h1>
@@ -64,15 +62,10 @@
                     <button type="submit" class="btn">Re-post</button>
                 </div>   
             </form>
-
         {% else %}
-
         <div class="answer-composing">
-
             <div class="question-wall detailed-quest">
-    
                 <div class="question-wall-inside detailed-quest-inside">
-        
                     <div class="user-info-post">
                         <img src="{{item.question.user.userprofile.avatar.url}}" alt="pics" height="70" width="70">
                         <h6>{{item.question.user.username}}</h6>
@@ -111,17 +104,12 @@
                                     <small>#{{tag}}</small>
                                 {% endfor %}   
                             </div>
-                            
                         </div>
-        
-                    </div>
-                    
+                    </div> 
                 </div>
-        
             </div>
     
             <div class="main-form new-quest-from">
-    
                 <h1 class="main-header">Editing answer...</h1>
         
                 <form action="{% url 'forumapp:edit_item' item.id 'answer' %}" method="post" enctype="multipart/form-data">
@@ -157,15 +145,11 @@
                     <div class="form-btn">
                         <button type="submit" class="btn">Re-post</button>
                     </div>
-
                 </form>
             </div>
         </div>
-
         {% endif %}
-        
     </div>
-
 {% endblock content %}
     
     
