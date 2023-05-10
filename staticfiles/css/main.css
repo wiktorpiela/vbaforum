@@ -1,0 +1,897 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.my-row {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+/* MOBILe NAV */
+.nav-burger {
+    display: none;
+}
+
+/* --------------------------- */
+/* NAVIGATION */
+/* --------------------------- */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 5rem;
+    align-items: center;
+    background-color: #32889f;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.nav-elements a{
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+}
+
+.forum-pic2{
+    display: none;
+}
+
+nav img{
+    border-radius: 1rem;
+    box-shadow: 0.2rem 0.2rem 0.2rem black;
+}
+
+nav a{
+    color: white;
+}
+
+nav a:hover{
+    color: rgb(170, 161, 161);
+    text-decoration: none;
+}
+
+nav form input[type='text'],
+nav form button{
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    margin-right: 1rem;
+}
+
+nav form input[type='text']{
+    width: 40rem;
+}
+
+nav form button:hover{
+    background-color: rgb(170, 161, 161);
+}
+
+.nav-from-btn{
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-color: black;
+    text-decoration: none;
+    border: 0.2rem solid black;
+    text-transform: none;
+}
+
+.nav-from-btn:hover{
+    color: black;
+    background-color: rgb(170, 161, 161);
+}
+
+nav form{
+    display: flex;
+}
+
+/* REUSABLE */
+.main-header{
+    font-size: 3.5rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.btn{
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgb(170, 161, 161);
+    margin-right: 1rem;
+    width: 20rem;
+    font-size: 2.5rem;
+    border: 0.2rem solid black;
+}
+
+.btn:hover{
+    background-color: white; 
+}
+
+.collection-icon-desc{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 3rem;
+    width: 50rem;
+}
+
+.collection-icon-desc a{
+    flex: 0 1rem 50%;
+    text-decoration: none;
+    color: #32889f;
+    border-radius: 1.5rem;
+    border: 0.3rem solid #32889f;
+    padding: 1rem 1rem;
+    font-size: 2rem;
+    flex: 0 0 calc(50% - 1rem);
+    margin-top: 2rem;
+}
+
+.collection-icon-desc a:hover{
+    color: rgb(170, 161, 161);
+    border: 0.3rem solid rgb(170, 161, 161);
+    border-radius: 1.5rem;
+}
+
+.icon{
+    font-size: 4.5rem;
+}
+
+.question-wall{
+    max-width: 90rem;
+    margin: 0 auto;
+    background-color: rgb(177, 174, 167);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    font-size: 2rem;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.code-example{
+    text-align: left;
+}
+
+.detailed-quest{
+    max-width: 120rem;
+}
+
+.question-wall a{
+    color: black;
+}
+
+.question-wall a:hover{
+    color: #35393a;
+    text-decoration: none;
+}
+
+.question-wall-tags small{
+    background-color: #32889f;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    font-size: 1.25rem;
+}
+
+.question-wall h4{
+    font-size: 2.5rem;
+}
+
+.question-wall h6{
+    font-size: 1.5rem;
+}
+
+.question-wall p{
+    font-size: 1.5rem;
+}
+
+.question-wall-inside{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.question-wall-inside-second{
+    width: 40%;
+    margin-left: 2rem;
+}
+
+.question-wall-inside-second img{
+    border-radius: 1.5rem;
+}
+
+.user-info-post img{
+    border-radius: 50%;
+}
+
+.user-info-post{
+    margin-right: 2.5rem;
+    margin-left: 1.5rem;
+    width: 15%;
+}
+
+.quest-detailed-content-image{
+    width: 85%;
+}
+
+.counting{
+    display: flex;
+    margin: 0 auto;
+    color: #32889f;
+}
+
+.counting p{
+    margin-right: 1rem;
+}
+
+.counting a{
+    color: #32889f;
+}
+
+.detailed-quest p{
+    font-size: 1.75rem;
+}
+
+.quest-detailed-content-image{
+    display: block;
+}
+
+.detailed-question-wall-inside-second{
+    /* margin: 0 auto; */
+    margin-left: 0rem;
+    margin-bottom: 1rem;
+}
+
+.detailed-quest-inside{
+    padding-right: 3rem;
+    align-items: flex-start;
+}
+
+.user-info-post{
+    margin-bottom: 10rem;
+    text-align: center;
+}
+
+.user-info-post small{
+    font-size: 1.5rem;
+}
+
+.user-info-post img{
+    margin-bottom: 1rem;
+}
+
+.code-example{
+    text-align: none;
+}
+
+ 
+/* FORMS */
+.main-form{
+    margin-top: 4rem;
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+.main-form label{
+    width: 21rem;
+    margin-right: 30rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.register-main-form label{
+    width: 21rem;
+    margin-right: 5rem;
+}
+
+.main-form h1{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.main-form a{
+    width: 57rem;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: #35393a;
+}
+
+.main-form a:hover{
+    color: #32889f;
+}
+
+.main-form form{
+    width: 57rem;
+    margin: 0 auto;
+}
+
+.main-form-component{
+    margin-bottom: 1.5rem;
+}
+
+.form-btn{
+    text-align: center;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    
+}
+
+.form-btn-form{
+    margin-left: 15rem;
+}
+
+.main-form form input,
+.main-form form select{
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    margin-right: 1rem;
+    width: 25.022rem;
+}
+
+.container-fluid{
+    background-color: #f5a6ad;
+    border: 0.2rem solid #d9182a;
+    text-align: center;
+    border-radius: 1.5rem;
+    margin-top: 3.5rem; 
+}
+
+.alert-dismissible{
+    padding-top: 2rem;
+}
+
+.main-form-component-new-quest{
+    text-align: center;
+    padding: 1rem;
+}
+
+.main-form-component-new-quest input[type='text'],
+.main-form-component-new-quest input[type='file']{
+    border-radius: 1.5rem;
+    /* width: 40.889rem; */
+    width: 70rem;
+}
+
+.new-quest-from{
+    margin-bottom: 3rem;
+    margin-right: 16rem;
+}
+
+.new-quest-from textarea{
+    height: 9rem;
+    padding: 0.5rem 1rem;
+    width: 70rem;
+}
+
+.new-quest-from label{
+    text-transform: uppercase;
+}
+
+.question-actions{
+    margin-top: 1rem;
+}
+
+/* USERPROFILE DISPLAY */
+.user-profile-avatar-desc{
+    display: flex;
+    margin: 3rem auto;
+    width: 54.2013rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-profile-avatar img{
+    border-radius: 10%;
+}
+
+.user-profile-desc p{
+    font-size: 2rem;
+    
+}
+
+.user-profile-desc{
+    margin-left: 2.5rem;
+}
+
+.user-profile-all-content{
+    margin: 0 auto;
+}
+
+.main-form-component input[type='file']{
+    margin-left: 12rem;
+    margin-top: 2rem;
+    width: 100rem;
+}
+
+.register-info{
+    margin: 2rem 0rem;
+    background-color: #f5a6ad;
+    border: 0.2rem solid #d9182a;
+    border-radius: 1.5rem;
+    padding: 2rem 2rem;
+    margin-left: 28rem;
+    width: 50rem;
+}
+
+.register-info h3{
+    font-size: 2.2rem;
+}
+
+.register-info ul{
+    font-size: 1.5rem;
+    padding-left: 2rem;
+}
+
+.reset-password-info{
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.user-profile-options a{
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-color: black;
+    text-decoration: none;
+    border: 0.2rem solid black;
+    text-transform: none;
+    font-size: 1.5rem;
+}
+
+.user-profile-options{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0rem 22rem;
+    
+}
+
+.user-profile-options a:hover{
+    background-color: rgb(170, 161, 161);
+    text-decoration: none;
+}
+
+.register-info-profile-view{
+    width: 54.202rem;
+    margin-left: 30rem;
+    margin-right: 22rem;
+}
+
+.btn-change-pass{
+    width: 25rem;
+}
+
+.main-form-component textarea{
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+}
+
+.main-form-component-bio{
+    display: flex;
+    margin-top: 3rem;
+    margin-right: 10rem;
+    text-align: left;
+}
+
+.main-form-component-bio textarea{
+    width: 100rem;
+}
+
+.user-profile-bio{
+    font-size: 1.5rem;
+    width: 54.202rem;
+    margin: 0 auto;
+    text-align: justify;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    background-color: rgb(170, 161, 161);
+}
+
+.browe-users-form form input[type='text'],
+.browe-users-form form button{
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    margin-right: 1rem;
+}
+
+.browe-users-form form button:hover{
+    background-color: rgb(170, 161, 161);
+}
+
+.browe-users-form form a{
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-color: black;
+    text-decoration: none;
+    border: 0.2rem solid black;
+    text-transform: none;
+}
+
+.browe-users-form form a:hover{
+    color: black;
+    background-color: rgb(170, 161, 161);
+}
+
+.browe-users-form form form{
+    display: flex;
+}
+
+.browe-users-form{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    margin-left: 34rem;
+}
+
+.browe-users-form form{
+    display: flex;  
+}
+
+.browe-users-form form input[type='text']{
+    width: 33rem;
+}
+
+.users-list{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.user-mini{
+    flex: 0 1rem 25%;
+    background-color: rgb(170, 161, 161);
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    border-radius: 1.5rem;
+    border: 0.5rem solid #32889f;
+    text-align: center;
+}
+
+.user-mini img{
+    height: 20rem;
+    width: 20rem;
+    border-radius: 1.5rem;
+}
+
+.user-mini a{
+    color: black;
+    font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 15rem;
+}
+
+.user-mini a:hover{
+    text-decoration: none;
+}
+
+.role-div{
+    margin-bottom: 1rem;
+}
+
+.following-users-header{
+    margin-bottom: 2rem;
+}
+
+.talk-bubble{
+    width: 40rem;
+    margin: 5rem auto;
+    border: 0.4rem solid #32889f;
+    padding: 2rem;
+    text-align: center;
+    color: #32889f;
+    position: relative;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(170, 161, 161);
+    align-items: center;
+}
+
+.sb1:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 1rem solid #32889f;
+    border-right: 1rem solid transparent;
+    border-top: 1rem solid #32889f;
+    border-bottom: 1rem solid transparent;
+    right: -2rem;
+    top: 0.6rem;
+}
+
+.talk-bubble img{
+    border-radius: 1.5rem;
+    height: 15rem;
+    width: 15rem;
+}
+
+.talk-bubble a{
+    font-size: 2rem;
+    color: black;
+}
+
+.talk-bubble a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.messages-wall{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+.contact-side img,
+.my-user-side img {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 1.5rem;
+  }
+
+.contact-side p,
+.my-user-side p{
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+.contact-side,
+.my-user-side{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.sender-message-container{
+    position: relative;
+	background: #00aabb;
+	border-radius: .4em;
+    margin-left: 2rem;
+    margin-right: 10rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.sender-message-container:after{
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 2.8rem solid transparent;
+	border-right-color: #00aabb;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -1.4rem;
+	margin-left: -2.8rem;
+}
+
+.receiver-message-container{
+    position: relative;
+	background: #00aabb;
+	border-radius: .4em;
+    margin-left: 10rem;
+    margin-right: 2rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.receiver-message-container:after{
+    content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 2.8rem solid transparent;
+	border-left-color: #00aabb;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -1.4rem;
+	margin-right: -2.8rem;
+}
+
+.sender-message-container h4,
+.receiver-message-container h4{
+    font-size: 2rem;
+}
+
+.sender-message-container p,
+.receiver-message-container p{
+    font-size: 1.5rem;
+}
+
+.sender-message-container a,
+.receiver-message-container a{
+    color: black;
+}
+
+.sender-message-container a:hover,
+.receiver-message-container a:hover{
+    text-decoration: none;
+    color: rgb(90, 85, 85);
+}
+
+.replying-message{
+    width: 72rem;
+}
+
+.sending-page{
+    width: 67.233rem;
+}
+
+.chatrooms-list{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+}
+
+.single-room-list{
+    flex: 0 1rem 33%;
+    text-align: center;
+    background-color: #32889f;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    width: 20rem;
+}
+
+.single-room-list h4{
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    color: white;  
+}
+
+.single-room-list h5{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: white;  
+}
+
+.single-room-list p{
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: white;  
+}
+
+.join-room-btn{
+    font-size: 2rem;
+    background-color: white;
+    color: black;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-color: black;
+    text-decoration: none;
+    border: 0.2rem solid black;
+    text-transform: none;
+    width: 10rem;
+}
+
+.join-room-btn:hover{
+    background-color: rgb(170, 161, 161);
+    text-decoration: none;
+    color: black;
+}
+
+.send-request-icon{
+    color: white;
+    font-size: 4rem;
+}
+
+.send-request-icon:hover{
+    color: #35393a;
+}
+
+.all-chat-messages-content{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    background-color: #32889f;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 1.5rem;
+}
+
+.single-chat-message{
+    display: flex;
+    /* text-align: center; */
+}
+
+.single-chat-message strong{
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.single-chat-message p{
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+.chat-messages{
+    text-align: center; 
+}
+
+.chat-messages-form form{
+    display: flex;
+    align-items: baseline;
+    margin-right: 70rem;
+}
+
+.chat-messages-btn{
+    font-size: 2rem;
+    height: 3.945rem;
+    width: 10rem;
+}
+
+.chat-messages-input{
+    width: 58rem;
+}
+
+.go-back-homepage{
+    font-size: 3rem;
+    color: black;
+}
+
+.go-back-homepage:hover{
+    text-decoration: none;
+    color: #32889f;
+}
+
+.go-back-homepage-container{
+    margin-top: 2rem;
+    text-align: center;
+}
+
+pre{
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    font-family: 'Fira Code';
+}
+
+.main-form-component-avatar{
+    display: flex;
+    align-items: center;
+}
+
+.main-form-component-avatar label{
+    margin-left: 2rem;
+}
+
+.main-form-component-avatar input[type='file']{
+    width: 100rem;
+}
+
+.main-form-component-avatar textarea{
+    margin-top: 2rem;
+}
+
+.user-profile-avatar img{
+    height: 20rem;
+    width: 20rem;
+}
+
+.user-prof-update-pic{
+    height: 10rem;
+    width: 10rem;
+}
+

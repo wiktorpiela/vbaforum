@@ -14,9 +14,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+
+CSRF_TRUSTED_ORIGINS = ['https://web-production-1afa.up.railway.app']
 
 # Application definition
 
@@ -43,6 +45,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'vbaforum.urls'
@@ -63,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'vbaforum.wsgi.application'
+WSGI_APPLICATION = 'vbaforum.wsgi.application'
 ASGI_APPLICATION = 'vbaforum.asgi.application'
 
 CHANNEL_LAYERS = {
@@ -75,13 +78,24 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'railway',
+            'USER': 'postgres',
+            'PASSWORD': os.environ["DBPASSWORD"],
+            'HOST': os.environ["HOST"],
+            'PORT': os.environ["PORT"],
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -112,12 +126,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -126,11 +134,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static", 
     ]
+
+DISABLE_COLLECTSTATIC = 0
 
 #media setup
 MEDIA_URL = '/media/'
