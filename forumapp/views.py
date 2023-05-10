@@ -40,6 +40,7 @@ def new_question(request):
 def question_details(request, questID):
     quest = get_object_or_404(Question, pk=questID)
     quest_posted_count = Question.objects.filter(user=quest.user).count()
+    followersCount = quest.user.following.all().count()
 
     quest.is_your = True if quest.user == request.user else False
     quest.is_liked = True if quest.likes.filter(id=request.user.id).exists() else False
@@ -47,6 +48,7 @@ def question_details(request, questID):
     answers = Answer.objects.filter(question = quest).order_by("-create_date")
 
     for answer in answers:
+        answer.author_followers_count = answer.user.following.all().count()
         if answer.likes.filter(id=request.user.id).exists():
             answer.is_liked = True
         else:
@@ -60,7 +62,8 @@ def question_details(request, questID):
 
     return render(request, "question_details.html", {"question":quest,
                                                      "answers":answers,
-                                                     "quest_posted_count":quest_posted_count})
+                                                     "quest_posted_count":quest_posted_count,
+                                                     "followersCount":followersCount})
 
 @login_required
 def add_answer(request, questID):
@@ -234,10 +237,7 @@ def profile_view(request, userID):
     this_user.is_your_profile = True if request.user == this_user else False
     roles = UserProfile.roles[:-1]
     quest_posted_count = Question.objects.filter(user=this_user).count()
-    followersCount = UserProfile.objects.prefetch_related("following")\
-        .get(pk=this_user.id).following.count()
-    print(this_user.id)
-    print(followersCount)
+    followersCount = this_user.following.all().count() #third column of manytomanyfield table 
     isFollowed = this_user.following.filter(user_id=request.user.id).exists()
     if isFollowed:
         this_user.is_followed = True

@@ -14,7 +14,7 @@
                     <small>{{question.user.userprofile.display_fullname_user_role}}</small>
                 </div>
                 <div>
-                    <small>Followers: {{question.user.userprofile.total_followers}}</small>
+                    <small>Followers: {{followersCount}}</small>
                 </div>
                 <div>
                     <small>Posted: {{quest_posted_count}}</small>
@@ -93,7 +93,7 @@
                                 <small>{{answer.user.userprofile.display_fullname_user_role}}</small>
                             </div>
                             <div>
-                                <small>Followers: {{answer.user.userprofile.total_followers}}</small>
+                                <small>Followers: {{answer.author_followers_count}}</small>
                             </div>
                             <div>
                                 <small>Posted: {{quest_posted_count}}</small>
