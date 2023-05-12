@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import cloudinary
+import cloudinary_storage
 
 load_dotenv()
 
@@ -18,7 +20,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-1afa.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-55da0.up.railway.app']
 
 # Application definition
 
@@ -35,6 +37,8 @@ INSTALLED_APPS = [
     "verify_email.apps.VerifyEmailConfig",
     "taggit",
     "chat",
+    "cloudinary",
+    "cloudinary_storage",
 ]
 
 MIDDLEWARE = [
@@ -162,4 +166,14 @@ LOGIN_URL = "accounts:login_user"
 
 ##taggit setup
 TAGGIT_CASE_SENSITIVE = False
+
+#storage for media files
+if not DEBUG:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.environ["CLOUD_NAME"],
+        'API_KEY': os.environ["API_KEY"],
+        'API_SECRET': os.environ["API_SECRET"],
+    }
+
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 

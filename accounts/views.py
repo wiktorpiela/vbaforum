@@ -108,12 +108,21 @@ def logout_user(request):
     logout(request)
     return redirect("forumapp:home")
 
-class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = "profile_view.html"
-    extra_context = {
-        "roles":UserProfile.roles[:-1]
-        }
+# class ProfileView(LoginRequiredMixin, TemplateView):
+#     template_name = "profile_view.html"
+#     extra_context = {
+#         "roles":UserProfile.roles[:-1]
+#         }
 
+@login_required
+def accounts_profile_view(request):
+    currentUser = request.user
+    followersCount = currentUser.following.all().count()
+    return render(request,
+                  "profile_view.html",
+                  {"followersCount":followersCount,
+                   "roles":UserProfile.roles[:-1]})
+ 
 class ProfileUpdateView(LoginRequiredMixin, TemplateView):
     user_form = UserForm
     profile_form = UserProfileForm

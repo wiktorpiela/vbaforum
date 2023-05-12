@@ -18,7 +18,7 @@
             </div>
             <div class="user-profile-desc">
                 <p>Username: {{userProf.username}}</p>
-                <p>{{userProf.email}}</p>
+                <!-- <p>{{userProf.email}}</p> -->
                 {% for short, long in roles %}
                     {% if short == userProf.userprofile.role %}
                         <p>Current role: {{long}}</p>

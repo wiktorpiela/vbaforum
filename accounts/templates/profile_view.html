@@ -17,14 +17,14 @@
             </div>
             <div class="user-profile-desc">
                 <p>Username: {{user.username}}</p>
-                <p>{{user.email}}</p>
+                <!-- <p>{{user.email}}</p> -->
                 {% for short, long in roles %}
                     {% if short == user.userprofile.role %}
                         <p>Current role: {{long}}</p>
                     {% endif %} 
                 {% endfor %}
                 <p>Joined: {{user.date_joined|date:'j E Y'}}</p>
-                <p>Followers: </p>
+                <p>Followers: {{followersCount}}</p>
                 
                 {% if user.userprofile.stop_notifications %}
                     <p>Email notifilations: OFF</p>

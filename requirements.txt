@@ -2,12 +2,16 @@ asgiref==3.6.0
 attrs==23.1.0
 autobahn==23.1.2
 Automat==22.10.0
+certifi==2023.5.7
 cffi==1.15.1
 channels==3.0.5
+charset-normalizer==3.1.0
+cloudinary==1.32.0
 constantly==15.1.0
 cryptography==40.0.2
 daphne==3.0.2
 Django==4.1.7
+django-cloudinary-storage==0.3.0
 django-taggit==3.1.0
 Django-Verify-Email==2.0.3
 gunicorn==20.1.0
@@ -21,6 +25,7 @@ pyasn1-modules==0.3.0
 pycparser==2.21
 pyOpenSSL==23.1.1
 python-dotenv==1.0.0
+requests==2.30.0
 service-identity==21.1.0
 six==1.16.0
 sqlparse==0.4.3
@@ -28,6 +33,7 @@ Twisted==22.10.0
 txaio==23.1.1
 typing_extensions==4.5.0
 tzdata==2022.7
+urllib3==1.26.15
 websocket-client==1.5.1
 whitenoise==6.4.0
 zope.interface==6.0
