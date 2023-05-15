@@ -34,7 +34,7 @@
             {% csrf_token %}
             <input type="text" name="search" placeholder="Search posts by title, text, author or tags ..." required>
             <button type="submit" class>Go!</button>
-            <a href="{% url 'forumapp:home' %}" class="nav-from-btn">Reset</a>
+            <!-- <a href="{% url 'forumapp:home' %}" class="nav-from-btn">Reset</a> -->
         </form>
 
         {% if user.is_authenticated %}
@@ -58,9 +58,6 @@
             {% endif %}
 
         {% else %}
-            <div></div>
-            <div></div>
-            <div></div>
             <a href="{% url 'accounts:register' %}">Register</a>
             <a href="{% url 'accounts:login_user' %}">Log in</a>
         {% endif %}
