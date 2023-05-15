@@ -79,7 +79,9 @@
     }
 
     .user-mini{
-        flex: 0 1 33%;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 1 33%;
+                flex: 0 1 33%;
         padding: 1rem;
     }
 
@@ -207,6 +209,8 @@
     }
 
     .nav-burger {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         font-size: 5rem;
         color: white;
@@ -214,9 +218,16 @@
 
     .nav-elements{
         display: none;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: start;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
         text-align: center;
         margin-right: 10rem;
     }
@@ -229,7 +240,8 @@
         display: inline;
         height: 6rem;
         width: 7rem;
-        box-shadow: none;
+        -webkit-box-shadow: none;
+                box-shadow: none;
         margin-right: 2rem;
     }
 
@@ -275,9 +287,16 @@
 
     .users-list{
         margin: 0 auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
     }
 
     .user-mini{

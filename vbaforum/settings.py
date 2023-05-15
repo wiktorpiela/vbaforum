@@ -20,7 +20,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-55da0.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://vbaforum.up.railway.app']
 
 # Application definition
 

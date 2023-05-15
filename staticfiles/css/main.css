@@ -1,5 +1,6 @@
 * {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
@@ -24,10 +25,16 @@ html, body {
 /* --------------------------- */
 
 nav{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     padding: 1rem 5rem;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     background-color: #32889f;
     font-size: 2rem;
     text-transform: uppercase;
@@ -44,7 +51,8 @@ nav{
 
 nav img{
     border-radius: 1rem;
-    box-shadow: 0.2rem 0.2rem 0.2rem black;
+    -webkit-box-shadow: 0.2rem 0.2rem 0.2rem black;
+            box-shadow: 0.2rem 0.2rem 0.2rem black;
 }
 
 nav a{
@@ -62,6 +70,7 @@ nav form button{
     padding: 0.5rem 1rem;
     background-color: white;
     margin-right: 1rem;
+    color: black;
 }
 
 nav form input[type='text']{
@@ -89,6 +98,8 @@ nav form button:hover{
 }
 
 nav form{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -114,9 +125,14 @@ nav form{
 }
 
 .collection-icon-desc{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     text-align: center;
     margin: 0 auto;
     margin-top: 3rem;
@@ -124,14 +140,17 @@ nav form{
 }
 
 .collection-icon-desc a{
-    flex: 0 1rem 50%;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1rem 50%;
+            flex: 0 1rem 50%;
     text-decoration: none;
     color: #32889f;
     border-radius: 1.5rem;
     border: 0.3rem solid #32889f;
     padding: 1rem 1rem;
     font-size: 2rem;
-    flex: 0 0 calc(50% - 1rem);
+    -ms-flex: 0 0 calc(50% - 1rem);
+        flex: 0 0 calc(50% - 1rem);
     margin-top: 2rem;
 }
 
@@ -195,9 +214,15 @@ nav form{
 }
 
 .question-wall-inside{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .question-wall-inside-second{
@@ -224,6 +249,8 @@ nav form{
 }
 
 .counting{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin: 0 auto;
     color: #32889f;
@@ -253,7 +280,9 @@ nav form{
 
 .detailed-quest-inside{
     padding-right: 3rem;
-    align-items: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
 }
 
 .user-info-post{
@@ -386,11 +415,17 @@ nav form{
 
 /* USERPROFILE DISPLAY */
 .user-profile-avatar-desc{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin: 3rem auto;
     width: 54.2013rem;
-    justify-content: space-between;
-    align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .user-profile-avatar img{
@@ -454,8 +489,12 @@ nav form{
 }
 
 .user-profile-options{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-evenly;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
     margin: 0rem 22rem;
     
 }
@@ -481,6 +520,8 @@ nav form{
 }
 
 .main-form-component-bio{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin-top: 3rem;
     margin-right: 10rem;
@@ -531,6 +572,8 @@ nav form{
 }
 
 .browe-users-form form form{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -542,6 +585,8 @@ nav form{
 }
 
 .browe-users-form form{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;  
 }
 
@@ -551,13 +596,20 @@ nav form{
 
 .users-list{
     margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .user-mini{
-    flex: 0 1rem 25%;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1rem 25%;
+            flex: 0 1rem 25%;
     background-color: rgb(170, 161, 161);
     padding: 1.5rem;
     margin-bottom: 3rem;
@@ -600,10 +652,16 @@ nav form{
     color: #32889f;
     position: relative;
     border-radius: 1.5rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-evenly;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
     background-color: rgb(170, 161, 161);
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .sb1:before {
@@ -636,8 +694,12 @@ nav form{
 }
 
 .messages-wall{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-evenly;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
     margin-top: 3rem;
     margin-bottom: 3rem;
   }
@@ -741,14 +803,21 @@ nav form{
 }
 
 .chatrooms-list{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-evenly;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
     margin-top: 4rem;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .single-room-list{
-    flex: 0 1rem 33%;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1rem 33%;
+            flex: 0 1rem 33%;
     text-align: center;
     background-color: #32889f;
     padding: 1.5rem;
@@ -812,6 +881,8 @@ nav form{
 }
 
 .single-chat-message{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     /* text-align: center; */
 }
@@ -831,8 +902,12 @@ nav form{
 }
 
 .chat-messages-form form{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: baseline;
+    -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+            align-items: baseline;
     margin-right: 70rem;
 }
 
@@ -869,8 +944,12 @@ pre{
 }
 
 .main-form-component-avatar{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .main-form-component-avatar label{
