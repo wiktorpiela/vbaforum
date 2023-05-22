@@ -84,15 +84,16 @@ def add_answer(request, questID):
             new_answer.save()
 
             author = new_answer.user
+            quest_author = new_answer.question.user
             email = EmailMessage(
                 f"Your question '{quest.title}' has been asnwered by {author.username}",
-                f"""Hi, {request.user.username}<br>
-                {request.user.username} has just added the answer to your question!
+                f"""Hi, {quest_author}<br>
+                {request.user.username} has just added the answer to your question!<br>
                 Content of the response:
                 {new_answer.text} <br>
                 Best regards, VBA forum Team""",
                 settings.DEFAULT_FROM_EMAIL,
-                [author.mail])
+                [quest_author.email])
             email.content_subtype = "html"
             email.send()
 
