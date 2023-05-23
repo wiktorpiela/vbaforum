@@ -3,6 +3,8 @@
 ---
 *Attention! For non-authenticated users this application provides only existing content review, such as questions and their answers. More features are available only for registered and authenticated users.*
 
+**Live version:** https://vbaforum.up.railway.app/
+
 ## Features
 # **UserProfile custom model**
 Thanks django built-in User class, creating new user object is quite easy, but application 'account' extends basic user model by adding new fields in UserProfile custom model, such as:
