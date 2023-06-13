@@ -49,6 +49,7 @@ def question_details(request, questID):
 
     for answer in answers:
         answer.author_followers_count = answer.user.following.all().count()
+        answer.answ_posted_count = Question.objects.filter(user = answer.user).count()
         if answer.likes.filter(id=request.user.id).exists():
             answer.is_liked = True
         else:
