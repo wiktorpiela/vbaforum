@@ -140,6 +140,9 @@ After modification, user profile page shows up to date informations. For this ex
 
 ### **Account deleting**
 Logging out user and permanently delete their profile with all related content included.
+Below pop up window will be displayed before the action is complete:<br>
+
+![Account delete confirmation](readme_images/confirmdeleteaccount.JPG)<br>
 
 # **CRUD**
 All of authenticated users are allowed to both create, read, update and delete content, which means they can post new questions and comment them, edit body of content they created or just remove them.
